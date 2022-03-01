@@ -16,5 +16,10 @@ namespace Schedule_Manager.Forms
         {
             InitializeComponent();
         }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
