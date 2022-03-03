@@ -21,5 +21,15 @@ namespace Schedule_Manager.Forms
         {
 
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("You've attempted to log in!");
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();   // Close the application
+        }
     }
 }

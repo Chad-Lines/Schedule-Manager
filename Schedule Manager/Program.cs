@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Schedule_Manager.Forms;
 
 namespace Schedule_Manager
 {
@@ -16,7 +17,7 @@ namespace Schedule_Manager
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Calendar());
+            Application.Run(new LoginForm());
         }
     }
 }
