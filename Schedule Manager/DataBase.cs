@@ -9,11 +9,13 @@ using System.Windows.Forms;
 
 namespace Schedule_Manager
 {
-    internal class DataBase
+    public class DataBase
     {
+        public static string constr = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
+
         public string Connect()
         {
-            string constr = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
+            
             MySqlConnection conn = new MySqlConnection(constr);
             
             string q = "select * from address";
