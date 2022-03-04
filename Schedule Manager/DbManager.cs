@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace Schedule_Manager
     static class DbManager
     {
         public static readonly string constr = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
+
+        private static Dictionary<int, Hashtable> _appointments = new Dictionary<int, Hashtable>(); 
         private static int _userId;
         private static string _userName;
 

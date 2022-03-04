@@ -7,26 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Schedule_Manager.Forms;
 
-namespace Schedule_Manager
+namespace Schedule_Manager.Forms
 {
-    public partial class Calendar : Form
+    public partial class Main : Form
     {
-        public Calendar()
+        public Main()
         {
             InitializeComponent();
             InitializeForm();
-
         }
 
         private void InitializeForm()
         {
-            // Creating the other forms, but not initializing. 
-            Customers cust;
-            Reports report;
 
-            btnCalendar.Enabled = false;
         }
 
         private void btnExit_Click(object sender, EventArgs e)

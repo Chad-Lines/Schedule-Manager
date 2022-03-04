@@ -18,7 +18,7 @@ namespace Schedule_Manager.Forms
         string FieldEmpty = string.Empty;
         string LoginError = string.Empty;
 
-        static string spanish = "es-ES";
+        static string spanishCode = "es-ES";
         static string englishFieldEmpty = "Please enter a Username and Password.";
         static string englishLoginError = "Username or Password is incorrect.";
         static string spanishFieldEmpty = "Por favor ingrese un nombre de usuario y contraseña. ";
@@ -32,8 +32,8 @@ namespace Schedule_Manager.Forms
 
         private void InitializeForm()
         {
-            if (CultureInfo.CurrentCulture.Name == spanish) // Checking to see if the local culture settings are set to es-ES (Spanish)...
-            {                                               // If so we set all of the text accordingly
+            if (CultureInfo.CurrentCulture.Name == spanishCode) // Checking to see if the local culture settings are set to es-ES (Spanish)...
+            {                                                   // If so we set all of the text accordingly
 
                 // These are the primary labels and button texts
                 lblLogin.Text = "Accesso";
@@ -104,14 +104,14 @@ namespace Schedule_Manager.Forms
                 dr.Read();                                                                              // Here we actually use the MySqlDataReader to capture.
                 DbManager.SetUserID((int)dr[0]);                                                        // Setting the user ID
                                                                                                         // The dr[0] returns the first cell of the row
-                Calendar cal = new Calendar();                                                          // Here we create the new Calendar view
+                Main main = new Main();                                                          // Here we create the new Calendar view
 
                 // This lambda expression simplifies handling the LoginForm. Although we hide the login form (see below)
                 // it is still in memory. When we exit the Calendar form, we want to also exit the Login form. This 
                 // lambda accomplishes that. If the cal form is closed, then this (the login form) will close also. 
-                cal.FormClosed += (s, args) => this.Close();     
-                
-                cal.Show();                                                                             // Show the Calendar Form
+                main.FormClosed += (s, args) => this.Close();
+
+                main.Show();                                                                             // Show the Calendar Form
                 this.Hide();                                                                            // Hide this form so it's not lurking in the background
             }
 

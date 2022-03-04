@@ -89,7 +89,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataBase.cs" />
     <Compile Include="DbManager.cs" />
     <Compile Include="Forms\AddAppointment.cs">
       <SubType>Form</SubType>
@@ -133,6 +132,12 @@
     <Compile Include="Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Reports.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Reports.resx">
       <DependentUpon>Reports.cs</DependentUpon>
