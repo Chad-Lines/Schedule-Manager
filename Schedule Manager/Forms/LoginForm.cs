@@ -18,6 +18,7 @@ namespace Schedule_Manager.Forms
         string FieldEmpty = string.Empty;
         string LoginError = string.Empty;
 
+        static string spanish = "es-ES";
         static string englishFieldEmpty = "Please enter a Username and Password.";
         static string englishLoginError = "Username or Password is incorrect.";
         static string spanishFieldEmpty = "Por favor ingrese un nombre de usuario y contraseña. ";
@@ -31,8 +32,8 @@ namespace Schedule_Manager.Forms
 
         private void InitializeForm()
         {
-            if (CultureInfo.CurrentCulture.Name == "es-ES") // Checking to see if the local culture settings are set to es-ES (Spanish)...
-            {                                               // If so we set al of the text accordingly
+            if (CultureInfo.CurrentCulture.Name == spanish) // Checking to see if the local culture settings are set to es-ES (Spanish)...
+            {                                               // If so we set all of the text accordingly
 
                 // These are the primary labels and button texts
                 lblLogin.Text = "Accesso";
@@ -81,6 +82,7 @@ namespace Schedule_Manager.Forms
 
         private void btnExit_Click(object sender, EventArgs e)
         {
+            DbManager.DbClose();
             this.Close();   // Close the application
         }
 
@@ -88,8 +90,7 @@ namespace Schedule_Manager.Forms
         {
             // This is the first function I'm writing to access the database, hence the quantity of comments
 
-            MySqlConnection conn = new MySqlConnection(DataBase.constr);                                // Create the connection using the connection string in the DataBase class
-            conn.Open();                                                                                // Open the database connection
+            MySqlConnection conn = DbManager.DbConnect();
             MySqlCommand cmd = new MySqlCommand(                                                        // Creating a new MySQL command
                 $"select userId from user where username = '{username}' and password = '{password}';",  // The text of the command (a query to get the userId)
                 conn                                                                                    // Passing in the connection
@@ -101,8 +102,19 @@ namespace Schedule_Manager.Forms
                                                                                                         // But in order to use it, you must execute the MySqlCommand...
                                                                                                         // reader method. Hence the "cmd.ExecuteReader()".
                 dr.Read();                                                                              // Here we actually use the MySqlDataReader to capture.
-                MessageBox.Show("Success! User Id: " + dr[0].ToString());                               // **** We're assuming that there is only one row returned...****
-            }                                                                                           // The dr[0] returns the first cell of the row
+                DbManager.SetUserID((int)dr[0]);                                                        // Setting the user ID
+                                                                                                        // The dr[0] returns the first cell of the row
+                Calendar cal = new Calendar();                                                          // Here we create the new Calendar view
+
+                // This lambda expression simplifies handling the LoginForm. Although we hide the login form (see below)
+                // it is still in memory. When we exit the Calendar form, we want to also exit the Login form. This 
+                // lambda accomplishes that. If the cal form is closed, then this (the login form) will close also. 
+                cal.FormClosed += (s, args) => this.Close();     
+                
+                cal.Show();                                                                             // Show the Calendar Form
+                this.Hide();                                                                            // Hide this form so it's not lurking in the background
+            }
+
             catch (Exception ex)                                                                        
             {                                                                                           // If the authentication fails, then...
                 txtUserName.Clear();                                                                    // Clear the username field
@@ -110,6 +122,7 @@ namespace Schedule_Manager.Forms
                 labelError = LoginError;                                                                // Set the error text appropriately
                 lblLoginErr.Text = labelError;                                                          // Assign that text to the error label
                 lblLoginErr.Show();                                                                     // Display the error label
+                Console.WriteLine(ex.Message);                                                          // Capture the exact error
             }
         }
     }

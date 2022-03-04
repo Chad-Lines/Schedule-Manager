@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataBase.cs" />
+    <Compile Include="DbManager.cs" />
     <Compile Include="Forms\AddAppointment.cs">
       <SubType>Form</SubType>
     </Compile>
