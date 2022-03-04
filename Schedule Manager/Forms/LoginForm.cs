@@ -24,7 +24,8 @@ namespace Schedule_Manager.Forms
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("You've attempted to log in!");
+            DataBase db = new DataBase();
+            MessageBox.Show(db.Connect());
         }
 
         private void btnExit_Click(object sender, EventArgs e)
