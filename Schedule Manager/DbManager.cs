@@ -19,6 +19,8 @@ namespace Schedule_Manager
 
         
         public static BindingList<Appointment> appointments = new BindingList<Appointment>();   // This is the binding list wherein we'll store appointements
+
+
         private static int userId;                                                              // Stores the user ID
         private static string userName;                                                         // Stores the user name
 
@@ -66,44 +68,65 @@ namespace Schedule_Manager
 
         public static BindingList<Appointment> GetAppointmentsByUserId(int id = -1)
         {
-            int outputId;                           // This is the id that we're going to use to get appointments
-            appointments.Clear();                   // Clearing the existing appointments 
-            if (id <= -1) { outputId = userId; }    // If no id is provided, then we assume that it's for the current user id
-            else { outputId = id; }                 // Otherwise we assin the output id to the id that was specified
+            int outputId;                                                           // This is the id that we're going to use to get appointments
+            appointments.Clear();                                                   // Clearing the existing appointments 
 
-            /* NOTE TO SELF
-             * Do some error checking to make sure that an int out of range cannot be used, and will default to the current user
-             * and/or throw an error.
-             */
+            if (id <= -1) { outputId = userId; }                                    // If no id is provided, then we assume that it's for the current user id
+            else { outputId = id; }                                                 // Otherwise we assign the output id to the id that was specified
 
-            MySqlCommand getAppointmentsByUserIdCmd = new MySqlCommand(                                     // Here's the query we're going to run
+            DataTable appointmentsDt = new DataTable();                             // We're going to use a DataTable to hold the query results
+
+            MySqlConnection appointmentConn = new MySqlConnection(constr);          // Creating the connection 
+            MySqlCommand getAppointmentsByUserIdCmd = new MySqlCommand(             // Creating the query
                 $"select * from appointment;select appointmentId, customerId, type, start, end " +
-                $"from appointment where userId = {outputId};"
+                $"from appointment where userId = {outputId};",
+                appointmentConn
                 );
-            getAppointmentsByUserIdCmd.Connection = DbConnect();                                            // We set the connection
-            MySqlDataReader appointmentsByUserIdDataReader = getAppointmentsByUserIdCmd.ExecuteReader();    // Setting up the reader
-            appointmentsByUserIdDataReader.Read();                                                          // Executing the query
 
-            THIS DOESNT WORK, NEED TO REVISIT
-
-            if (appointmentsByUserIdDataReader.HasRows)                 // If there are rows returned
-            {
-                foreach (DataRow row in appointmentsByUserIdDataReader) // For each row...
+            using (appointmentConn)                                                         // Using the connection we established...
+            {           
+                using (getAppointmentsByUserIdCmd)                                          // And the query that we defined...
                 {
-                    Appointment newAppt = new Appointment();            // Create a new appointment
-                    newAppt.userId = outputId;                          // Setting the userId
-                    newAppt.type = (string)row[2];                      // Setting the type
-                    newAppt.start = (DateTime)row[3];                   // Setting the start date and time
-                    newAppt.end = (DateTime)row[4];                     // Setting the end date and time
+                    appointmentConn.Open();                                                 // Open the connection
+                    MySqlDataReader reader = getAppointmentsByUserIdCmd.ExecuteReader();    // Initialize the data reader
+                    appointmentsDt.Load(reader);                                            // Execute the reader
 
-                    appointments.Add(newAppt);                          // Add the new appointment to the appointments list
+                    if (appointmentsDt.Rows.Count > 0)                                      // If there are rows, then...
+                    {
+                        foreach (DataRow row in appointmentsDt.Rows)                        // for each row...
+                        {                            
+                            Appointment newAppt = new Appointment();                        // Create a new appointment
+                            newAppt.appointmentId = (int)row[0];                            // Set the parameters as appropriate
+                            newAppt.customerId = (int)row[1];
+                            newAppt.userId = (int)row[1];
+                            newAppt.type = row[7].ToString();
+
+                            /* +-------------------------------------------------------------------------------------------------------------+
+                             * |                                                                                                             |
+                             * | REQUIREMENT E: (1/n) Provide the ability to automatically adjust appointment times based on user time zones |
+                             * |                                                                                                             |
+                             * +-------------------------------------------------------------------------------------------------------------+
+                             * There's a lot going on here. For the sanity of future me (and/or inhereting programmers), we'll go through it...
+                            */
+                            DateTime utcStart = (DateTime)row[9];           // First we convert the start time, understanding that it's in UTC format
+                            DateTime localStart = utcStart.ToLocalTime();   // Then we convert the UTC time to Local Time.
+
+                            DateTime utcEnd = (DateTime)row[10];            // We do the same process for the end time
+                            DateTime localEnd = utcEnd.ToLocalTime();
+
+                            // Now we convert the dates into a string. DateTime formatting is a pain, so I'll spell it out ...
+                            // MM = Month, dd = day, yyy = Year. For example: "12/31/2018"
+                            // hh = hour in 12-hour format (HH for 24-hour format), mmm = minute, tt indicates either AM or PM
+                            // For example: "05:00 PM" 
+                            newAppt.start = String.Format("{0:MM/dd/yyy hh:mmm tt}", localStart);  
+                            newAppt.end = String.Format("{0:MM/dd/yyy hh:mmm tt}", localEnd);
+
+                            appointments.Add(newAppt);                      // Finally we add the appointments to the binding list
+                        }                        
+                    }
                 }
             }
-            else
-            {
-                Console.WriteLine("No records found.");                 // If there are no rows, then alert
-            }
-            return appointments;                                        // Return the appointments
+            return appointments;                                                            // Return the binding list
         }
     }
 }

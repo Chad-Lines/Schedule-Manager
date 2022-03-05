@@ -22,7 +22,8 @@ namespace Schedule_Manager.Forms
 
         private void InitializeForm()
         {
-            dgvCalendar.DataSource = DbManager.GetAppointmentsByUserId();
+            ConfigureCalendarView();
+            
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -31,7 +32,15 @@ namespace Schedule_Manager.Forms
         }
 
         #region CalendarTab
-
+        private void ConfigureCalendarView()
+        {
+            // Configuring the DataGridView Source and Parameters
+            dgvCalendar.DataSource = DbManager.GetAppointmentsByUserId();           // Adding the appointment list as the data source
+            dgvCalendar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;    // Full row sleect (rather than single cells)
+            dgvCalendar.ReadOnly = true;                                            // Setting the data to "read only"
+            dgvCalendar.MultiSelect = false;                                        // Disabling multi-select
+            dgvCalendar.AllowUserToAddRows = false;                                 // Disallow adding new rows
+        }
         #endregion
     }
 }
