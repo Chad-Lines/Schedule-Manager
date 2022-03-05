@@ -31,19 +31,19 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabCalendar = new System.Windows.Forms.TabPage();
-            this.tabCustomers = new System.Windows.Forms.TabPage();
             this.btnMonthAppointments = new System.Windows.Forms.Button();
-            this.btnWeekAppointments = new System.Windows.Forms.Button();
             this.btnAllAppointments = new System.Windows.Forms.Button();
+            this.btnWeekAppointments = new System.Windows.Forms.Button();
+            this.dgvCalendar = new System.Windows.Forms.DataGridView();
+            this.btnDeleteAppointment = new System.Windows.Forms.Button();
             this.btnEditAppointment = new System.Windows.Forms.Button();
             this.btnAddAppointments = new System.Windows.Forms.Button();
-            this.btnDeleteAppointment = new System.Windows.Forms.Button();
-            this.dgvAppointments = new System.Windows.Forms.DataGridView();
-            this.tabReports = new System.Windows.Forms.TabPage();
+            this.tabCustomers = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tabReports = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -54,10 +54,10 @@
             this.button5 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabCalendar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCalendar)).BeginInit();
             this.tabCustomers.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).BeginInit();
-            this.tabReports.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tabReports.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -89,7 +89,7 @@
             this.tabCalendar.Controls.Add(this.btnMonthAppointments);
             this.tabCalendar.Controls.Add(this.btnAllAppointments);
             this.tabCalendar.Controls.Add(this.btnWeekAppointments);
-            this.tabCalendar.Controls.Add(this.dgvAppointments);
+            this.tabCalendar.Controls.Add(this.dgvCalendar);
             this.tabCalendar.Controls.Add(this.btnDeleteAppointment);
             this.tabCalendar.Controls.Add(this.btnEditAppointment);
             this.tabCalendar.Controls.Add(this.btnAddAppointments);
@@ -100,20 +100,6 @@
             this.tabCalendar.TabIndex = 0;
             this.tabCalendar.Text = "Calendar";
             // 
-            // tabCustomers
-            // 
-            this.tabCustomers.BackColor = System.Drawing.Color.Transparent;
-            this.tabCustomers.Controls.Add(this.dataGridView1);
-            this.tabCustomers.Controls.Add(this.button3);
-            this.tabCustomers.Controls.Add(this.button2);
-            this.tabCustomers.Controls.Add(this.button1);
-            this.tabCustomers.Location = new System.Drawing.Point(4, 22);
-            this.tabCustomers.Name = "tabCustomers";
-            this.tabCustomers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCustomers.Size = new System.Drawing.Size(1035, 513);
-            this.tabCustomers.TabIndex = 1;
-            this.tabCustomers.Text = "Customers";
-            // 
             // btnMonthAppointments
             // 
             this.btnMonthAppointments.Location = new System.Drawing.Point(106, 9);
@@ -122,6 +108,15 @@
             this.btnMonthAppointments.TabIndex = 30;
             this.btnMonthAppointments.Text = "Mo";
             this.btnMonthAppointments.UseVisualStyleBackColor = true;
+            // 
+            // btnAllAppointments
+            // 
+            this.btnAllAppointments.Location = new System.Drawing.Point(16, 9);
+            this.btnAllAppointments.Name = "btnAllAppointments";
+            this.btnAllAppointments.Size = new System.Drawing.Size(39, 23);
+            this.btnAllAppointments.TabIndex = 28;
+            this.btnAllAppointments.Text = "All";
+            this.btnAllAppointments.UseVisualStyleBackColor = true;
             // 
             // btnWeekAppointments
             // 
@@ -132,14 +127,22 @@
             this.btnWeekAppointments.Text = "Wk";
             this.btnWeekAppointments.UseVisualStyleBackColor = true;
             // 
-            // btnAllAppointments
+            // dgvCalendar
             // 
-            this.btnAllAppointments.Location = new System.Drawing.Point(16, 9);
-            this.btnAllAppointments.Name = "btnAllAppointments";
-            this.btnAllAppointments.Size = new System.Drawing.Size(39, 23);
-            this.btnAllAppointments.TabIndex = 28;
-            this.btnAllAppointments.Text = "All";
-            this.btnAllAppointments.UseVisualStyleBackColor = true;
+            this.dgvCalendar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCalendar.Location = new System.Drawing.Point(15, 38);
+            this.dgvCalendar.Name = "dgvCalendar";
+            this.dgvCalendar.Size = new System.Drawing.Size(1008, 469);
+            this.dgvCalendar.TabIndex = 24;
+            // 
+            // btnDeleteAppointment
+            // 
+            this.btnDeleteAppointment.Location = new System.Drawing.Point(949, 9);
+            this.btnDeleteAppointment.Name = "btnDeleteAppointment";
+            this.btnDeleteAppointment.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteAppointment.TabIndex = 25;
+            this.btnDeleteAppointment.Text = "Delete";
+            this.btnDeleteAppointment.UseVisualStyleBackColor = true;
             // 
             // btnEditAppointment
             // 
@@ -159,37 +162,27 @@
             this.btnAddAppointments.Text = "Add";
             this.btnAddAppointments.UseVisualStyleBackColor = true;
             // 
-            // btnDeleteAppointment
+            // tabCustomers
             // 
-            this.btnDeleteAppointment.Location = new System.Drawing.Point(949, 9);
-            this.btnDeleteAppointment.Name = "btnDeleteAppointment";
-            this.btnDeleteAppointment.Size = new System.Drawing.Size(75, 23);
-            this.btnDeleteAppointment.TabIndex = 25;
-            this.btnDeleteAppointment.Text = "Delete";
-            this.btnDeleteAppointment.UseVisualStyleBackColor = true;
+            this.tabCustomers.BackColor = System.Drawing.Color.Transparent;
+            this.tabCustomers.Controls.Add(this.dataGridView1);
+            this.tabCustomers.Controls.Add(this.button3);
+            this.tabCustomers.Controls.Add(this.button2);
+            this.tabCustomers.Controls.Add(this.button1);
+            this.tabCustomers.Location = new System.Drawing.Point(4, 22);
+            this.tabCustomers.Name = "tabCustomers";
+            this.tabCustomers.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCustomers.Size = new System.Drawing.Size(1035, 513);
+            this.tabCustomers.TabIndex = 1;
+            this.tabCustomers.Text = "Customers";
             // 
-            // dgvAppointments
+            // dataGridView1
             // 
-            this.dgvAppointments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAppointments.Location = new System.Drawing.Point(15, 38);
-            this.dgvAppointments.Name = "dgvAppointments";
-            this.dgvAppointments.Size = new System.Drawing.Size(1008, 469);
-            this.dgvAppointments.TabIndex = 24;
-            // 
-            // tabReports
-            // 
-            this.tabReports.BackColor = System.Drawing.Color.Transparent;
-            this.tabReports.Controls.Add(this.dataGridView2);
-            this.tabReports.Controls.Add(this.groupBox2);
-            this.tabReports.Controls.Add(this.label2);
-            this.tabReports.Controls.Add(this.button7);
-            this.tabReports.Controls.Add(this.button6);
-            this.tabReports.Controls.Add(this.button5);
-            this.tabReports.Location = new System.Drawing.Point(4, 22);
-            this.tabReports.Name = "tabReports";
-            this.tabReports.Size = new System.Drawing.Size(1035, 513);
-            this.tabReports.TabIndex = 2;
-            this.tabReports.Text = "Reports";
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(15, 38);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(1008, 469);
+            this.dataGridView1.TabIndex = 25;
             // 
             // button3
             // 
@@ -218,13 +211,20 @@
             this.button1.Text = "Delete";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // tabReports
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 38);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1008, 469);
-            this.dataGridView1.TabIndex = 25;
+            this.tabReports.BackColor = System.Drawing.Color.Transparent;
+            this.tabReports.Controls.Add(this.dataGridView2);
+            this.tabReports.Controls.Add(this.groupBox2);
+            this.tabReports.Controls.Add(this.label2);
+            this.tabReports.Controls.Add(this.button7);
+            this.tabReports.Controls.Add(this.button6);
+            this.tabReports.Controls.Add(this.button5);
+            this.tabReports.Location = new System.Drawing.Point(4, 22);
+            this.tabReports.Name = "tabReports";
+            this.tabReports.Size = new System.Drawing.Size(1035, 513);
+            this.tabReports.TabIndex = 2;
+            this.tabReports.Text = "Reports";
             // 
             // dataGridView2
             // 
@@ -310,11 +310,11 @@
             this.Text = "Main";
             this.tabControl1.ResumeLayout(false);
             this.tabCalendar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCalendar)).EndInit();
             this.tabCustomers.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvAppointments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabReports.ResumeLayout(false);
             this.tabReports.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -330,7 +330,7 @@
         private System.Windows.Forms.Button btnMonthAppointments;
         private System.Windows.Forms.Button btnAllAppointments;
         private System.Windows.Forms.Button btnWeekAppointments;
-        private System.Windows.Forms.DataGridView dgvAppointments;
+        private System.Windows.Forms.DataGridView dgvCalendar;
         private System.Windows.Forms.Button btnDeleteAppointment;
         private System.Windows.Forms.Button btnEditAppointment;
         private System.Windows.Forms.Button btnAddAppointments;

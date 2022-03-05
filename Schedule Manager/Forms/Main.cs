@@ -12,6 +12,8 @@ namespace Schedule_Manager.Forms
 {
     public partial class Main : Form
     {
+        
+
         public Main()
         {
             InitializeComponent();
@@ -20,12 +22,16 @@ namespace Schedule_Manager.Forms
 
         private void InitializeForm()
         {
-
+            dgvCalendar.DataSource = DbManager.GetAppointmentsByUserId();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        #region CalendarTab
+
+        #endregion
     }
 }

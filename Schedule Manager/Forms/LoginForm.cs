@@ -32,9 +32,15 @@ namespace Schedule_Manager.Forms
 
         private void InitializeForm()
         {
+            /* +-------------------------------------------------------------------------------------+
+             * |                                                                                     |
+             * | REQUIREMENT A: Determine the User's Location and translate login and error messages |
+             * |                                                                                     |
+             * +-------------------------------------------------------------------------------------+
+             */
+
             if (CultureInfo.CurrentCulture.Name == spanishCode) // Checking to see if the local culture settings are set to es-ES (Spanish)...
             {                                                   // If so we set all of the text accordingly
-
                 // These are the primary labels and button texts
                 lblLogin.Text = "Accesso";
                 lblUsername.Text = "Nombre de Usuario";
@@ -82,8 +88,8 @@ namespace Schedule_Manager.Forms
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DbManager.DbClose();
-            this.Close();   // Close the application
+            DbManager.DbClose();    // Close the database connection
+            this.Close();           // Close the application
         }
 
         private void AuthenticateUser(string username, string password)
@@ -104,14 +110,21 @@ namespace Schedule_Manager.Forms
                 dr.Read();                                                                              // Here we actually use the MySqlDataReader to capture.
                 DbManager.SetUserID((int)dr[0]);                                                        // Setting the user ID
                                                                                                         // The dr[0] returns the first cell of the row
-                Main main = new Main();                                                          // Here we create the new Calendar view
+                Main main = new Main();                                                                 // Here we create the new main view
 
-                // This lambda expression simplifies handling the LoginForm. Although we hide the login form (see below)
-                // it is still in memory. When we exit the Calendar form, we want to also exit the Login form. This 
-                // lambda accomplishes that. If the cal form is closed, then this (the login form) will close also. 
+                /* +-----------------------------------------------------------------------------------------------+
+                 * |                                                                                               |
+                 * | REQUIREMENT G: (1/2) Write two or more lambda expressions to make your program more efficient |
+                 * |                                                                                               |
+                 * +-----------------------------------------------------------------------------------------------+
+                 * This lambda expression simplifies handling the LoginForm. Although we hide the login form (see below)
+                 * it is still in memory. When we exit the Main form, we want to also exit the Login form. This 
+                 * lambda expression accomplishes that. If the main form is closed, then this (the login form) will close 
+                 * also. 
+                */
                 main.FormClosed += (s, args) => this.Close();
 
-                main.Show();                                                                             // Show the Calendar Form
+                main.Show();                                                                            // Show the main Form
                 this.Hide();                                                                            // Hide this form so it's not lurking in the background
             }
 
