@@ -73,8 +73,7 @@ namespace Schedule_Manager
 
             DataTable appointmentsDt = new DataTable();                                     // We're going to use a DataTable to hold the query results
             MySqlCommand getAppointmentsByUserIdCmd = new MySqlCommand(                     // Creating the query
-                $"select * from appointment;select appointmentId, customerId, " +
-                $"type, start, end from appointment where userId = {outputId};",
+                $"select * from appointment where userId = {outputId};",
                 DbConnect()                                                                 // Since DbConnect already returns a connection, we'll use it
                 );
 
@@ -82,7 +81,6 @@ namespace Schedule_Manager
             {           
                 using (getAppointmentsByUserIdCmd)                                          // And the query that we defined...
                 {
-                    //appointmentConn.Open();                                               // Open the connection
                     MySqlDataReader reader = getAppointmentsByUserIdCmd.ExecuteReader();    // Initialize the data reader
                     appointmentsDt.Load(reader);                                            // Execute the reader
 
@@ -93,6 +91,7 @@ namespace Schedule_Manager
                             Appointment newAppt = new Appointment();                        // Create a new appointment
                             newAppt.appointmentId = (int)row[0];                            // Set the parameters as appropriate
                             newAppt.customerId = (int)row[1];
+                            newAppt.customerName = GetCustomerNameById(newAppt.customerId); 
                             newAppt.userId = (int)row[1];
                             newAppt.type = row[7].ToString();
 
@@ -134,6 +133,29 @@ namespace Schedule_Manager
             */
             DateTime dateTime = dt.ToUniversalTime();
             return dateTime;
+        }
+
+        public static string GetCustomerNameById(int id)
+        {
+            string customerName = "";                                                   // The string to be returned
+
+            MySqlCommand getCustomerNameByIdCmd = new MySqlCommand(                     // Creating the query
+                $"select customerName from customer where customerid = {id}",           // The actual query we'll run
+                DbConnect()                                                             // Since DbConnect already returns a connection, we'll use it
+                );
+
+            using (DbConnect())                                                         // Using the connection...
+            {
+                using (getCustomerNameByIdCmd)                                          // Using the query...
+                {
+                    MySqlDataReader reader = getCustomerNameByIdCmd.ExecuteReader();    // Execute the query
+                    while (reader.Read())                                               // Reading the results
+                    {
+                        customerName = reader.GetString(0);                             // Assign the result of cell 0 ot the customerName variable
+                    }
+                }
+            }
+            return customerName;                                                        // Return the customerName
         }
     }
 }

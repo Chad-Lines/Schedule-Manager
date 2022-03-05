@@ -31,9 +31,6 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabCalendar = new System.Windows.Forms.TabPage();
-            this.btnMonthAppointments = new System.Windows.Forms.Button();
-            this.btnAllAppointments = new System.Windows.Forms.Button();
-            this.btnWeekAppointments = new System.Windows.Forms.Button();
             this.dgvCalendar = new System.Windows.Forms.DataGridView();
             this.btnDeleteAppointment = new System.Windows.Forms.Button();
             this.btnEditAppointment = new System.Windows.Forms.Button();
@@ -52,6 +49,17 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rdoAll = new System.Windows.Forms.RadioButton();
+            this.rdoWeek = new System.Windows.Forms.RadioButton();
+            this.rdoMonth = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabCalendar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalendar)).BeginInit();
@@ -86,9 +94,10 @@
             // tabCalendar
             // 
             this.tabCalendar.BackColor = System.Drawing.Color.Transparent;
-            this.tabCalendar.Controls.Add(this.btnMonthAppointments);
-            this.tabCalendar.Controls.Add(this.btnAllAppointments);
-            this.tabCalendar.Controls.Add(this.btnWeekAppointments);
+            this.tabCalendar.Controls.Add(this.label1);
+            this.tabCalendar.Controls.Add(this.rdoMonth);
+            this.tabCalendar.Controls.Add(this.rdoWeek);
+            this.tabCalendar.Controls.Add(this.rdoAll);
             this.tabCalendar.Controls.Add(this.dgvCalendar);
             this.tabCalendar.Controls.Add(this.btnDeleteAppointment);
             this.tabCalendar.Controls.Add(this.btnEditAppointment);
@@ -100,44 +109,25 @@
             this.tabCalendar.TabIndex = 0;
             this.tabCalendar.Text = "Calendar";
             // 
-            // btnMonthAppointments
-            // 
-            this.btnMonthAppointments.Location = new System.Drawing.Point(106, 9);
-            this.btnMonthAppointments.Name = "btnMonthAppointments";
-            this.btnMonthAppointments.Size = new System.Drawing.Size(39, 23);
-            this.btnMonthAppointments.TabIndex = 30;
-            this.btnMonthAppointments.Text = "Mo";
-            this.btnMonthAppointments.UseVisualStyleBackColor = true;
-            // 
-            // btnAllAppointments
-            // 
-            this.btnAllAppointments.Location = new System.Drawing.Point(16, 9);
-            this.btnAllAppointments.Name = "btnAllAppointments";
-            this.btnAllAppointments.Size = new System.Drawing.Size(39, 23);
-            this.btnAllAppointments.TabIndex = 28;
-            this.btnAllAppointments.Text = "All";
-            this.btnAllAppointments.UseVisualStyleBackColor = true;
-            // 
-            // btnWeekAppointments
-            // 
-            this.btnWeekAppointments.Location = new System.Drawing.Point(61, 9);
-            this.btnWeekAppointments.Name = "btnWeekAppointments";
-            this.btnWeekAppointments.Size = new System.Drawing.Size(39, 23);
-            this.btnWeekAppointments.TabIndex = 29;
-            this.btnWeekAppointments.Text = "Wk";
-            this.btnWeekAppointments.UseVisualStyleBackColor = true;
-            // 
             // dgvCalendar
             // 
             this.dgvCalendar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCalendar.Location = new System.Drawing.Point(15, 38);
+            this.dgvCalendar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column7,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6});
+            this.dgvCalendar.Location = new System.Drawing.Point(15, 90);
             this.dgvCalendar.Name = "dgvCalendar";
-            this.dgvCalendar.Size = new System.Drawing.Size(1008, 469);
+            this.dgvCalendar.Size = new System.Drawing.Size(1008, 417);
             this.dgvCalendar.TabIndex = 24;
             // 
             // btnDeleteAppointment
             // 
-            this.btnDeleteAppointment.Location = new System.Drawing.Point(949, 9);
+            this.btnDeleteAppointment.Location = new System.Drawing.Point(948, 61);
             this.btnDeleteAppointment.Name = "btnDeleteAppointment";
             this.btnDeleteAppointment.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteAppointment.TabIndex = 25;
@@ -146,7 +136,7 @@
             // 
             // btnEditAppointment
             // 
-            this.btnEditAppointment.Location = new System.Drawing.Point(868, 9);
+            this.btnEditAppointment.Location = new System.Drawing.Point(867, 61);
             this.btnEditAppointment.Name = "btnEditAppointment";
             this.btnEditAppointment.Size = new System.Drawing.Size(75, 23);
             this.btnEditAppointment.TabIndex = 27;
@@ -155,12 +145,13 @@
             // 
             // btnAddAppointments
             // 
-            this.btnAddAppointments.Location = new System.Drawing.Point(787, 9);
+            this.btnAddAppointments.Location = new System.Drawing.Point(786, 61);
             this.btnAddAppointments.Name = "btnAddAppointments";
             this.btnAddAppointments.Size = new System.Drawing.Size(75, 23);
             this.btnAddAppointments.TabIndex = 26;
             this.btnAddAppointments.Text = "Add";
             this.btnAddAppointments.UseVisualStyleBackColor = true;
+            this.btnAddAppointments.Click += new System.EventHandler(this.btnAddAppointments_Click);
             // 
             // tabCustomers
             // 
@@ -299,6 +290,98 @@
             this.button5.Text = "Report 1";
             this.button5.UseVisualStyleBackColor = true;
             // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "start";
+            this.Column1.HeaderText = "Appointment Start";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 200;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "end";
+            this.Column2.HeaderText = "Appointment End";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 200;
+            // 
+            // Column7
+            // 
+            this.Column7.DataPropertyName = "customerName";
+            this.Column7.HeaderText = "Customer";
+            this.Column7.Name = "Column7";
+            this.Column7.Width = 200;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "type";
+            this.Column3.HeaderText = "Appointment Type";
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 200;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "appointmentId";
+            this.Column4.HeaderText = "Appointment ID";
+            this.Column4.Name = "Column4";
+            this.Column4.Visible = false;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "customerId";
+            this.Column5.HeaderText = "Customer ID";
+            this.Column5.Name = "Column5";
+            this.Column5.Visible = false;
+            // 
+            // Column6
+            // 
+            this.Column6.DataPropertyName = "userId";
+            this.Column6.HeaderText = "User ID";
+            this.Column6.Name = "Column6";
+            this.Column6.Visible = false;
+            // 
+            // rdoAll
+            // 
+            this.rdoAll.AutoSize = true;
+            this.rdoAll.Location = new System.Drawing.Point(15, 64);
+            this.rdoAll.Name = "rdoAll";
+            this.rdoAll.Size = new System.Drawing.Size(36, 17);
+            this.rdoAll.TabIndex = 28;
+            this.rdoAll.TabStop = true;
+            this.rdoAll.Text = "All";
+            this.rdoAll.UseVisualStyleBackColor = true;
+            // 
+            // rdoWeek
+            // 
+            this.rdoWeek.AutoSize = true;
+            this.rdoWeek.Location = new System.Drawing.Point(57, 64);
+            this.rdoWeek.Name = "rdoWeek";
+            this.rdoWeek.Size = new System.Drawing.Size(54, 17);
+            this.rdoWeek.TabIndex = 29;
+            this.rdoWeek.TabStop = true;
+            this.rdoWeek.Text = "Week";
+            this.rdoWeek.UseVisualStyleBackColor = true;
+            // 
+            // rdoMonth
+            // 
+            this.rdoMonth.AutoSize = true;
+            this.rdoMonth.Location = new System.Drawing.Point(117, 64);
+            this.rdoMonth.Name = "rdoMonth";
+            this.rdoMonth.Size = new System.Drawing.Size(55, 17);
+            this.rdoMonth.TabIndex = 30;
+            this.rdoMonth.TabStop = true;
+            this.rdoMonth.Text = "Month";
+            this.rdoMonth.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(11, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(171, 24);
+            this.label1.TabIndex = 31;
+            this.label1.Text = "Your Appointments";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -310,6 +393,7 @@
             this.Text = "Main";
             this.tabControl1.ResumeLayout(false);
             this.tabCalendar.ResumeLayout(false);
+            this.tabCalendar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalendar)).EndInit();
             this.tabCustomers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -327,9 +411,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabCalendar;
         private System.Windows.Forms.TabPage tabCustomers;
-        private System.Windows.Forms.Button btnMonthAppointments;
-        private System.Windows.Forms.Button btnAllAppointments;
-        private System.Windows.Forms.Button btnWeekAppointments;
         private System.Windows.Forms.DataGridView dgvCalendar;
         private System.Windows.Forms.Button btnDeleteAppointment;
         private System.Windows.Forms.Button btnEditAppointment;
@@ -347,5 +428,16 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RadioButton rdoMonth;
+        private System.Windows.Forms.RadioButton rdoWeek;
+        private System.Windows.Forms.RadioButton rdoAll;
     }
 }

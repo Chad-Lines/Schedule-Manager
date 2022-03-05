@@ -39,6 +39,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.lnkAddCustomer = new System.Windows.Forms.LinkLabel();
             label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -137,11 +138,25 @@
             this.label2.TabIndex = 22;
             this.label2.Text = "Customer";
             // 
+            // lnkAddCustomer
+            // 
+            this.lnkAddCustomer.AutoSize = true;
+            this.lnkAddCustomer.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.lnkAddCustomer.LinkColor = System.Drawing.Color.RoyalBlue;
+            this.lnkAddCustomer.Location = new System.Drawing.Point(206, 116);
+            this.lnkAddCustomer.Name = "lnkAddCustomer";
+            this.lnkAddCustomer.Size = new System.Drawing.Size(98, 13);
+            this.lnkAddCustomer.TabIndex = 33;
+            this.lnkAddCustomer.TabStop = true;
+            this.lnkAddCustomer.Text = "Add New Customer";
+            this.lnkAddCustomer.VisitedLinkColor = System.Drawing.Color.RoyalBlue;
+            // 
             // AddAppointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(385, 453);
+            this.Controls.Add(this.lnkAddCustomer);
             this.Controls.Add(label5);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
@@ -172,5 +187,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.LinkLabel lnkAddCustomer;
     }
 }

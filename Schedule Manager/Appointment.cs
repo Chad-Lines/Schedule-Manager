@@ -11,6 +11,7 @@ namespace Schedule_Manager
         // PROPERTIES --------------------------------
         public int  appointmentId { get; set; }
         public int customerId { get; set; }
+        public string customerName { get; set; }
         public int userId { get; set; }
         public string type { get; set; }
         public string start { get; set; }

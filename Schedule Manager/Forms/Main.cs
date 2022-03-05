@@ -30,10 +30,14 @@ namespace Schedule_Manager.Forms
         {
             this.Close();
         }
+        
 
         #region CalendarTab
         private void ConfigureCalendarView()
         {
+            // Selecting the default view
+            rdoAll.Checked = true;
+
             // Configuring the DataGridView Source and Parameters
             dgvCalendar.DataSource = DbManager.GetAppointmentsByUserId();           // Adding the appointment list as the data source
             dgvCalendar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;    // Full row sleect (rather than single cells)
@@ -41,6 +45,15 @@ namespace Schedule_Manager.Forms
             dgvCalendar.MultiSelect = false;                                        // Disabling multi-select
             dgvCalendar.AllowUserToAddRows = false;                                 // Disallow adding new rows
         }
+
+        private void btnAddAppointments_Click(object sender, EventArgs e)
+        {
+            AddAppointment addAppt = new AddAppointment();
+            addAppt.Show();
+        }
+
         #endregion
+
+
     }
 }
