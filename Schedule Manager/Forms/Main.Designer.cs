@@ -31,7 +31,18 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabCalendar = new System.Windows.Forms.TabPage();
+            this.btnMonth = new System.Windows.Forms.Button();
+            this.btnWeek = new System.Windows.Forms.Button();
+            this.btnAll = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.dgvCalendar = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnDeleteAppointment = new System.Windows.Forms.Button();
             this.btnEditAppointment = new System.Windows.Forms.Button();
             this.btnAddAppointments = new System.Windows.Forms.Button();
@@ -49,20 +60,6 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rdoAll = new System.Windows.Forms.RadioButton();
-            this.rdoWeek = new System.Windows.Forms.RadioButton();
-            this.rdoMonth = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnMonth = new System.Windows.Forms.Button();
-            this.btnWeek = new System.Windows.Forms.Button();
-            this.btnAll = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabCalendar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalendar)).BeginInit();
@@ -101,9 +98,6 @@
             this.tabCalendar.Controls.Add(this.btnWeek);
             this.tabCalendar.Controls.Add(this.btnAll);
             this.tabCalendar.Controls.Add(this.label1);
-            this.tabCalendar.Controls.Add(this.rdoMonth);
-            this.tabCalendar.Controls.Add(this.rdoWeek);
-            this.tabCalendar.Controls.Add(this.rdoAll);
             this.tabCalendar.Controls.Add(this.dgvCalendar);
             this.tabCalendar.Controls.Add(this.btnDeleteAppointment);
             this.tabCalendar.Controls.Add(this.btnEditAppointment);
@@ -114,6 +108,46 @@
             this.tabCalendar.Size = new System.Drawing.Size(1035, 513);
             this.tabCalendar.TabIndex = 0;
             this.tabCalendar.Text = "Calendar";
+            // 
+            // btnMonth
+            // 
+            this.btnMonth.Location = new System.Drawing.Point(177, 61);
+            this.btnMonth.Name = "btnMonth";
+            this.btnMonth.Size = new System.Drawing.Size(75, 23);
+            this.btnMonth.TabIndex = 32;
+            this.btnMonth.Text = "This Month";
+            this.btnMonth.UseVisualStyleBackColor = true;
+            this.btnMonth.Click += new System.EventHandler(this.btnMonth_Click);
+            // 
+            // btnWeek
+            // 
+            this.btnWeek.Location = new System.Drawing.Point(96, 61);
+            this.btnWeek.Name = "btnWeek";
+            this.btnWeek.Size = new System.Drawing.Size(75, 23);
+            this.btnWeek.TabIndex = 34;
+            this.btnWeek.Text = "This Week";
+            this.btnWeek.UseVisualStyleBackColor = true;
+            this.btnWeek.Click += new System.EventHandler(this.btnWeek_Click);
+            // 
+            // btnAll
+            // 
+            this.btnAll.Location = new System.Drawing.Point(15, 61);
+            this.btnAll.Name = "btnAll";
+            this.btnAll.Size = new System.Drawing.Size(75, 23);
+            this.btnAll.TabIndex = 33;
+            this.btnAll.Text = "All";
+            this.btnAll.UseVisualStyleBackColor = true;
+            this.btnAll.Click += new System.EventHandler(this.btnAll_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(11, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(171, 24);
+            this.label1.TabIndex = 31;
+            this.label1.Text = "Your Appointments";
             // 
             // dgvCalendar
             // 
@@ -130,6 +164,55 @@
             this.dgvCalendar.Name = "dgvCalendar";
             this.dgvCalendar.Size = new System.Drawing.Size(1008, 417);
             this.dgvCalendar.TabIndex = 24;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "start";
+            this.Column1.HeaderText = "Appointment Start";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 200;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "end";
+            this.Column2.HeaderText = "Appointment End";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 200;
+            // 
+            // Column7
+            // 
+            this.Column7.DataPropertyName = "customerName";
+            this.Column7.HeaderText = "Customer";
+            this.Column7.Name = "Column7";
+            this.Column7.Width = 200;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "type";
+            this.Column3.HeaderText = "Appointment Type";
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 200;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "appointmentId";
+            this.Column4.HeaderText = "Appointment ID";
+            this.Column4.Name = "Column4";
+            this.Column4.Visible = false;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "customerId";
+            this.Column5.HeaderText = "Customer ID";
+            this.Column5.Name = "Column5";
+            this.Column5.Visible = false;
+            // 
+            // Column6
+            // 
+            this.Column6.DataPropertyName = "userId";
+            this.Column6.HeaderText = "User ID";
+            this.Column6.Name = "Column6";
+            this.Column6.Visible = false;
             // 
             // btnDeleteAppointment
             // 
@@ -296,128 +379,6 @@
             this.button5.Text = "Report 1";
             this.button5.UseVisualStyleBackColor = true;
             // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "start";
-            this.Column1.HeaderText = "Appointment Start";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 200;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "end";
-            this.Column2.HeaderText = "Appointment End";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 200;
-            // 
-            // Column7
-            // 
-            this.Column7.DataPropertyName = "customerName";
-            this.Column7.HeaderText = "Customer";
-            this.Column7.Name = "Column7";
-            this.Column7.Width = 200;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "type";
-            this.Column3.HeaderText = "Appointment Type";
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 200;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "appointmentId";
-            this.Column4.HeaderText = "Appointment ID";
-            this.Column4.Name = "Column4";
-            this.Column4.Visible = false;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "customerId";
-            this.Column5.HeaderText = "Customer ID";
-            this.Column5.Name = "Column5";
-            this.Column5.Visible = false;
-            // 
-            // Column6
-            // 
-            this.Column6.DataPropertyName = "userId";
-            this.Column6.HeaderText = "User ID";
-            this.Column6.Name = "Column6";
-            this.Column6.Visible = false;
-            // 
-            // rdoAll
-            // 
-            this.rdoAll.AutoSize = true;
-            this.rdoAll.Location = new System.Drawing.Point(15, 64);
-            this.rdoAll.Name = "rdoAll";
-            this.rdoAll.Size = new System.Drawing.Size(36, 17);
-            this.rdoAll.TabIndex = 28;
-            this.rdoAll.TabStop = true;
-            this.rdoAll.Text = "All";
-            this.rdoAll.UseVisualStyleBackColor = true;
-            this.rdoAll.CheckedChanged += new System.EventHandler(this.rdoAll_CheckedChanged);
-            // 
-            // rdoWeek
-            // 
-            this.rdoWeek.AutoSize = true;
-            this.rdoWeek.Location = new System.Drawing.Point(57, 64);
-            this.rdoWeek.Name = "rdoWeek";
-            this.rdoWeek.Size = new System.Drawing.Size(77, 17);
-            this.rdoWeek.TabIndex = 29;
-            this.rdoWeek.TabStop = true;
-            this.rdoWeek.Text = "This Week";
-            this.rdoWeek.UseVisualStyleBackColor = true;
-            this.rdoWeek.CheckedChanged += new System.EventHandler(this.rdoWeek_CheckedChanged);
-            // 
-            // rdoMonth
-            // 
-            this.rdoMonth.AutoSize = true;
-            this.rdoMonth.Location = new System.Drawing.Point(140, 64);
-            this.rdoMonth.Name = "rdoMonth";
-            this.rdoMonth.Size = new System.Drawing.Size(78, 17);
-            this.rdoMonth.TabIndex = 30;
-            this.rdoMonth.TabStop = true;
-            this.rdoMonth.Text = "This Month";
-            this.rdoMonth.UseVisualStyleBackColor = true;
-            this.rdoMonth.CheckedChanged += new System.EventHandler(this.rdoMonth_CheckedChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(11, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(171, 24);
-            this.label1.TabIndex = 31;
-            this.label1.Text = "Your Appointments";
-            // 
-            // btnMonth
-            // 
-            this.btnMonth.Location = new System.Drawing.Point(382, 61);
-            this.btnMonth.Name = "btnMonth";
-            this.btnMonth.Size = new System.Drawing.Size(75, 23);
-            this.btnMonth.TabIndex = 32;
-            this.btnMonth.Text = "This Month";
-            this.btnMonth.UseVisualStyleBackColor = true;
-            // 
-            // btnWeek
-            // 
-            this.btnWeek.Location = new System.Drawing.Point(301, 61);
-            this.btnWeek.Name = "btnWeek";
-            this.btnWeek.Size = new System.Drawing.Size(75, 23);
-            this.btnWeek.TabIndex = 34;
-            this.btnWeek.Text = "This Week";
-            this.btnWeek.UseVisualStyleBackColor = true;
-            // 
-            // btnAll
-            // 
-            this.btnAll.Location = new System.Drawing.Point(220, 61);
-            this.btnAll.Name = "btnAll";
-            this.btnAll.Size = new System.Drawing.Size(75, 23);
-            this.btnAll.TabIndex = 33;
-            this.btnAll.Text = "All";
-            this.btnAll.UseVisualStyleBackColor = true;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -472,9 +433,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton rdoMonth;
-        private System.Windows.Forms.RadioButton rdoWeek;
-        private System.Windows.Forms.RadioButton rdoAll;
         private System.Windows.Forms.Button btnMonth;
         private System.Windows.Forms.Button btnWeek;
         private System.Windows.Forms.Button btnAll;
