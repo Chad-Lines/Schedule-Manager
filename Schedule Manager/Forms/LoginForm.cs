@@ -133,6 +133,8 @@ namespace Schedule_Manager.Forms
              * it is still in memory. When we exit the Main form, we want to also exit the Login form. This 
              * lambda expression accomplishes that. If the main form is closed, then this (the login form) will close 
              * also. 
+             * 
+             * Lambda #2 is in Main.cs
             */
             main.FormClosed += (s, args) => this.Close();
 

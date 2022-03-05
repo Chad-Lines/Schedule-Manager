@@ -60,6 +60,9 @@
             this.rdoWeek = new System.Windows.Forms.RadioButton();
             this.rdoMonth = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnMonth = new System.Windows.Forms.Button();
+            this.btnWeek = new System.Windows.Forms.Button();
+            this.btnAll = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabCalendar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalendar)).BeginInit();
@@ -94,6 +97,9 @@
             // tabCalendar
             // 
             this.tabCalendar.BackColor = System.Drawing.Color.Transparent;
+            this.tabCalendar.Controls.Add(this.btnMonth);
+            this.tabCalendar.Controls.Add(this.btnWeek);
+            this.tabCalendar.Controls.Add(this.btnAll);
             this.tabCalendar.Controls.Add(this.label1);
             this.tabCalendar.Controls.Add(this.rdoMonth);
             this.tabCalendar.Controls.Add(this.rdoWeek);
@@ -349,28 +355,31 @@
             this.rdoAll.TabStop = true;
             this.rdoAll.Text = "All";
             this.rdoAll.UseVisualStyleBackColor = true;
+            this.rdoAll.CheckedChanged += new System.EventHandler(this.rdoAll_CheckedChanged);
             // 
             // rdoWeek
             // 
             this.rdoWeek.AutoSize = true;
             this.rdoWeek.Location = new System.Drawing.Point(57, 64);
             this.rdoWeek.Name = "rdoWeek";
-            this.rdoWeek.Size = new System.Drawing.Size(54, 17);
+            this.rdoWeek.Size = new System.Drawing.Size(77, 17);
             this.rdoWeek.TabIndex = 29;
             this.rdoWeek.TabStop = true;
-            this.rdoWeek.Text = "Week";
+            this.rdoWeek.Text = "This Week";
             this.rdoWeek.UseVisualStyleBackColor = true;
+            this.rdoWeek.CheckedChanged += new System.EventHandler(this.rdoWeek_CheckedChanged);
             // 
             // rdoMonth
             // 
             this.rdoMonth.AutoSize = true;
-            this.rdoMonth.Location = new System.Drawing.Point(117, 64);
+            this.rdoMonth.Location = new System.Drawing.Point(140, 64);
             this.rdoMonth.Name = "rdoMonth";
-            this.rdoMonth.Size = new System.Drawing.Size(55, 17);
+            this.rdoMonth.Size = new System.Drawing.Size(78, 17);
             this.rdoMonth.TabIndex = 30;
             this.rdoMonth.TabStop = true;
-            this.rdoMonth.Text = "Month";
+            this.rdoMonth.Text = "This Month";
             this.rdoMonth.UseVisualStyleBackColor = true;
+            this.rdoMonth.CheckedChanged += new System.EventHandler(this.rdoMonth_CheckedChanged);
             // 
             // label1
             // 
@@ -381,6 +390,33 @@
             this.label1.Size = new System.Drawing.Size(171, 24);
             this.label1.TabIndex = 31;
             this.label1.Text = "Your Appointments";
+            // 
+            // btnMonth
+            // 
+            this.btnMonth.Location = new System.Drawing.Point(382, 61);
+            this.btnMonth.Name = "btnMonth";
+            this.btnMonth.Size = new System.Drawing.Size(75, 23);
+            this.btnMonth.TabIndex = 32;
+            this.btnMonth.Text = "This Month";
+            this.btnMonth.UseVisualStyleBackColor = true;
+            // 
+            // btnWeek
+            // 
+            this.btnWeek.Location = new System.Drawing.Point(301, 61);
+            this.btnWeek.Name = "btnWeek";
+            this.btnWeek.Size = new System.Drawing.Size(75, 23);
+            this.btnWeek.TabIndex = 34;
+            this.btnWeek.Text = "This Week";
+            this.btnWeek.UseVisualStyleBackColor = true;
+            // 
+            // btnAll
+            // 
+            this.btnAll.Location = new System.Drawing.Point(220, 61);
+            this.btnAll.Name = "btnAll";
+            this.btnAll.Size = new System.Drawing.Size(75, 23);
+            this.btnAll.TabIndex = 33;
+            this.btnAll.Text = "All";
+            this.btnAll.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -439,5 +475,8 @@
         private System.Windows.Forms.RadioButton rdoMonth;
         private System.Windows.Forms.RadioButton rdoWeek;
         private System.Windows.Forms.RadioButton rdoAll;
+        private System.Windows.Forms.Button btnMonth;
+        private System.Windows.Forms.Button btnWeek;
+        private System.Windows.Forms.Button btnAll;
     }
 }
