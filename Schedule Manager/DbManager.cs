@@ -197,7 +197,34 @@ namespace Schedule_Manager
 
         public static void AddAppointment(Appointment appt)
         {
+            /* +-------------------------------------------------------------------------------------------------------------+
+            * |                                                                                                             |
+            * | REQUIREMENT E: (3/n) Provide the ability to automatically adjust appointment times based on user time zones |
+            * |                                                                                                             |
+            * +-------------------------------------------------------------------------------------------------------------+
+            */
+            DateTime startDt = ConvertToUtcTime(DateTime.Parse(appt.start));    // Here we're (1) converting the start and end strings into
+            DateTime endDt = ConvertToUtcTime(DateTime.Parse(appt.end));        // DateTime objects, and then (2) converting them into UTC
+                                                                                // time before we insert them into the database.
+            int customerId = appt.customerId;                                   // Capture the customer ID
+            string type = appt.type;                                            // Capture the appointment type
+            string sDefault = "not needed";                                     // This is for the fields that are not unnecessary
 
+            MySqlCommand insertAppointmentCmd = new MySqlCommand(               // Keep in mind that userName and userId are already 
+                $"insert into appointment (customerId, userId, title, " +       // defined. Here we just pass them in through the insert
+                $"description, location, contact, type, url, start, end, " +
+                $"createdBy, lastUpdateBy ) values ({customerId}, {userId}, " +
+                $"'{sDefault}', '{sDefault}', '{sDefault}', '{sDefault}', type, '{sDefault}', " +
+                $"'{startDt.ToString()}', '{endDt.ToString()}', '{userName}', '{userName}' );", DbConnect());
+
+            MySqlDataReader apptReader = insertAppointmentCmd.ExecuteReader();  // Execute the Query
+            // THIS IS WHERE I LEFT OFF!!!
+            // https://stackoverflow.com/questions/36785594/mysql-data-mysqlclient-mysqlexception-incorrect-datetime-value
+
+            while (apptReader.Read())                       
+            {
+            }
+            MessageBox.Show("Appointment Saved");                               // Alert the user that the appointment has been saved
         }
     }
 }

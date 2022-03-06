@@ -52,7 +52,18 @@ namespace Schedule_Manager.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            Customer selectedCustomer = (Customer)cbCustomers.SelectedItem; // Here we're capturing the selected customer as a Customer object
+                                                                            // which let's us grab the customerId to associate with the
+                                                                            // new appointment
+            Appointment newAppt = new Appointment();                        // Creating the new appointment using user-provided data
+            newAppt.customerId = selectedCustomer.customerId;               // Here's where we associate the customerId
+            newAppt.type = cbType.Text;                                     // Capture the appointment type
+            newAppt.start = dtpStart.Value.ToString("yyyy-MM-dd H:mm:ss");  // We're capturing these as strings for now. When we send them
+            newAppt.end = dtpEnd.Value.ToString("yyyy-MM-dd H:mm:ss");      // to DbManager, they'll be converted into UTC DateTime objects
+                                                                            // It's important to recognize that we're capturing the VALUE of
+                                                                            // the DateTime object and not the object itself
 
+            DbManager.AddAppointment(newAppt);                              // Saving the new appointment to the database
         }
     }
 }
