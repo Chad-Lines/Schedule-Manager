@@ -13,7 +13,7 @@ namespace Schedule_Manager.Forms
 {
     public partial class Main : Form
     {
-        static BindingList<Appointment> allAppts = DbManager.GetAppointmentsByUserId();
+        BindingList<Appointment> allAppts = DbManager.GetAppointmentsByUserId();
         //BindingList<Appointment> visibleAppts = allAppts;
 
         public Main()
@@ -105,7 +105,7 @@ namespace Schedule_Manager.Forms
             dgvCalendar.DataSource = allAppts.Where(                                                            // This is where we filter by...
                 a => cal.GetWeekOfYear(DateTime.Parse(a.start), dfi.CalendarWeekRule, dfi.FirstDayOfWeek) ==    // Get the week of the year (int) of the appointment, and...
                      cal.GetWeekOfYear(DateTime.Now, dfi.CalendarWeekRule, dfi.FirstDayOfWeek)                  // compare it agains the current week of the year (int)
-            );
+            ).ToList();
         }
 
         private void btnMonth_Click(object sender, EventArgs e)
@@ -118,12 +118,10 @@ namespace Schedule_Manager.Forms
             DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;        // We get the current DateTimeFormatInfo
             System.Globalization.Calendar cal = dfi.Calendar;               // Getting a calendar item
 
-            MessageBox.Show("My Month: " + DateTime.Now.Month.ToString());
-
             dgvCalendar.DataSource = null;
             dgvCalendar.DataSource = allAppts.Where(                        // This is where we filter by...
                 a => DateTime.Parse(a.start).Month == DateTime.Now.Month    // Compare the appointment month to the current month
-            );
+            ).ToList();
         }
 
 
