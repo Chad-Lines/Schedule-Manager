@@ -18,6 +18,8 @@ namespace Schedule_Manager
         public static readonly string constr = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
         
         public static BindingList<Appointment> appointments = new BindingList<Appointment>();   // This is the binding list wherein we'll store appointements
+        public static BindingList<Customer> customers = new BindingList<Customer>();            // This is the binding list wherein we'll store customers
+
         private static int userId;                                                              // Stores the user ID
         private static string userName;                                                         // Stores the user name
 
@@ -82,7 +84,7 @@ namespace Schedule_Manager
                 using (getAppointmentsByUserIdCmd)                                          // And the query that we defined...
                 {
                     MySqlDataReader reader = getAppointmentsByUserIdCmd.ExecuteReader();    // Initialize the data reader
-                    appointmentsDt.Load(reader);                                            // Execute the reader
+                    appointmentsDt.Load(reader);                                            // Execute the reader and load the data into the DataTable
 
                     if (appointmentsDt.Rows.Count > 0)                                      // If there are rows, then...
                     {
@@ -109,6 +111,41 @@ namespace Schedule_Manager
                 }
             }
             return appointments;                                            // Return the binding list
+        }
+
+        public static BindingList<Customer> GetAllCustomers()
+        {
+            DataTable customersDt = new DataTable();                            // We're going to use a DataTable to hold the query results
+            MySqlCommand getAllUsersCmd =
+                new MySqlCommand($"select * from customer;", DbConnect());      // Creating the query
+
+            using (DbConnect())                                                 // Using the connection
+            {
+                using (getAllUsersCmd)                                          // Using the query we created
+                {   
+                    MySqlDataReader reader = getAllUsersCmd.ExecuteReader();    // Initialize the data reader
+                    customersDt.Load(reader);                                   // Execute the reader and load the data into the DataTable
+
+                    if (customersDt.Rows.Count > 0)                             // If there are rows, then...
+                    {
+                        foreach (DataRow row in customersDt.Rows)               // for each row...
+                        {
+                            Customer newCust = new Customer();                  // Create the new customer
+                            newCust.customerId = (int)row[0];                   // Set the parameters as appropriate
+                            newCust.customerName = row[1].ToString();
+                            newCust.addressId = (int)row[2];
+                            newCust.active = (bool)row[3];
+                            newCust.createdDate = (DateTime)row[4];
+                            newCust.createdBy = row[5].ToString();
+                            newCust.lastUpdate = (DateTime)row[6];
+                            newCust.lastUpdateBy = row[7].ToString();
+
+                            customers.Add(newCust);                             // Add the new customers to the customers list
+                        }
+                    }
+                }
+            }
+            return customers;                                                   // Return the customers list
         }
 
         public static DateTime ConvertToLocalTime(DateTime dt)
@@ -156,6 +193,11 @@ namespace Schedule_Manager
                 }
             }
             return customerName;                                                        // Return the customerName
+        }
+
+        public static void AddAppointment(Appointment appt)
+        {
+
         }
     }
 }

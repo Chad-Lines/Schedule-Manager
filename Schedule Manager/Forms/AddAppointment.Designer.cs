@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.Label label5;
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
+            this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.cbType = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbCustomers = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lnkAddCustomer = new System.Windows.Forms.LinkLabel();
             label5 = new System.Windows.Forms.Label();
@@ -54,19 +54,19 @@
             label5.TabIndex = 32;
             label5.Text = "New Appointment";
             // 
-            // dateTimePicker2
+            // dtpEnd
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(77, 304);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(227, 20);
-            this.dateTimePicker2.TabIndex = 31;
+            this.dtpEnd.Location = new System.Drawing.Point(77, 304);
+            this.dtpEnd.Name = "dtpEnd";
+            this.dtpEnd.Size = new System.Drawing.Size(227, 20);
+            this.dtpEnd.TabIndex = 31;
             // 
-            // dateTimePicker1
+            // dtpStart
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(77, 232);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(227, 20);
-            this.dateTimePicker1.TabIndex = 30;
+            this.dtpStart.Location = new System.Drawing.Point(77, 232);
+            this.dtpStart.Name = "dtpStart";
+            this.dtpStart.Size = new System.Drawing.Size(227, 20);
+            this.dtpStart.TabIndex = 30;
             // 
             // label1
             // 
@@ -77,31 +77,33 @@
             this.label1.TabIndex = 29;
             this.label1.Text = "End Date and Time";
             // 
-            // button2
+            // btnCancel
             // 
-            this.button2.Location = new System.Drawing.Point(204, 357);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 23);
-            this.button2.TabIndex = 28;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnCancel.Location = new System.Drawing.Point(204, 357);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(100, 23);
+            this.btnCancel.TabIndex = 28;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // button1
+            // btnSave
             // 
-            this.button1.Location = new System.Drawing.Point(77, 357);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 23);
-            this.button1.TabIndex = 27;
-            this.button1.Text = "Save";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSave.Location = new System.Drawing.Point(77, 357);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(100, 23);
+            this.btnSave.TabIndex = 27;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // comboBox2
+            // cbType
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(77, 162);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(227, 21);
-            this.comboBox2.TabIndex = 26;
+            this.cbType.FormattingEnabled = true;
+            this.cbType.Location = new System.Drawing.Point(77, 162);
+            this.cbType.Name = "cbType";
+            this.cbType.Size = new System.Drawing.Size(227, 21);
+            this.cbType.TabIndex = 26;
             // 
             // label4
             // 
@@ -121,13 +123,13 @@
             this.label3.TabIndex = 24;
             this.label3.Text = "Start Date and Time";
             // 
-            // comboBox1
+            // cbCustomers
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(77, 92);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(227, 21);
-            this.comboBox1.TabIndex = 23;
+            this.cbCustomers.FormattingEnabled = true;
+            this.cbCustomers.Location = new System.Drawing.Point(77, 92);
+            this.cbCustomers.Name = "cbCustomers";
+            this.cbCustomers.Size = new System.Drawing.Size(227, 21);
+            this.cbCustomers.TabIndex = 23;
             // 
             // label2
             // 
@@ -150,6 +152,7 @@
             this.lnkAddCustomer.TabStop = true;
             this.lnkAddCustomer.Text = "Add New Customer";
             this.lnkAddCustomer.VisitedLinkColor = System.Drawing.Color.RoyalBlue;
+            this.lnkAddCustomer.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAddCustomer_LinkClicked);
             // 
             // AddAppointment
             // 
@@ -158,15 +161,15 @@
             this.ClientSize = new System.Drawing.Size(385, 453);
             this.Controls.Add(this.lnkAddCustomer);
             this.Controls.Add(label5);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtpEnd);
+            this.Controls.Add(this.dtpStart);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.cbType);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbCustomers);
             this.Controls.Add(this.label2);
             this.Name = "AddAppointment";
             this.Text = "AddAppointment";
@@ -177,15 +180,15 @@
 
         #endregion
 
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpEnd;
+        private System.Windows.Forms.DateTimePicker dtpStart;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.ComboBox cbType;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbCustomers;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.LinkLabel lnkAddCustomer;
     }
