@@ -37,16 +37,8 @@ namespace Schedule_Manager.Forms
         #region CalendarTab
         private void ConfigureCalendarView()
         {
-            dgvCalendar.DataSource = allAppts;
+            updateCalendarView();
             btnAll.Enabled = false;
-
-            // Configuring the DataGridView Source and Parameters
-            dgvCalendar.AutoGenerateColumns = false;
-            dgvCalendar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;    // Full row sleect (rather than single cells)
-            dgvCalendar.ReadOnly = true;                                            // Setting the data to "read only"
-            dgvCalendar.MultiSelect = false;                                        // Disabling multi-select
-            dgvCalendar.AllowUserToAddRows = false;                                 // Disallow adding new rows
-
         }
 
         private void btnAddAppointments_Click(object sender, EventArgs e)
@@ -124,6 +116,17 @@ namespace Schedule_Manager.Forms
             ).ToList();
         }
 
+        public void updateCalendarView()
+        {
+            dgvCalendar.DataSource = allAppts;
+
+            // Configuring the DataGridView Source and Parameters
+            dgvCalendar.AutoGenerateColumns = false;
+            dgvCalendar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;    // Full row sleect (rather than single cells)
+            dgvCalendar.ReadOnly = true;                                            // Setting the data to "read only"
+            dgvCalendar.MultiSelect = false;                                        // Disabling multi-select
+            dgvCalendar.AllowUserToAddRows = false;                                 // Disallow adding new rows
+        }
 
 
         #endregion

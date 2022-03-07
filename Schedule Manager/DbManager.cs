@@ -210,20 +210,22 @@ namespace Schedule_Manager
             string type = appt.type;                                            // Capture the appointment type
             string sDefault = "not needed";                                     // This is for the fields that are not unnecessary
 
-            MySqlCommand insertAppointmentCmd = new MySqlCommand(               // Keep in mind that userName and userId are already 
-                $"insert into appointment (customerId, userId, title, " +       // defined. Here we just pass them in through the insert
-                $"description, location, contact, type, url, start, end, " +
-                $"createdBy, lastUpdateBy ) values ({customerId}, {userId}, " +
-                $"'{sDefault}', '{sDefault}', '{sDefault}', '{sDefault}', type, '{sDefault}', " +
-                $"'{startDt.ToString()}', '{endDt.ToString()}', '{userName}', '{userName}' );", DbConnect());
+            string query =                                                      // Keep in mind that userName and userId are already populated
+                $"insert into appointment" +
+                $"(customerId, userId, title, description, location, contact, " +
+                $"type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy)" +
+                $"values ({customerId}, {userId}, '{sDefault}', '{sDefault}', " +
+                $"'{sDefault}', '{sDefault}', type, '{sDefault}', " +
+                $" @sdate, @edate, @sdate, '{userName}', @sdate, '{userName}' );";
 
-            MySqlDataReader apptReader = insertAppointmentCmd.ExecuteReader();  // Execute the Query
-            // THIS IS WHERE I LEFT OFF!!!
-            // https://stackoverflow.com/questions/36785594/mysql-data-mysqlclient-mysqlexception-incorrect-datetime-value
-
-            while (apptReader.Read())                       
+            using (var command = new MySqlCommand(query, DbConnect()))
             {
+                command.Parameters.Add("@sdate", MySqlDbType.Datetime).Value = startDt;
+                command.Parameters.Add("@edate", MySqlDbType.Datetime).Value = endDt;
+                command.ExecuteNonQuery();
             }
+
+
             MessageBox.Show("Appointment Saved");                               // Alert the user that the appointment has been saved
         }
     }

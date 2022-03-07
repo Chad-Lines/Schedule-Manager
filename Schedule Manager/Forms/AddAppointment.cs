@@ -64,6 +64,9 @@ namespace Schedule_Manager.Forms
                                                                             // the DateTime object and not the object itself
 
             DbManager.AddAppointment(newAppt);                              // Saving the new appointment to the database
+            Main m = new Main();                                            // Instantiating Main so we can access the updateCalendarView()
+            m.updateCalendarView();                                         // Updating the calendar view
+            this.Close();                                                   // Closing out this form
         }
     }
 }
