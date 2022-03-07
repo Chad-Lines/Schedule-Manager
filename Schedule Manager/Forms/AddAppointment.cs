@@ -12,7 +12,7 @@ namespace Schedule_Manager.Forms
 {
     public partial class AddAppointment : Form
     {
-        private BindingList<Customer> allCustomers = DbManager.GetAllCustomers();   // Getting our list of customers
+        private BindingList<Customer> allCustomers;   // This will hold our list of customers
 
         public AddAppointment()
         {
@@ -22,6 +22,9 @@ namespace Schedule_Manager.Forms
 
         public void InitializeForm()
         {
+            if(allCustomers != null) { allCustomers.Clear(); }      // If there are customers in the list, we clear it to prevent duplicates                                                                    
+            allCustomers = DbManager.GetAllCustomers();             // Set allCustomers to the customer list from the database
+
             // Setting up the Customer Combo Box
             cbCustomers.DataSource = allCustomers;                  // Set the datasource to get all customers from the database
             cbCustomers.DropDownStyle = ComboBoxStyle.DropDownList; // Setting the style like this prevents users from entering new data.

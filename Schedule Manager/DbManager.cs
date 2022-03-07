@@ -211,20 +211,19 @@ namespace Schedule_Manager
             string sDefault = "not needed";                                     // This is for the fields that are not unnecessary
 
             string query =                                                      // Keep in mind that userName and userId are already populated
-                $"insert into appointment" +
+                $"insert into appointment" +                                    // This is our insert statement
                 $"(customerId, userId, title, description, location, contact, " +
                 $"type, url, start, end, createDate, createdBy, lastUpdate, lastUpdateBy)" +
                 $"values ({customerId}, {userId}, '{sDefault}', '{sDefault}', " +
-                $"'{sDefault}', '{sDefault}', type, '{sDefault}', " +
+                $"'{sDefault}', '{sDefault}', '{type}', '{sDefault}', " +
                 $" @sdate, @edate, @sdate, '{userName}', @sdate, '{userName}' );";
 
-            using (var command = new MySqlCommand(query, DbConnect()))
+            using (var command = new MySqlCommand(query, DbConnect()))                  // Using the command that we create...
             {
-                command.Parameters.Add("@sdate", MySqlDbType.Datetime).Value = startDt;
+                command.Parameters.Add("@sdate", MySqlDbType.Datetime).Value = startDt; // Add in the start date and end date parameters
                 command.Parameters.Add("@edate", MySqlDbType.Datetime).Value = endDt;
-                command.ExecuteNonQuery();
+                command.ExecuteNonQuery();                                              // Execute the command
             }
-
 
             MessageBox.Show("Appointment Saved");                               // Alert the user that the appointment has been saved
         }
