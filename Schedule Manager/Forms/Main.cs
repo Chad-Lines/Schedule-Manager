@@ -134,9 +134,17 @@ namespace Schedule_Manager.Forms
 
         private void btnEditAppointment_Click(object sender, EventArgs e)
         {
-            Appointment currentAppointment = (Appointment)dgvCalendar.CurrentRow.DataBoundItem; // Getting the appointment to edit 
-            EditAppointment editAppt = new EditAppointment();                                   // Instantiating Edit form
-            editAppt.Show();                                                                    // Showing the Edit form
+            if (dgvCalendar.CurrentRow.DataBoundItem.GetType() == typeof(Appointment))
+            {
+                Appointment currentAppointment = (Appointment)dgvCalendar.CurrentRow.DataBoundItem; // Getting the appointment to edit 
+                EditAppointment editAppt = new EditAppointment(currentAppointment);                 // Instantiating Edit form
+                editAppt.Show();                                                                    // Showing the Edit form
+            }
+            else
+            {
+                MessageBox.Show("Please select an appointment to edit");
+            }
+            
         }
     }
 }

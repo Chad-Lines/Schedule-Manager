@@ -148,6 +148,32 @@ namespace Schedule_Manager
             return customers;                                                   // Return the customers list
         }
 
+        public static BindingList<String> GetAllTypes()
+        {
+            BindingList<String> types = new BindingList<String>();
+            DataTable typeDt = new DataTable();
+            MySqlCommand getDistinctTypeCmd = 
+                new MySqlCommand("select distinct type from appointment",
+                DbConnect());
+
+            using (DbConnect())
+            {
+                using (getDistinctTypeCmd)
+                {
+                    MySqlDataReader reader = getDistinctTypeCmd.ExecuteReader();
+                    typeDt.Load(reader);
+
+                    if (typeDt.Rows.Count > 0)
+                    {
+                        types.Add(typeDt.Rows[0][0].ToString());
+                    }
+
+                }
+            }
+
+            return types;
+        }
+
         public static DateTime ConvertToLocalTime(DateTime dt)
         {
             /* +-------------------------------------------------------------------------------------------------------------+
@@ -227,5 +253,10 @@ namespace Schedule_Manager
 
             MessageBox.Show("Appointment Saved");                                       // Alert the user that the appointment has been saved
         }
+
+        public static void UpdateAppointment(Appointment appt)
+        {
+
+        }        
     }
 }

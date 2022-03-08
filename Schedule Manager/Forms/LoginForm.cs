@@ -17,7 +17,7 @@ namespace Schedule_Manager.Forms
         string labelError = string.Empty;
         string FieldEmpty = string.Empty;
         string LoginError = string.Empty;
-
+        
         static string spanishCode = "es-ES";
         static string englishFieldEmpty = "Please enter a Username and Password.";
         static string englishLoginError = "Username or Password is incorrect.";
@@ -112,7 +112,7 @@ namespace Schedule_Manager.Forms
              * |                                                                                               |
              * |                [X] Entering an Incorrect Username or Password (4/4 Validation requiremets)    |
              * |                                                                                               |
-             * |                [x] Try/Catch (1/2 Methods)                                                    |
+             * |                [X] Try/Catch (1/2 Methods)                                                    |
              * +-----------------------------------------------------------------------------------------------+
              * 2/3 is in the AddAppointment.cs file.
              * 3/3 is in the AddCustomer.cs file.

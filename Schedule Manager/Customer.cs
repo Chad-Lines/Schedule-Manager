@@ -22,7 +22,7 @@ namespace Schedule_Manager
         public override string ToString()
         {
             // Overriding the default display to show useful information about a given Product
-            return $"[{customerId}] {customerName}";
+            return $"{customerName}";
         }
     }
 }

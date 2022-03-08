@@ -13,27 +13,26 @@ namespace Schedule_Manager.Forms
     public partial class EditAppointment : Form
     {
         private BindingList<Customer> allCustomers;                         // This will hold our list of customers
+        private BindingList<String> allTypes;                               // 
         private Appointment currentAppointment = Main.currentAppointment;   // This is the appointment selected, that we're going to edit
 
-        public EditAppointment()
+        public EditAppointment(Appointment currentAppointment)
         {
             InitializeComponent();
-            InitializeForm();
-        }
 
-        public void InitializeForm()
-        {
             // Setting up the BindingList
             if (allCustomers != null) { allCustomers.Clear(); }         // If there are customers in the list, then we clear it to prevent duplicates                                                                    
             allCustomers = DbManager.GetAllCustomers();                 // Set allCustomers to the customer list from the database
 
+            if (allTypes != null) { allTypes.Clear(); }
+            allTypes = DbManager.GetAllTypes();
+
             // Setting up the Customer Combo Box
             cbCustomers.DataSource = allCustomers;                      // Set the datasource to get all customers from the database
             cbCustomers.DropDownStyle = ComboBoxStyle.DropDownList;     // Setting the style like this prevents users from entering new data.
-            cbCustomers.Text = currentAppointment.customerName;  //
+            cbCustomers.Text = currentAppointment.customerName;         //
 
-            cbType.Items.Add("Scrum");                                  // This combo box is much easier. We manuallly add in the types that are                                                                    
-            cbType.Items.Add("Presentation");                           // already in use, but we also allow the user to add their own.
+            cbType.DataSource = allTypes;                               // already in use, but we also allow the user to add their own.
             cbType.Text = currentAppointment.type;
 
             // Setting up the Date Time Pickers
