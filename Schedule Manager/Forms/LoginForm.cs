@@ -61,6 +61,8 @@ namespace Schedule_Manager.Forms
 
             lblLoginErr.Text = labelError;  // Set the labelError to default
             lblLoginErr.Hide();             // Hide the error label
+
+            txtPassword.PasswordChar = '*'; // Hiding the password characters
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
@@ -101,6 +103,20 @@ namespace Schedule_Manager.Forms
                 $"select userId from user where username = '{username}' and password = '{password}';",  // The text of the command (a query to get the userId)
                 conn                                                                                    // Passing in the connection
             );
+
+            /* +-----------------------------------------------------------------------------------------------+
+             * |                                                                                               |
+             * | REQUIREMENT F: (1/3) You may use the same mechanism of exception control more than once,      |
+             * |                but you must incorporate at least two different mechanisms of exception        |
+             * |                control.                                                                       |
+             * |                                                                                               |
+             * |                [X] Entering an Incorrect Username or Password (4/4 Validation requiremets)    |
+             * |                                                                                               |
+             * |                [x] Try/Catch (1/2 Methods)                                                    |
+             * +-----------------------------------------------------------------------------------------------+
+             * 2/3 is in the AddAppointment.cs file.
+             * 3/3 is in the AddCustomer.cs file.
+             */
 
             try                                                                                         // We're going to attempt to get data from the Datbase with the...
             {                                                                                           // user information provided.

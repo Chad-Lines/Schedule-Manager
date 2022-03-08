@@ -23,8 +23,8 @@ namespace Schedule_Manager
         private void InitializeForm()
         {
             // Creating the other forms, but not initializing. 
-            Customers cust;
-            Reports report;
+            //Customers cust;
+            //Reports report;
 
             btnCalendar.Enabled = false;
         }

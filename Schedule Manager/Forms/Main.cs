@@ -14,7 +14,7 @@ namespace Schedule_Manager.Forms
     public partial class Main : Form
     {
         BindingList<Appointment> allAppts = DbManager.GetAppointmentsByUserId();
-        //BindingList<Appointment> visibleAppts = allAppts;
+        public static Appointment currentAppointment;
 
         public Main()
         {
@@ -129,8 +129,14 @@ namespace Schedule_Manager.Forms
         }
 
 
+
         #endregion
 
-
+        private void btnEditAppointment_Click(object sender, EventArgs e)
+        {
+            Appointment currentAppointment = (Appointment)dgvCalendar.CurrentRow.DataBoundItem; // Getting the appointment to edit 
+            EditAppointment editAppt = new EditAppointment();                                   // Instantiating Edit form
+            editAppt.Show();                                                                    // Showing the Edit form
+        }
     }
 }

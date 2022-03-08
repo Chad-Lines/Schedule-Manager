@@ -225,7 +225,7 @@ namespace Schedule_Manager
                 command.ExecuteNonQuery();                                              // Execute the command
             }
 
-            MessageBox.Show("Appointment Saved");                               // Alert the user that the appointment has been saved
+            MessageBox.Show("Appointment Saved");                                       // Alert the user that the appointment has been saved
         }
     }
 }

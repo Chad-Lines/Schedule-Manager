@@ -231,6 +231,7 @@
             this.btnEditAppointment.TabIndex = 27;
             this.btnEditAppointment.Text = "Edit...";
             this.btnEditAppointment.UseVisualStyleBackColor = true;
+            this.btnEditAppointment.Click += new System.EventHandler(this.btnEditAppointment_Click);
             // 
             // btnAddAppointments
             // 
