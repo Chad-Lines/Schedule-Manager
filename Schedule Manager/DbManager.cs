@@ -26,8 +26,17 @@ namespace Schedule_Manager
         public static MySqlConnection DbConnect()
         {
             MySqlConnection conn = new MySqlConnection(constr); // Create the connection using the connection string in the DataBase class
-            conn.Open();                                        // Open the database connection
-            return conn;                                        // Return the connection
+            try
+            {
+                conn.Open();                                        // Open the database connection
+                                                        // Return the connection
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+
+            return conn;            
         }
 
         public static void DbClose()
@@ -153,7 +162,7 @@ namespace Schedule_Manager
             BindingList<String> types = new BindingList<String>();
             DataTable typeDt = new DataTable();
             MySqlCommand getDistinctTypeCmd = 
-                new MySqlCommand("select distinct type from appointment",
+                new MySqlCommand("select distinct type from appointment;",
                 DbConnect());
 
             using (DbConnect())
@@ -165,7 +174,11 @@ namespace Schedule_Manager
 
                     if (typeDt.Rows.Count > 0)
                     {
-                        types.Add(typeDt.Rows[0][0].ToString());
+                        foreach (DataRow d in typeDt.Rows)
+                        {
+                            types.Add(d[0].ToString());
+                        }
+                        
                     }
 
                 }
@@ -254,9 +267,30 @@ namespace Schedule_Manager
             MessageBox.Show("Appointment Saved");                                       // Alert the user that the appointment has been saved
         }
 
-        public static void UpdateAppointment(Appointment appt)
+        public static void UpdateAppointment(int apptId, Appointment appt)
         {
+            DateTime startDt = ConvertToUtcTime(DateTime.Parse(appt.start));    // Here we're (1) converting the start and end strings into
+            DateTime endDt = ConvertToUtcTime(DateTime.Parse(appt.end));        // DateTime objects, and then (2) converting them into UTC
+                                                                                // time before we insert them into the database.
+            int customerId = appt.customerId;                                   // Capture the customer ID
+            string type = appt.type;                                            // Capture the appointment type
+            string query =                                                      // This is our update query
+               $"update appointment " +
+               $"set " +
+                $"customerId = {appt.customerId}," +
+                $"type = '{appt.type}'," +
+                $"start = @sdate," +
+                $"end = @edate " +
+               $"where appointmentId = {apptId};";
 
+            using (var command = new MySqlCommand(query, DbConnect()))                  // Using the command that we create...
+            {
+                command.Parameters.Add("@sdate", MySqlDbType.Datetime).Value = startDt; // Add in the start date and end date parameters
+                command.Parameters.Add("@edate", MySqlDbType.Datetime).Value = endDt;
+                command.ExecuteNonQuery();                                              // Execute the command
+            }
+
+            MessageBox.Show("Appointment Saved");                                       // Alert the user that the appointment has been saved
         }        
     }
 }
