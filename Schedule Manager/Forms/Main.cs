@@ -15,8 +15,8 @@ namespace Schedule_Manager.Forms
     {
         BindingList<Appointment> allAppts = DbManager.GetAppointmentsByUserId();
         public static Appointment currentAppointment;
-        
-        BindingList<Customer> allCustomers = DbManager.GetAllCustomers();
+
+        BindingList<Customer> allCustomers;
         public static Customer currentCustomer;
 
         #region Initialization
@@ -192,6 +192,26 @@ namespace Schedule_Manager.Forms
             dgvCustomer.AllowUserToAddRows = false;                                 // Disallow adding new rows
 
         }
+
+        private void btnAddCustomer_Click(object sender, EventArgs e)
+        {
+            AddCustomer addCust = new AddCustomer();
+            addCust.Show();
+        }
+        private void btnEditCustomer_Click(object sender, EventArgs e)
+        {
+            EditCustomer editCust = new EditCustomer(); 
+            editCust.Show();
+        }
+
+        private void btnDeleteCustomer_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
+        #region ReportsTab
+
         #endregion
     }
 }

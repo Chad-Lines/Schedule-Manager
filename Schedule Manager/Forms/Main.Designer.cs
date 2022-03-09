@@ -48,6 +48,14 @@
             this.btnAddAppointments = new System.Windows.Forms.Button();
             this.tabCustomers = new System.Windows.Forms.TabPage();
             this.dgvCustomer = new System.Windows.Forms.DataGridView();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnEditCustomer = new System.Windows.Forms.Button();
             this.btnAddCustomer = new System.Windows.Forms.Button();
             this.btnDeleteCustomer = new System.Windows.Forms.Button();
@@ -60,14 +68,6 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabCalendar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalendar)).BeginInit();
@@ -283,6 +283,62 @@
             this.dgvCustomer.Size = new System.Drawing.Size(1008, 469);
             this.dgvCustomer.TabIndex = 25;
             // 
+            // Column8
+            // 
+            this.Column8.DataPropertyName = "customerId";
+            this.Column8.HeaderText = "customerId";
+            this.Column8.Name = "Column8";
+            this.Column8.Visible = false;
+            // 
+            // Column9
+            // 
+            this.Column9.DataPropertyName = "customerName";
+            this.Column9.HeaderText = "Customer Name";
+            this.Column9.Name = "Column9";
+            this.Column9.Width = 200;
+            // 
+            // Column10
+            // 
+            this.Column10.DataPropertyName = "addressId";
+            this.Column10.HeaderText = "addressId";
+            this.Column10.Name = "Column10";
+            this.Column10.Visible = false;
+            // 
+            // Column11
+            // 
+            this.Column11.DataPropertyName = "active";
+            this.Column11.HeaderText = "Active";
+            this.Column11.Name = "Column11";
+            this.Column11.Width = 75;
+            // 
+            // Column12
+            // 
+            this.Column12.DataPropertyName = "createdDate";
+            this.Column12.HeaderText = "Created";
+            this.Column12.Name = "Column12";
+            // 
+            // Column13
+            // 
+            this.Column13.DataPropertyName = "createdBy";
+            this.Column13.HeaderText = "Created By";
+            this.Column13.Name = "Column13";
+            // 
+            // Column14
+            // 
+            this.Column14.DataPropertyName = "lastUpdate";
+            this.Column14.HeaderText = "Last Updated";
+            this.Column14.Name = "Column14";
+            this.Column14.Visible = false;
+            this.Column14.Width = 200;
+            // 
+            // Column15
+            // 
+            this.Column15.DataPropertyName = "lastUpdatedBy";
+            this.Column15.HeaderText = "Last Update User";
+            this.Column15.Name = "Column15";
+            this.Column15.Visible = false;
+            this.Column15.Width = 200;
+            // 
             // btnEditCustomer
             // 
             this.btnEditCustomer.Location = new System.Drawing.Point(867, 9);
@@ -291,6 +347,7 @@
             this.btnEditCustomer.TabIndex = 18;
             this.btnEditCustomer.Text = "Edit...";
             this.btnEditCustomer.UseVisualStyleBackColor = true;
+            this.btnEditCustomer.Click += new System.EventHandler(this.btnEditCustomer_Click);
             // 
             // btnAddCustomer
             // 
@@ -300,6 +357,7 @@
             this.btnAddCustomer.TabIndex = 17;
             this.btnAddCustomer.Text = "Add";
             this.btnAddCustomer.UseVisualStyleBackColor = true;
+            this.btnAddCustomer.Click += new System.EventHandler(this.btnAddCustomer_Click);
             // 
             // btnDeleteCustomer
             // 
@@ -309,6 +367,7 @@
             this.btnDeleteCustomer.TabIndex = 16;
             this.btnDeleteCustomer.Text = "Delete";
             this.btnDeleteCustomer.UseVisualStyleBackColor = true;
+            this.btnDeleteCustomer.Click += new System.EventHandler(this.btnDeleteCustomer_Click);
             // 
             // tabReports
             // 
@@ -397,62 +456,6 @@
             this.button5.TabIndex = 26;
             this.button5.Text = "Report 1";
             this.button5.UseVisualStyleBackColor = true;
-            // 
-            // Column8
-            // 
-            this.Column8.DataPropertyName = "customerId";
-            this.Column8.HeaderText = "customerId";
-            this.Column8.Name = "Column8";
-            this.Column8.Visible = false;
-            // 
-            // Column9
-            // 
-            this.Column9.DataPropertyName = "customerName";
-            this.Column9.HeaderText = "Customer Name";
-            this.Column9.Name = "Column9";
-            this.Column9.Width = 200;
-            // 
-            // Column10
-            // 
-            this.Column10.DataPropertyName = "addressId";
-            this.Column10.HeaderText = "addressId";
-            this.Column10.Name = "Column10";
-            this.Column10.Visible = false;
-            // 
-            // Column11
-            // 
-            this.Column11.DataPropertyName = "active";
-            this.Column11.HeaderText = "Active";
-            this.Column11.Name = "Column11";
-            this.Column11.Width = 75;
-            // 
-            // Column12
-            // 
-            this.Column12.DataPropertyName = "createdDate";
-            this.Column12.HeaderText = "Created";
-            this.Column12.Name = "Column12";
-            // 
-            // Column13
-            // 
-            this.Column13.DataPropertyName = "createdBy";
-            this.Column13.HeaderText = "Created By";
-            this.Column13.Name = "Column13";
-            // 
-            // Column14
-            // 
-            this.Column14.DataPropertyName = "lastUpdate";
-            this.Column14.HeaderText = "Last Updated";
-            this.Column14.Name = "Column14";
-            this.Column14.Visible = false;
-            this.Column14.Width = 200;
-            // 
-            // Column15
-            // 
-            this.Column15.DataPropertyName = "lastUpdatedBy";
-            this.Column15.HeaderText = "Last Update User";
-            this.Column15.Name = "Column15";
-            this.Column15.Visible = false;
-            this.Column15.Width = 200;
             // 
             // Main
             // 
