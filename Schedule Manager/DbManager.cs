@@ -23,6 +23,7 @@ namespace Schedule_Manager
         private static int userId;                                                              // Stores the user ID
         private static string userName;                                                         // Stores the user name
 
+        #region Db Admin Functions
         public static MySqlConnection DbConnect()
         {
             MySqlConnection conn = new MySqlConnection(constr); // Create the connection using the connection string in the DataBase class
@@ -43,7 +44,9 @@ namespace Schedule_Manager
         {
             
         }
+        #endregion
 
+        #region User Functions
         public static void SetUserID(int id)
         {
             // Setting the current user ID
@@ -80,7 +83,9 @@ namespace Schedule_Manager
         {
             userName = username;
         }
+        #endregion
 
+        #region Customer Functions
         public static string GetCustomerNameById(int id)
         {
             string customerName = "";                                                   // The string to be returned
@@ -138,7 +143,9 @@ namespace Schedule_Manager
             }
             return customers;                                                   // Return the customers list
         }
+        #endregion
 
+        #region Appointment Functions
         public static void AddAppointment(Appointment appt)
         {
             /* +-------------------------------------------------------------------------------------------------------------+
@@ -295,8 +302,81 @@ namespace Schedule_Manager
 
             return types;
         }
+        #endregion
+
+        #region Address/Phone Functions
+        private static void AddAddress()
+        {
+
+        }
+
+        private static int GetAddressId(String a)
+        {
+            return 0;
+        }
+
+        private static void UpdateAddress(int id) // Also used to update the Phone Number
+        {
+
+        }
+
+        private static void DeleteAddress()
+        {
+
+        }
+        #endregion
+
+        #region City Functions
+        private static void AddCity()
+        {
+
+        }
         
-        // HELPER FUNCTIONS ---------------------------------------------------------------
+        private static int GetCityId(String c)
+        {
+            return 0;
+        }
+
+        private static void UpdateCity(int id)
+        {
+            
+        }
+
+        private static void DeleteCity()
+        {
+
+        }
+
+        #endregion
+
+        #region Country Functions
+
+        private static void AddCountry()
+        {
+
+        }
+        
+        private static int GetCountryId(string Country)
+        {
+            return 0;
+        }
+
+        private static void UpdateCountry(int id)
+        {
+
+        }
+
+        private static void DeleteCountry()
+        {
+
+        }
+
+
+
+
+        #endregion
+
+        #region Helper Functions
 
         public static DateTime ConvertToLocalTime(DateTime dt)
         {
@@ -321,6 +401,6 @@ namespace Schedule_Manager
             DateTime dateTime = dt.ToUniversalTime();
             return dateTime;
         }
-
+        #endregion
     }
 }

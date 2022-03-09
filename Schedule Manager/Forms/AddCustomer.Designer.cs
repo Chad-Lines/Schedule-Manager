@@ -41,6 +41,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.txtZip = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -58,7 +60,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(78, 69);
+            this.label2.Location = new System.Drawing.Point(78, 74);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 13);
             this.label2.TabIndex = 12;
@@ -66,7 +68,7 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(81, 85);
+            this.txtName.Location = new System.Drawing.Point(81, 90);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(221, 20);
             this.txtName.TabIndex = 14;
@@ -74,7 +76,7 @@
             // 
             // txtAddress
             // 
-            this.txtAddress.Location = new System.Drawing.Point(81, 149);
+            this.txtAddress.Location = new System.Drawing.Point(81, 141);
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(221, 20);
             this.txtAddress.TabIndex = 16;
@@ -83,7 +85,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(78, 133);
+            this.label1.Location = new System.Drawing.Point(78, 125);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(45, 13);
             this.label1.TabIndex = 15;
@@ -91,7 +93,7 @@
             // 
             // txtCity
             // 
-            this.txtCity.Location = new System.Drawing.Point(81, 213);
+            this.txtCity.Location = new System.Drawing.Point(81, 192);
             this.txtCity.Name = "txtCity";
             this.txtCity.Size = new System.Drawing.Size(221, 20);
             this.txtCity.TabIndex = 18;
@@ -100,7 +102,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(78, 197);
+            this.label3.Location = new System.Drawing.Point(78, 176);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(24, 13);
             this.label3.TabIndex = 17;
@@ -108,7 +110,7 @@
             // 
             // txtCountry
             // 
-            this.txtCountry.Location = new System.Drawing.Point(81, 277);
+            this.txtCountry.Location = new System.Drawing.Point(81, 294);
             this.txtCountry.Name = "txtCountry";
             this.txtCountry.Size = new System.Drawing.Size(221, 20);
             this.txtCountry.TabIndex = 20;
@@ -117,7 +119,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(78, 261);
+            this.label4.Location = new System.Drawing.Point(78, 278);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 19;
@@ -125,7 +127,7 @@
             // 
             // txtPhone
             // 
-            this.txtPhone.Location = new System.Drawing.Point(81, 341);
+            this.txtPhone.Location = new System.Drawing.Point(81, 345);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(221, 20);
             this.txtPhone.TabIndex = 22;
@@ -134,7 +136,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(78, 325);
+            this.label5.Location = new System.Drawing.Point(78, 330);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(153, 13);
             this.label5.TabIndex = 21;
@@ -160,11 +162,30 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // txtZip
+            // 
+            this.txtZip.Location = new System.Drawing.Point(81, 243);
+            this.txtZip.Name = "txtZip";
+            this.txtZip.Size = new System.Drawing.Size(221, 20);
+            this.txtZip.TabIndex = 27;
+            this.txtZip.TextChanged += new System.EventHandler(this.txtZip_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(78, 227);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(84, 13);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "Zip/Postal Code";
+            // 
             // AddCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(388, 450);
+            this.Controls.Add(this.txtZip);
+            this.Controls.Add(this.label7);
             this.Controls.Add(label6);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -198,5 +219,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.TextBox txtZip;
+        private System.Windows.Forms.Label label7;
     }
 }

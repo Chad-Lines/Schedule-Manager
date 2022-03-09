@@ -20,22 +20,31 @@ namespace Schedule_Manager.Forms
         public bool cityValid = false;
         public bool countryValid = false;
         public bool phoneValid = false;
+        public bool zipValid = false;
 
         public AddCustomer()
         {
             InitializeComponent();
+            btnSave.Enabled = false;
         }
 
         #region Helper Functions
         public bool allowSave()
         {
-            if (nameValid)                                      // This will hold all of the validation variables...
+            if (                    // Checking the validation variables
+                nameValid &&
+                addressValid &&
+                cityValid &&
+                countryValid &&
+                phoneValid &&
+                zipValid
+                )      
             {
-                return true;                                    // If they're valid, we enable the Save button
+                return true;        // If they're valid, we enable the Save button
             }
-            else                                                // If they're not valid...
+            else                    // If they're not valid...
             {
-                return false;                                   // Keep the Save button disabled
+                return false;       // Keep the Save button disabled
             }
         }
 
@@ -90,6 +99,21 @@ namespace Schedule_Manager.Forms
             btnSave.Enabled = allowSave();
         }
 
+        private void txtZip_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(txtZip.Text))
+            {
+                txtZip.BackColor = System.Drawing.Color.Salmon;
+                zipValid = false;
+            }
+            else
+            {
+                txtZip.BackColor = System.Drawing.Color.White;
+                zipValid = true;
+            }
+            btnSave.Enabled = allowSave();
+        }
+
         private void txtCountry_TextChanged(object sender, EventArgs e)
         {
             if (String.IsNullOrWhiteSpace(txtCountry.Text))
@@ -130,8 +154,17 @@ namespace Schedule_Manager.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            Customer customer = new Customer();
+            customer.customerName = txtName.Text;
+            customer.createdDate = DateTime.Now;
+            customer.createdBy = DbManager.GetUsername();
+            customer.lastUpdate = DateTime.Now;
+            customer.lastUpdateBy = DbManager.GetUsername();
+
+
 
         }
+
 
 
 
