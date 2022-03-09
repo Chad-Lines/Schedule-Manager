@@ -15,6 +15,11 @@ namespace Schedule_Manager.Forms
     {
         BindingList<Appointment> allAppts = DbManager.GetAppointmentsByUserId();
         public static Appointment currentAppointment;
+        
+        BindingList<Customer> allCustomers = DbManager.GetAllCustomers();
+        public static Customer currentCustomer;
+
+        #region Initialization
 
         public Main()
         {
@@ -25,12 +30,28 @@ namespace Schedule_Manager.Forms
 
         private void InitializeForm()
         {
-            ConfigureCalendarView();            
+            ConfigureCalendarView();
+            UpdateCustomerView();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        #endregion
+
+        #region CalendarTab
+        private void ConfigureCalendarView()
+        {
+            updateCalendarView();
+            btnAll.Enabled = false;
+        }
+
+        private void btnAddAppointments_Click(object sender, EventArgs e)
+        {
+            AddAppointment addAppt = new AddAppointment();
+            addAppt.Show();
         }
 
         private void btnEditAppointment_Click(object sender, EventArgs e)
@@ -55,11 +76,11 @@ namespace Schedule_Manager.Forms
                 var option = MessageBox.Show("Are you sure you want to delete this appointment?",   // Ask the user to confirm the delete operation
                                 "Confirm Delete", MessageBoxButtons.YesNo);
 
-                if(option == DialogResult.Yes)                                                      // Assuming they say Yes, then...
+                if (option == DialogResult.Yes)                                                      // Assuming they say Yes, then...
                 {
                     try                                                                             // Try to...
-                    { 
-                        Appointment toDeleteAppointment =                                           
+                    {
+                        Appointment toDeleteAppointment =
                             (Appointment)dgvCalendar.CurrentRow.DataBoundItem;                      // Capture the appointment to delete
                         DbManager.DeleteAppointment(toDeleteAppointment);                           // Delete the appointment
                     }
@@ -67,22 +88,11 @@ namespace Schedule_Manager.Forms
                     {
                         Console.WriteLine(ex.Message);                                              // Log the error to the console
                     }
-                } else{ return; }                                                                   // If the user answers "No", then don't delete it
-            } else { MessageBox.Show("Select an Appointment to Delete"); }                          // If the item is not valid, let the user know
+                }
+                else { return; }                                                                   // If the user answers "No", then don't delete it
+            }
+            else { MessageBox.Show("Select an Appointment to Delete"); }                          // If the item is not valid, let the user know
             ConfigureCalendarView();                                                                // Reload the calendar view
-        }
-
-        #region CalendarTab
-        private void ConfigureCalendarView()
-        {
-            updateCalendarView();
-            btnAll.Enabled = false;
-        }
-
-        private void btnAddAppointments_Click(object sender, EventArgs e)
-        {
-            AddAppointment addAppt = new AddAppointment();
-            addAppt.Show();
         }
 
         private void rdoMonth_CheckedChanged(object sender, EventArgs e)
@@ -166,10 +176,22 @@ namespace Schedule_Manager.Forms
             dgvCalendar.AllowUserToAddRows = false;                                 // Disallow adding new rows
         }
 
-
-
         #endregion
+                
+        #region CustomerTab
+        private void UpdateCustomerView()
+        {
+            allCustomers = DbManager.GetAllCustomers();
 
-        
+            // Configuring the DataGridView Source and Parameters
+            dgvCustomer.DataSource = allCustomers;                                      // Re-establishes the dgv source
+            dgvCustomer.AutoGenerateColumns = false;
+            dgvCustomer.SelectionMode = DataGridViewSelectionMode.FullRowSelect;    // Full row sleect (rather than single cells)
+            dgvCustomer.ReadOnly = true;                                            // Setting the data to "read only"
+            dgvCustomer.MultiSelect = false;                                        // Disabling multi-select
+            dgvCustomer.AllowUserToAddRows = false;                                 // Disallow adding new rows
+
+        }
+        #endregion
     }
 }

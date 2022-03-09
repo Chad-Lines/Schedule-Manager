@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Schedule_Manager
 {
-    internal class Customer
+    public class Customer
     {
         // PROPERTIES --------------------------------
         public int customerId { get; set; }
