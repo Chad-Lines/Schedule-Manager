@@ -32,7 +32,45 @@ namespace Schedule_Manager.Forms
         {
             this.Close();
         }
-        
+
+        private void btnEditAppointment_Click(object sender, EventArgs e)
+        {
+            if (dgvCalendar.CurrentRow.DataBoundItem.GetType() == typeof(Appointment))
+            {
+                Appointment currentAppointment = (Appointment)dgvCalendar.CurrentRow.DataBoundItem; // Getting the appointment to edit 
+                EditAppointment editAppt = new EditAppointment(currentAppointment);                 // Instantiating Edit form
+                editAppt.Show();                                                                    // Showing the Edit form
+            }
+            else
+            {
+                MessageBox.Show("Please select an appointment to edit");
+            }
+
+        }
+
+        private void btnDeleteAppointment_Click(object sender, EventArgs e)
+        {
+            if (dgvCalendar.CurrentRow.DataBoundItem.GetType() == typeof(Appointment))              // If the selected item is valid, then...
+            {
+                var option = MessageBox.Show("Are you sure you want to delete this appointment?",   // Ask the user to confirm the delete operation
+                                "Confirm Delete", MessageBoxButtons.YesNo);
+
+                if(option == DialogResult.Yes)                                                      // Assuming they say Yes, then...
+                {
+                    try                                                                             // Try to...
+                    { 
+                        Appointment toDeleteAppointment =                                           
+                            (Appointment)dgvCalendar.CurrentRow.DataBoundItem;                      // Capture the appointment to delete
+                        DbManager.DeleteAppointment(toDeleteAppointment);                           // Delete the appointment
+                    }
+                    catch (Exception ex)                                                            // If it doesn't work, then...
+                    {
+                        Console.WriteLine(ex.Message);                                              // Log the error to the console
+                    }
+                } else{ return; }                                                                   // If the user answers "No", then don't delete it
+            } else { MessageBox.Show("Select an Appointment to Delete"); }                          // If the item is not valid, let the user know
+            ConfigureCalendarView();                                                                // Reload the calendar view
+        }
 
         #region CalendarTab
         private void ConfigureCalendarView()
@@ -76,7 +114,6 @@ namespace Schedule_Manager.Forms
             btnWeek.Enabled = false;
             btnAll.Enabled = true;
             btnMonth.Enabled = true;
-
             DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;                                            // We get the current DateTimeFormatInfo
             System.Globalization.Calendar cal = dfi.Calendar;                                                   // Getting a calendar item (curse me for creating a "Calendar" class!)
 
@@ -106,21 +143,22 @@ namespace Schedule_Manager.Forms
             btnWeek.Enabled = true;
             btnAll.Enabled = true;
             btnMonth.Enabled = false;
-
-            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;        // We get the current DateTimeFormatInfo
-            System.Globalization.Calendar cal = dfi.Calendar;               // Getting a calendar item
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;                // We get the current DateTimeFormatInfo
+            System.Globalization.Calendar cal = dfi.Calendar;                       // Getting a calendar item
 
             dgvCalendar.DataSource = null;
-            dgvCalendar.DataSource = allAppts.Where(                        // This is where we filter by...
-                a => DateTime.Parse(a.start).Month == DateTime.Now.Month    // Compare the appointment month to the current month
+            dgvCalendar.DataSource = allAppts.Where(                                // This is where we filter by...
+                a => DateTime.Parse(a.start).Month == DateTime.Now.Month            // Compare the appointment month to the current month
             ).ToList();
         }
 
         public void updateCalendarView()
         {
-            dgvCalendar.DataSource = allAppts;
+            allAppts = DbManager.GetAppointmentsByUserId();                         // Updates the appointments
 
             // Configuring the DataGridView Source and Parameters
+            dgvCalendar.Sort(dgvCalendar.Columns[0], ListSortDirection.Ascending);  // Sorting the calendar by appointment start date
+            dgvCalendar.DataSource = allAppts;                                      // Re-establishes the dgv source
             dgvCalendar.AutoGenerateColumns = false;
             dgvCalendar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;    // Full row sleect (rather than single cells)
             dgvCalendar.ReadOnly = true;                                            // Setting the data to "read only"
@@ -132,19 +170,6 @@ namespace Schedule_Manager.Forms
 
         #endregion
 
-        private void btnEditAppointment_Click(object sender, EventArgs e)
-        {
-            if (dgvCalendar.CurrentRow.DataBoundItem.GetType() == typeof(Appointment))
-            {
-                Appointment currentAppointment = (Appointment)dgvCalendar.CurrentRow.DataBoundItem; // Getting the appointment to edit 
-                EditAppointment editAppt = new EditAppointment(currentAppointment);                 // Instantiating Edit form
-                editAppt.Show();                                                                    // Showing the Edit form
-            }
-            else
-            {
-                MessageBox.Show("Please select an appointment to edit");
-            }
-            
-        }
+        
     }
 }
