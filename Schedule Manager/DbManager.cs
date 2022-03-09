@@ -28,15 +28,15 @@ namespace Schedule_Manager
             MySqlConnection conn = new MySqlConnection(constr); // Create the connection using the connection string in the DataBase class
             try
             {
-                conn.Open();                                        // Open the database connection
-                                                        // Return the connection
+                conn.Open();                                    // Open the database connection
+                                                                
             }
             catch (Exception ex)
             {
-                Console.Write(ex.Message);
+                Console.Write(ex.Message);                      // Display any errors
             }
 
-            return conn;            
+            return conn;                                        // Return the connection
         }
 
         public static void DbClose()
