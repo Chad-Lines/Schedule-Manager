@@ -343,7 +343,7 @@ namespace Schedule_Manager
         private static void AddCity(City c)
         {
             string query =                                              // Setting the query
-                $"insert into city (city, countryId, " +
+                $"insert into city (city, countryId) " +
                 $"values '{c.city}', {c.countryId};";
 
             using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
@@ -371,9 +371,16 @@ namespace Schedule_Manager
 
         #region Country Functions
 
-        private static void AddCountry()
+        private static void AddCountry(Country c)
         {
+            string query =                                              // Setting the query
+                $"insert into city (country) " +
+                $"values '{c.country}';";
 
+            using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
+            {
+                command.ExecuteNonQuery();                              // Execute the command
+            }
         }
         
         private static int GetCountryId(string Country)
@@ -390,9 +397,6 @@ namespace Schedule_Manager
         {
 
         }
-
-
-
 
         #endregion
 
