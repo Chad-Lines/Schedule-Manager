@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Schedule_Manager
+{
+    internal class City
+    {
+        public int cityID { get; set; }
+        public string city { get; set; }
+        public int countryId { get; set; }
+        public DateTime createDate { get; set; }
+        public string createdBy { get; set; }
+        public DateTime lastUpdate { get; set; }
+        public DateTime lastUpdateBy { get; set; }
+    }
+}

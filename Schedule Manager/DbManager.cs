@@ -305,9 +305,22 @@ namespace Schedule_Manager
         #endregion
 
         #region Address/Phone Functions
-        private static void AddAddress()
+        private static void AddAddress(Address a)
         {
+            string add2;                                                // Accounting for there not being a second address string
+            if (a.address2 != null) { add2 = a.address2; }
+            else { add2 = ""; }
 
+            string query =                                              // Setting the query
+                $"insert into address (address, address2, " +
+                    $"cityId, postalCode, phone) " +
+                $"values '{a.address}', '{add2}', {a.cityId}, " +
+                $"{a.postalCode}, '{a.phone}';";
+
+            using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
+            {
+                command.ExecuteNonQuery();                              // Execute the command
+            }
         }
 
         private static int GetAddressId(String a)
@@ -327,9 +340,16 @@ namespace Schedule_Manager
         #endregion
 
         #region City Functions
-        private static void AddCity()
+        private static void AddCity(City c)
         {
+            string query =                                              // Setting the query
+                $"insert into city (city, countryId, " +
+                $"values '{c.city}', {c.countryId};";
 
+            using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
+            {
+                command.ExecuteNonQuery();                              // Execute the command
+            }
         }
         
         private static int GetCityId(String c)
