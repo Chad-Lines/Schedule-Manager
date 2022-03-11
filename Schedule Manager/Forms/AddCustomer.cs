@@ -154,22 +154,47 @@ namespace Schedule_Manager.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            CreateCountry();    // These create functions must be done in this order
+            CreateCity();       // because of dependencies
+            CreateAddress();
+            CreateCustomer();
+        }
+        #endregion
+
+        #region Create Functions
+        private Country CreateCountry()
+        {
+            
+        }
+        private City CreateCity()
+        {
+
+        }
+        private Address CreateAddress()
+        {
+
+        }
+        
+        private void CreateCustomer()
+        {
             Customer customer = new Customer();
             customer.customerName = txtName.Text;
             customer.createdDate = DateTime.Now;
             customer.createdBy = DbManager.GetUsername();
             customer.lastUpdate = DateTime.Now;
             customer.lastUpdateBy = DbManager.GetUsername();
-
-
-
         }
-
-
-
 
         #endregion
 
-        
+
+
+
+
+
+
+#endregion
+
+
     }
 }
