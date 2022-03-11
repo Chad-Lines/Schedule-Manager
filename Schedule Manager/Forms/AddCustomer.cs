@@ -154,7 +154,7 @@ namespace Schedule_Manager.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            CreateCountry();    // These create functions must be done in this order
+            CreateCountryID();    // These create functions must be done in this order
             CreateCity();       // because of dependencies
             CreateAddress();
             CreateCustomer();
@@ -162,18 +162,21 @@ namespace Schedule_Manager.Forms
         #endregion
 
         #region Create Functions
-        private Country CreateCountry()
+        private int CreateCountryID()
         {
-            
-        }
-        private City CreateCity()
-        {
+            Country c = new Country();
+            DbManager.AddCountry(c);
 
+            return c;
         }
-        private Address CreateAddress()
-        {
+        //private City CreateCity()
+        //{
 
-        }
+        //}
+        //private Address CreateAddress()
+        //{
+
+        //}
         
         private void CreateCustomer()
         {
@@ -186,15 +189,5 @@ namespace Schedule_Manager.Forms
         }
 
         #endregion
-
-
-
-
-
-
-
-#endregion
-
-
     }
 }

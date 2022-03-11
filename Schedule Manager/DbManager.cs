@@ -371,7 +371,7 @@ namespace Schedule_Manager
 
         #region Country Functions
 
-        private static void AddCountry(Country c)
+        public static void AddCountry(Country c)
         {
             string query =                                              // Setting the query
                 $"insert into city (country) " +
@@ -382,18 +382,18 @@ namespace Schedule_Manager
                 command.ExecuteNonQuery();                              // Execute the command
             }
         }
-        
-        private static int GetCountryId(string Country)
+
+        public static int GetCountryId(string Country)
         {
             return 0;
         }
 
-        private static void UpdateCountry(int id)
+        public static void UpdateCountry(int id)
         {
 
         }
 
-        private static void DeleteCountry()
+        public static void DeleteCountry()
         {
 
         }
