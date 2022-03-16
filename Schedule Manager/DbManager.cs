@@ -305,8 +305,10 @@ namespace Schedule_Manager
         #endregion
 
         #region Address/Phone Functions
-        private static void AddAddress(Address a)
+        public static int AddAddress(Address a)
         {
+            int aId = GetNextId("address");                             // Get the next ID for the address table
+
             string add2;                                                // Accounting for there not being a second address string
             if (a.address2 != null) { add2 = a.address2; }
             else { add2 = ""; }
@@ -321,7 +323,11 @@ namespace Schedule_Manager
             {
                 command.ExecuteNonQuery();                              // Execute the command
             }
+
+            return aId;
         }
+
+        
 
         private static int GetAddressId(String a)
         {
@@ -383,24 +389,36 @@ namespace Schedule_Manager
             }
         }
 
-        public static int GetCountryId(string Country)
-        {
-            return 0;
-        }
-
-        public static void UpdateCountry(int id)
-        {
-
-        }
-
-        public static void DeleteCountry()
-        {
-
-        }
-
         #endregion
 
         #region Helper Functions
+        private static int GetNextId(string table)
+        {
+            int id = -1;                                                    // Giving id a default value of -1
+            string query = $"select max({table}id) from {table}";           // Get the highest index of the supplied table
+
+            try
+            {
+                using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
+                {
+                    MySqlDataReader r = command.ExecuteReader();            // Execute the command
+                    while (r.Read())
+                    {
+                        id = Int32.Parse((string)r[0]);                     // Get the current maximum ID
+                        return id + 1;                                      // Add 1 to it and return
+                    }
+                    r.Close();
+                    return id;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return id;
+            }
+
+
+        }
 
         public static DateTime ConvertToLocalTime(DateTime dt)
         {

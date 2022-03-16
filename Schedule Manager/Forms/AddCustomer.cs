@@ -154,7 +154,19 @@ namespace Schedule_Manager.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            
+            string username = DbManager.GetUsername();
+            DateTime timestamp = DbManager.ConvertToUtcTime(DateTime.Now);
+
+            // Setting up the Address
+            Address a = new Address();
+
+            int countryId = DbManager.AddCountry();
+            int cityId = DbManager.AddCity();
+            int addressId = DbManager.AddAddress(a);
+
+            DbManager.CreateCustomer();
+
+
         }
         #endregion
 
