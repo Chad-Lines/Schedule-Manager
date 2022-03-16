@@ -304,7 +304,37 @@ namespace Schedule_Manager
         }
         #endregion
 
-        #region Address/Phone Functions
+        #region Country, City, Address Functions
+        public static int AddCountry(Country c)
+        {
+            int cId = GetNextId("country");
+
+            string query =                                              // Setting the query
+                $"insert into city (country) " +
+                $"values '{c.country}';";
+
+            using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
+            {
+                command.ExecuteNonQuery();                              // Execute the command
+            }
+            return cId;
+        }
+
+        public static int AddCity(City c)
+        {
+            int cId = GetNextId("city");                                // Get the next ID for the city table
+            string query =                                              // Setting the query
+                $"insert into city (city, countryId) " +
+                $"values '{c.city}', {c.countryId};";
+
+            using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
+            {
+                command.ExecuteNonQuery();                              // Execute the command
+            }
+
+            return cId;
+        }
+
         public static int AddAddress(Address a)
         {
             int aId = GetNextId("address");                             // Get the next ID for the address table
@@ -326,69 +356,7 @@ namespace Schedule_Manager
 
             return aId;
         }
-
-        
-
-        private static int GetAddressId(String a)
-        {
-            return 0;
-        }
-
-        private static void UpdateAddress(int id) // Also used to update the Phone Number
-        {
-
-        }
-
-        private static void DeleteAddress()
-        {
-
-        }
-        #endregion
-
-        #region City Functions
-        private static void AddCity(City c)
-        {
-            string query =                                              // Setting the query
-                $"insert into city (city, countryId) " +
-                $"values '{c.city}', {c.countryId};";
-
-            using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
-            {
-                command.ExecuteNonQuery();                              // Execute the command
-            }
-        }
-        
-        private static int GetCityId(String c)
-        {
-            return 0;
-        }
-
-        private static void UpdateCity(int id)
-        {
-            
-        }
-
-        private static void DeleteCity()
-        {
-
-        }
-
-        #endregion
-
-        #region Country Functions
-
-        public static void AddCountry(Country c)
-        {
-            string query =                                              // Setting the query
-                $"insert into city (country) " +
-                $"values '{c.country}';";
-
-            using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
-            {
-                command.ExecuteNonQuery();                              // Execute the command
-            }
-        }
-
+               
         #endregion
 
         #region Helper Functions

@@ -177,7 +177,7 @@ namespace Schedule_Manager.Forms
             ct.createdBy = DbManager.GetUsername();
             ct.lastUpdate = timestamp;
             ct.lastUpdateBy = DbManager.GetUsername();
-            //int countryId = DbManager.AddCountry();
+            int countryId = DbManager.AddCountry(ct);
 
             City c = new City();
             c.city = txtCity.Text;
@@ -185,22 +185,20 @@ namespace Schedule_Manager.Forms
             c.createdBy = DbManager.GetUsername();
             c.lastUpdate = timestamp;
             c.lastUpdateBy = DbManager.GetUsername();
-
-
-
-            //int cityId = DbManager.AddCity();
+            c.countryId = countryId;
+            int cityId = DbManager.AddCity(c);
 
             // Setting up the Address
             Address a = new Address();            
             a.address = txtAddress.Text;
             a.address2 = txtAddress2.Text;
-            //a.cityId = c.cityId;
             a.postalCode = Int32.Parse(txtZip.Text);
             a.phone = txtPhone.Text;
             a.createDate = timestamp;
             a.createdBy = DbManager.GetUsername();
             a.lastUpdate = timestamp;
             a.lastUpdateBy = DbManager.GetUsername();
+            a.cityId = cityId;
             int addressId = DbManager.AddAddress(a);
 
             //DbManager.CreateCustomer();
