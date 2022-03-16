@@ -14,6 +14,6 @@ namespace Schedule_Manager
         public DateTime createDate { get; set; }
         public string createdBy { get; set; }
         public DateTime lastUpdate { get; set; }
-        public DateTime lastUpdateBy { get; set; }
+        public string lastUpdateBy { get; set; }
     }
 }

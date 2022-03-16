@@ -84,6 +84,18 @@ namespace Schedule_Manager.Forms
             btnSave.Enabled = allowSave();
         }
 
+        private void txtAddress2_TextChanged(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(txtAddress2.Text))
+            {
+                txtAddress2.Text = "";
+            }
+            else
+            {
+                return;
+            }
+        }
+
         private void txtCity_TextChanged(object sender, EventArgs e)
         {
             if (String.IsNullOrWhiteSpace(txtCity.Text))
@@ -156,15 +168,42 @@ namespace Schedule_Manager.Forms
         {
             string username = DbManager.GetUsername();
             DateTime timestamp = DbManager.ConvertToUtcTime(DateTime.Now);
+            string t = timestamp.ToString(); 
+
+            // Setting up the Country
+            Country ct = new Country();
+            ct.country = txtCountry.Text;
+            ct.createDate = timestamp;
+            ct.createdBy = DbManager.GetUsername();
+            ct.lastUpdate = timestamp;
+            ct.lastUpdateBy = DbManager.GetUsername();
+            //int countryId = DbManager.AddCountry();
+
+            City c = new City();
+            c.city = txtCity.Text;
+            c.createDate = timestamp;
+            c.createdBy = DbManager.GetUsername();
+            c.lastUpdate = timestamp;
+            c.lastUpdateBy = DbManager.GetUsername();
+
+
+
+            //int cityId = DbManager.AddCity();
 
             // Setting up the Address
-            Address a = new Address();
-
-            int countryId = DbManager.AddCountry();
-            int cityId = DbManager.AddCity();
+            Address a = new Address();            
+            a.address = txtAddress.Text;
+            a.address2 = txtAddress2.Text;
+            //a.cityId = c.cityId;
+            a.postalCode = Int32.Parse(txtZip.Text);
+            a.phone = txtPhone.Text;
+            a.createDate = timestamp;
+            a.createdBy = DbManager.GetUsername();
+            a.lastUpdate = timestamp;
+            a.lastUpdateBy = DbManager.GetUsername();
             int addressId = DbManager.AddAddress(a);
 
-            DbManager.CreateCustomer();
+            //DbManager.CreateCustomer();
 
 
         }
@@ -184,5 +223,7 @@ namespace Schedule_Manager.Forms
         }
 
         #endregion
+
+        
     }
 }
