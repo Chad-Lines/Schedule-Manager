@@ -143,6 +143,11 @@ namespace Schedule_Manager
             }
             return customers;                                                   // Return the customers list
         }
+
+        public static void AddCustomer(Customer c)
+        {
+
+        }
         #endregion
 
         #region Appointment Functions

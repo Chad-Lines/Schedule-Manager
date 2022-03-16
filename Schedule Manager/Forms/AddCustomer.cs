@@ -201,7 +201,17 @@ namespace Schedule_Manager.Forms
             a.cityId = cityId;
             int addressId = DbManager.AddAddress(a);
 
-            //DbManager.CreateCustomer();
+            // Setting up the Customer
+            Customer cust = new Customer();
+            cust.customerName = txtName.Text;
+            cust.addressId = addressId;
+            cust.active = true;
+            cust.createdDate = timestamp;
+            cust.createdBy = DbManager.GetUsername();
+            cust.lastUpdate = timestamp;
+            cust.lastUpdateBy = DbManager.GetUsername();
+
+            DbManager.AddCustomer(cust);
 
 
         }
