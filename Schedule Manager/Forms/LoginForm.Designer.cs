@@ -36,6 +36,7 @@
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblLoginErr = new System.Windows.Forms.Label();
+            this.btnTest = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtUserName
@@ -110,11 +111,26 @@
             this.lblLoginErr.TabIndex = 7;
             this.lblLoginErr.Text = "Username or Passord is Incorrect";
             // 
+            // btnTest
+            // 
+            this.btnTest.BackColor = System.Drawing.Color.IndianRed;
+            this.btnTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTest.Font = new System.Drawing.Font("Montserrat SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTest.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnTest.Location = new System.Drawing.Point(420, 440);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(225, 47);
+            this.btnTest.TabIndex = 8;
+            this.btnTest.Text = "TEST";
+            this.btnTest.UseVisualStyleBackColor = false;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1064, 603);
+            this.Controls.Add(this.btnTest);
             this.Controls.Add(this.lblLoginErr);
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
@@ -141,5 +157,6 @@
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label lblLoginErr;
+        private System.Windows.Forms.Button btnTest;
     }
 }

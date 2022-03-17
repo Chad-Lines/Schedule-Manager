@@ -157,5 +157,57 @@ namespace Schedule_Manager.Forms
             main.Show();                                    // Show the main Form
             this.Hide();                                    // Hide this form so it's not lurking in the background
         }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            DbManager.userName = "test";
+            DbManager.userId = 1;
+
+            DateTime timestamp = DbManager.ConvertToUtcTime(DateTime.Now);
+            string t = timestamp.ToString();
+
+            // Setting up the Country
+            Country ct = new Country();
+            ct.country = "USA";
+            ct.createDate = timestamp;
+            ct.createdBy = DbManager.GetUsername();
+            ct.lastUpdate = timestamp;
+            ct.lastUpdateBy = DbManager.GetUsername();
+            int countryId = DbManager.AddCountry(ct);
+
+            City c = new City();
+            c.city = "Boston";
+            c.createDate = timestamp;
+            c.createdBy = DbManager.GetUsername();
+            c.lastUpdate = timestamp;
+            c.lastUpdateBy = DbManager.GetUsername();
+            c.countryId = countryId;
+            int cityId = DbManager.AddCity(c);
+
+            // Setting up the Address
+            Address a = new Address();
+            a.address = "123 Road St.";
+            a.address2 = "Apt 12";
+            a.postalCode = Int32.Parse("84121");
+            a.phone = "1234567890";
+            a.createDate = timestamp;
+            a.createdBy = DbManager.GetUsername();
+            a.lastUpdate = timestamp;
+            a.lastUpdateBy = DbManager.GetUsername();
+            a.cityId = cityId;
+            int addressId = DbManager.AddAddress(a);
+
+            // Setting up the Customer
+            Customer cust = new Customer();
+            cust.customerName = "Johnny Quest";
+            cust.addressId = addressId;
+            cust.active = true;
+            cust.createdDate = timestamp;
+            cust.createdBy = DbManager.GetUsername();
+            cust.lastUpdate = timestamp;
+            cust.lastUpdateBy = DbManager.GetUsername();
+
+            DbManager.AddCustomer(cust);
+        }
     }
 }

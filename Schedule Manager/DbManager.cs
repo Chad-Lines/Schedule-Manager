@@ -20,8 +20,8 @@ namespace Schedule_Manager
         public static BindingList<Appointment> appointments = new BindingList<Appointment>();   // This is the binding list wherein we'll store appointements
         public static BindingList<Customer> customers = new BindingList<Customer>();            // This is the binding list wherein we'll store customers
 
-        private static int userId;                                                              // Stores the user ID
-        private static string userName;                                                         // Stores the user name
+        public static int userId;                                                               // Stores the user ID
+        public static string userName;                                                          // Stores the user name
 
         #region Db Admin Functions
         public static MySqlConnection DbConnect()
@@ -146,13 +146,17 @@ namespace Schedule_Manager
 
         public static void AddCustomer(Customer c)
         {
-            string query =                                              // Setting the query
-                $"insert into city (country) " +
-                $"values '{c.country}';";
+            string query =                                                  // Setting the query to insert the customer
+                $"insert into customer (customerName, addressId, " +
+                $"active, createDate, createdBy, lastUpdate, " +
+                $"lastUpdateBy) " +
+                $"values ('{c.customerName}', {c.addressId}, {c.active}, " +
+                $"{c.createdDate}, '{c.createdBy}', {c.lastUpdate}, " +
+                $"'{c.lastUpdateBy}';";
 
-            using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
+            using (var command = new MySqlCommand(query, DbConnect()))      // Using the command that we create...
             {
-                command.ExecuteNonQuery();                              // Execute the command
+                command.ExecuteNonQuery();                                  // Execute the command
             }
         }
         #endregion
@@ -322,8 +326,10 @@ namespace Schedule_Manager
             int cId = GetNextId("country");
 
             string query =                                              // Setting the query
-                $"insert into country (country) " +
-                $"values '{c.country}';";
+                $"insert into country (country, createDate, " +
+                $"createdBy, lastUpdate, lastUpdateBy) " +
+                $"values ('{c.country}', {c.createDate}, " +
+                $"'{c.createdBy}', {c.lastUpdate}, '{c.lastUpdateBy}';";
 
             using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
             {
