@@ -146,7 +146,14 @@ namespace Schedule_Manager
 
         public static void AddCustomer(Customer c)
         {
+            string query =                                              // Setting the query
+                $"insert into city (country) " +
+                $"values '{c.country}';";
 
+            using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
+            {
+                command.ExecuteNonQuery();                              // Execute the command
+            }
         }
         #endregion
 
@@ -315,7 +322,7 @@ namespace Schedule_Manager
             int cId = GetNextId("country");
 
             string query =                                              // Setting the query
-                $"insert into city (country) " +
+                $"insert into country (country) " +
                 $"values '{c.country}';";
 
             using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
