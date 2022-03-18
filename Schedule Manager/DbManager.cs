@@ -420,6 +420,7 @@ namespace Schedule_Manager
             using (var command = new MySqlCommand(query, DbConnect()))          // Using the command that we create...
             {
                 MySqlDataReader r = command.ExecuteReader();                    // Capture the query output
+
                 a.addressId = Convert.ToInt32(r[0]);                            // Setting the address parameters
                 a.address = r[1].ToString();
                 a.address2 = r[2].ToString();
