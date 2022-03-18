@@ -323,19 +323,25 @@ namespace Schedule_Manager
         #region Country, City, Address Functions
         public static int AddCountry(Country c)
         {
-            int cId = GetNextId("country");
+            int cId = GetNextId("country");                                             // Getting the countryId
 
-            string query =                                              // Setting the query
+            DateTime create = ConvertToUtcTime(c.createDate);                           // Converting the local dates to UTC
+            DateTime update = ConvertToUtcTime(c.lastUpdate);
+
+            string query =                                                              // Setting the query
                 $"insert into country (country, createDate, " +
                 $"createdBy, lastUpdate, lastUpdateBy) " +
-                $"values ('{c.country}', {c.createDate}, " +
-                $"'{c.createdBy}', {c.lastUpdate}, '{c.lastUpdateBy}';";
+                $"values ('{c.country}', @create, " +
+                $"'{c.createdBy}', @update, '{c.lastUpdateBy}');";
 
-            using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
+            using (var command = new MySqlCommand(query, DbConnect()))                  // Using the command that we create...
             {
-                command.ExecuteNonQuery();                              // Execute the command
+                command.Parameters.Add("@create", MySqlDbType.Datetime).Value = create; // Inserting parameters
+                command.Parameters.Add("@update", MySqlDbType.Datetime).Value = update;
+                
+                command.ExecuteNonQuery();                                              // Execute the command
             }
-            return cId;
+            return cId;                                                                 // Return the countryId
         }
 
         public static int AddCity(City c)
