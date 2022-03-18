@@ -131,7 +131,7 @@ namespace Schedule_Manager
                             newCust.customerName = row[1].ToString();
                             newCust.addressId = (int)row[2];
                             newCust.active = (bool)row[3];
-                            newCust.createdDate = (DateTime)row[4];
+                            newCust.createDate = (DateTime)row[4];
                             newCust.createdBy = row[5].ToString();
                             newCust.lastUpdate = (DateTime)row[6];
                             newCust.lastUpdateBy = row[7].ToString();
@@ -146,17 +146,23 @@ namespace Schedule_Manager
 
         public static void AddCustomer(Customer c)
         {
-            string query =                                                  // Setting the query to insert the customer
+            DateTime create = ConvertToUtcTime(c.createDate);                           // Converting the local dates to UTC
+            DateTime update = ConvertToUtcTime(c.lastUpdate);
+
+            string query =                                                              // Setting the query to insert the customer
                 $"insert into customer (customerName, addressId, " +
                 $"active, createDate, createdBy, lastUpdate, " +
                 $"lastUpdateBy) " +
                 $"values ('{c.customerName}', {c.addressId}, {c.active}, " +
-                $"{c.createdDate}, '{c.createdBy}', {c.lastUpdate}, " +
-                $"'{c.lastUpdateBy}';";
+                $"@create, '{c.createdBy}', @update, " +
+                $"'{c.lastUpdateBy}');";
 
-            using (var command = new MySqlCommand(query, DbConnect()))      // Using the command that we create...
+            using (var command = new MySqlCommand(query, DbConnect()))                  // Using the command that we create...
             {
-                command.ExecuteNonQuery();                                  // Execute the command
+                command.Parameters.Add("@create", MySqlDbType.Datetime).Value = create; // Inserting parameters
+                command.Parameters.Add("@update", MySqlDbType.Datetime).Value = update;
+
+                command.ExecuteNonQuery();                                              // Execute the command
             }
         }
         #endregion
@@ -347,12 +353,21 @@ namespace Schedule_Manager
         public static int AddCity(City c)
         {
             int cId = GetNextId("city");                                // Get the next ID for the city table
+
+            DateTime create = ConvertToUtcTime(c.createDate);           // Converting the local dates to UTC
+            DateTime update = ConvertToUtcTime(c.lastUpdate);
+
             string query =                                              // Setting the query
-                $"insert into city (city, countryId) " +
-                $"values '{c.city}', {c.countryId};";
+                $"insert into city (city, countryId, createDate, " +
+                $"createdBy, lastUpdate, lastUpdateBy) " +
+                $"values ('{c.city}', {c.countryId}, @create, " +
+                $"'{c.createdBy}', @update, '{c.lastUpdateBy}');";
 
             using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
             {
+                command.Parameters.Add("@create", MySqlDbType.Datetime).Value = create; // Inserting parameters
+                command.Parameters.Add("@update", MySqlDbType.Datetime).Value = update;
+
                 command.ExecuteNonQuery();                              // Execute the command
             }
 
@@ -361,24 +376,32 @@ namespace Schedule_Manager
 
         public static int AddAddress(Address a)
         {
-            int aId = GetNextId("address");                             // Get the next ID for the address table
+            int aId = GetNextId("address");                                             // Get the next ID for the address table
 
-            string add2;                                                // Accounting for there not being a second address string
+            DateTime create = ConvertToUtcTime(a.createDate);                           // Converting the local dates to UTC
+            DateTime update = ConvertToUtcTime(a.lastUpdate);
+
+            string add2;                                                                // Accounting for there not being a second address string
             if (a.address2 != null) { add2 = a.address2; }
             else { add2 = ""; }
 
-            string query =                                              // Setting the query
+            string query =                                                              // Setting the query
                 $"insert into address (address, address2, " +
-                    $"cityId, postalCode, phone) " +
-                $"values '{a.address}', '{add2}', {a.cityId}, " +
-                $"{a.postalCode}, '{a.phone}';";
+                    $"cityId, postalCode, phone, createDate, " +
+                    $"createdBy, lastUpdate, lastUpdateBy) " +
+                $"values ('{a.address}', '{add2}', {a.cityId}, " +
+                    $"'{a.postalCode}', '{a.phone}', @create, " +
+                    $"'{a.createdBy}', @update, '{a.lastUpdateBy}');"; 
 
-            using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
+            using (var command = new MySqlCommand(query, DbConnect()))                  // Using the command that we create...
             {
-                command.ExecuteNonQuery();                              // Execute the command
+                command.Parameters.Add("@create", MySqlDbType.Datetime).Value = create; // Inserting parameters
+                command.Parameters.Add("@update", MySqlDbType.Datetime).Value = update;
+
+                command.ExecuteNonQuery();                                              // Execute the command
             }
 
-            return aId;
+            return aId;                                                                 // Return the Address ID
         }
                
         #endregion
@@ -396,8 +419,9 @@ namespace Schedule_Manager
                     MySqlDataReader r = command.ExecuteReader();            // Execute the command
                     while (r.Read())
                     {
-                        id = Int32.Parse((string)r[0]);                     // Get the current maximum ID
-                        return id + 1;                                      // Add 1 to it and return
+                        id = Convert.ToInt32(r[0]);
+                        id++;
+                        return id;                                      // Add 1 to it and return
                     }
                     r.Close();
                     return id;

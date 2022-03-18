@@ -166,9 +166,9 @@ namespace Schedule_Manager.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string username = DbManager.GetUsername();
-            DateTime timestamp = DbManager.ConvertToUtcTime(DateTime.Now);
-            string t = timestamp.ToString(); 
+            string username = DbManager.GetUsername();                      // Capture the username
+            DateTime timestamp = DbManager.ConvertToUtcTime(DateTime.Now);  // Get the current DateTime
+            string t = timestamp.ToString();                                // Convert the DateTime to a String
 
             // Setting up the Country
             Country ct = new Country();
@@ -206,32 +206,17 @@ namespace Schedule_Manager.Forms
             cust.customerName = txtName.Text;
             cust.addressId = addressId;
             cust.active = true;
-            cust.createdDate = timestamp;
+            cust.createDate = timestamp;
             cust.createdBy = DbManager.GetUsername();
             cust.lastUpdate = timestamp;
             cust.lastUpdateBy = DbManager.GetUsername();
 
-            DbManager.AddCustomer(cust);
-
-
+            DbManager.AddCustomer(cust);                    // Add the customer
+            MessageBox.Show("Customer added.");             // Alert the user
+            this.Close();                                   // Close the window
+            Main m = new Main();
+            m.UpdateCustomerView();
         }
-        #endregion
-
-        #region Create Functions
-        
-        
-        private void CreateCustomer()
-        {
-            Customer customer = new Customer();
-            customer.customerName = txtName.Text;
-            customer.createdDate = DateTime.Now;
-            customer.createdBy = DbManager.GetUsername();
-            customer.lastUpdate = DateTime.Now;
-            customer.lastUpdateBy = DbManager.GetUsername();
-        }
-
-        #endregion
-
-        
+        #endregion       
     }
 }

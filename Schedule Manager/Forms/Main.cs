@@ -179,7 +179,7 @@ namespace Schedule_Manager.Forms
         #endregion
                 
         #region CustomerTab
-        private void UpdateCustomerView()
+        public void UpdateCustomerView()
         {
             allCustomers = DbManager.GetAllCustomers();
 
