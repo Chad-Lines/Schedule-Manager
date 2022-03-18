@@ -181,6 +181,7 @@ namespace Schedule_Manager.Forms
         #region CustomerTab
         public void UpdateCustomerView()
         {
+            allCustomers = null;
             allCustomers = DbManager.GetAllCustomers();
 
             // Configuring the DataGridView Source and Parameters

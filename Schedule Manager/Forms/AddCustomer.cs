@@ -179,6 +179,7 @@ namespace Schedule_Manager.Forms
             ct.lastUpdateBy = DbManager.GetUsername();
             int countryId = DbManager.AddCountry(ct);
 
+            // Setting up the City
             City c = new City();
             c.city = txtCity.Text;
             c.createDate = timestamp;

@@ -111,6 +111,8 @@ namespace Schedule_Manager
 
         public static BindingList<Customer> GetAllCustomers()
         {
+            customers.Clear();
+
             DataTable customersDt = new DataTable();                            // We're going to use a DataTable to hold the query results
             MySqlCommand getAllUsersCmd =
                 new MySqlCommand($"select * from customer;", DbConnect());      // Creating the query
