@@ -352,6 +352,11 @@ namespace Schedule_Manager
             return cId;                                                                 // Return the countryId
         }
 
+        //public static Country GetCountryById(int id)
+        //{
+
+        //}
+
         public static int AddCity(City c)
         {
             int cId = GetNextId("city");                                // Get the next ID for the city table
@@ -384,6 +389,7 @@ namespace Schedule_Manager
             DateTime update = ConvertToUtcTime(a.lastUpdate);
 
             string add2;                                                                // Accounting for there not being a second address string
+
             if (a.address2 != null) { add2 = a.address2; }
             else { add2 = ""; }
 
@@ -405,7 +411,29 @@ namespace Schedule_Manager
 
             return aId;                                                                 // Return the Address ID
         }
-               
+
+        public static Address GetAddressById(int id)
+        {
+            Address a = new Address();                                          // Address object to hold the object we're going to select
+            string query = $"select * from address where addressId = {id}";     // The query 
+
+            using (var command = new MySqlCommand(query, DbConnect()))          // Using the command that we create...
+            {
+                MySqlDataReader r = command.ExecuteReader();                    // Capture the query output
+                a.addressId = Convert.ToInt32(r[0]);                            // Setting the address parameters
+                a.address = r[1].ToString();
+                a.address2 = r[2].ToString();
+                a.cityId = Convert.ToInt32(r[3]);
+                a.postalCode = (int)r[4];
+                a.phone = r[5].ToString();
+                a.createDate = Convert.ToDateTime(r[6]);
+                a.createdBy = r[7].ToString();
+                a.lastUpdate = Convert.ToDateTime(r[8]);
+                a.lastUpdateBy = r[9].ToString();
+            }              
+            return a;                                                           // Return the address
+        }
+
         #endregion
 
         #region Helper Functions
