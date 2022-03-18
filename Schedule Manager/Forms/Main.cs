@@ -201,7 +201,8 @@ namespace Schedule_Manager.Forms
         }
         private void btnEditCustomer_Click(object sender, EventArgs e)
         {
-            EditCustomer editCust = new EditCustomer(); 
+            Customer cust = (Customer)dgvCustomer.CurrentRow.DataBoundItem;
+            EditCustomer editCust = new EditCustomer(cust); 
             editCust.Show();
         }
 
