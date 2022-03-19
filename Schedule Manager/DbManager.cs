@@ -352,10 +352,29 @@ namespace Schedule_Manager
             return cId;                                                                 // Return the countryId
         }
 
-        //public static Country GetCountryById(int id)
-        //{
+        public static Country GetCountryById(int id)
+        {
+            Country c = new Country();                                      // Country object to hold the object we're going to select
 
-        //}
+            string query = $"select * from country where countryId = {id}"; // The query 
+
+            using (var command = new MySqlCommand(query, DbConnect()))      // Using the command that we create...
+            {
+                MySqlDataReader r = command.ExecuteReader();                // Capture the query output
+
+                while (r.Read())                                            // While reading the output...
+                {
+                    c.countryId = Convert.ToInt32(r[0]);                    // Setting the country parameters
+                    c.country = r[1].ToString();
+                    c.createDate = Convert.ToDateTime(r[2]);
+                    c.createdBy = r[3].ToString();
+                    c.lastUpdate = Convert.ToDateTime(r[4]);
+                    c.lastUpdateBy = r[5].ToString();
+                }
+            }
+
+            return c;                                                       // Return the country
+        }
 
         public static int AddCity(City c)
         {
@@ -383,7 +402,7 @@ namespace Schedule_Manager
 
         public static City GetCityById(int id)
         {
-            City c = new City();                                        // Address object to hold the object we're going to select
+            City c = new City();                                        // City object to hold the object we're going to select
             string query = $"select * from city where cityId = {id}";   // The query 
 
             using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...

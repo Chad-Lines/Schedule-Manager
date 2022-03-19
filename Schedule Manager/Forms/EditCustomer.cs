@@ -26,18 +26,19 @@ namespace Schedule_Manager.Forms
             InitializeComponent();
             btnSave.Enabled = false;
 
+            // Capturing the objects that we need to populate the form fields
             Address addr = DbManager.GetAddressById(customer.addressId);
             City city = DbManager.GetCityById(addr.cityId);
-            //Country country = DbManager.GetCityById(city.countryId);
+            Country country = DbManager.GetCountryById(city.countryId);
 
+            // Setting the form field data as appropriate
             txtName.Text = customer.customerName;
             txtAddress.Text = addr.address;
             txtAddress2.Text = addr.address2;
             txtCity.Text = city.city;
             txtZip.Text = addr.postalCode.ToString();
-            //txtCountry.Text = country.country;
+            txtCountry.Text = country.country;
             txtPhone.Text = addr.phone;
-           
         }
 
         #region Helper Functions
