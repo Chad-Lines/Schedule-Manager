@@ -26,8 +26,17 @@ namespace Schedule_Manager.Forms
             InitializeComponent();
             btnSave.Enabled = false;
 
+            Address addr = DbManager.GetAddressById(customer.addressId);
+            City city = DbManager.GetCityById(addr.cityId);
+            //Country country = DbManager.GetCityById(city.countryId);
+
             txtName.Text = customer.customerName;
-            
+            txtAddress.Text = addr.address;
+            txtAddress2.Text = addr.address2;
+            txtCity.Text = city.city;
+            txtZip.Text = addr.postalCode.ToString();
+            //txtCountry.Text = country.country;
+            txtPhone.Text = addr.phone;
            
         }
 

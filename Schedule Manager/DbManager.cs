@@ -381,6 +381,29 @@ namespace Schedule_Manager
             return cId;
         }
 
+        public static City GetCityById(int id)
+        {
+            City c = new City();                                        // Address object to hold the object we're going to select
+            string query = $"select * from city where cityId = {id}";   // The query 
+
+            using (var command = new MySqlCommand(query, DbConnect()))  // Using the command that we create...
+            {
+                MySqlDataReader r = command.ExecuteReader();            // Capture the query output
+
+                while (r.Read())                                        // While reading the output...
+                {
+                    c.cityId = Convert.ToInt32(r[0]);                   // Setting the city parameters
+                    c.city = r[1].ToString();
+                    c.countryId = Convert.ToInt32(r[2]);
+                    c.createDate = Convert.ToDateTime(r[3]);
+                    c.createdBy = r[4].ToString();
+                    c.lastUpdate = Convert.ToDateTime(r[5]);
+                    c.lastUpdateBy = r[6].ToString();
+                }
+            }
+            return c;                                                   // Return the city
+        }
+
         public static int AddAddress(Address a)
         {
             int aId = GetNextId("address");                                             // Get the next ID for the address table
@@ -421,16 +444,19 @@ namespace Schedule_Manager
             {
                 MySqlDataReader r = command.ExecuteReader();                    // Capture the query output
 
-                a.addressId = Convert.ToInt32(r[0]);                            // Setting the address parameters
-                a.address = r[1].ToString();
-                a.address2 = r[2].ToString();
-                a.cityId = Convert.ToInt32(r[3]);
-                a.postalCode = (int)r[4];
-                a.phone = r[5].ToString();
-                a.createDate = Convert.ToDateTime(r[6]);
-                a.createdBy = r[7].ToString();
-                a.lastUpdate = Convert.ToDateTime(r[8]);
-                a.lastUpdateBy = r[9].ToString();
+                while (r.Read())                                                // While reading the output...
+                {
+                    a.addressId = Convert.ToInt32(r[0]);                        // Setting the address parameters
+                    a.address = r[1].ToString();
+                    a.address2 = r[2].ToString();
+                    a.cityId = Convert.ToInt32(r[3]);
+                    a.postalCode = Int32.Parse((string)r[4]);
+                    a.phone = r[5].ToString();
+                    a.createDate = Convert.ToDateTime(r[6]);
+                    a.createdBy = r[7].ToString();
+                    a.lastUpdate = Convert.ToDateTime(r[8]);
+                    a.lastUpdateBy = r[9].ToString();
+                }                
             }              
             return a;                                                           // Return the address
         }

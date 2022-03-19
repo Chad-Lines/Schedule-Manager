@@ -8,7 +8,7 @@ namespace Schedule_Manager
 {
     internal class City
     {
-        public int cityID { get; set; }
+        public int cityId { get; set; }
         public string city { get; set; }
         public int countryId { get; set; }
         public DateTime createDate { get; set; }
