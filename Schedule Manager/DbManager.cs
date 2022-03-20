@@ -167,6 +167,11 @@ namespace Schedule_Manager
                 command.ExecuteNonQuery();                                              // Execute the command
             }
         }
+        
+        public static void UpdateCustomer(Customer c)
+        {
+
+        }
         #endregion
 
         #region Appointment Functions
