@@ -21,6 +21,9 @@ namespace Schedule_Manager.Forms
         public bool phoneValid = false;
         public bool zipValid = false;
 
+        // Holding the Customer ID
+        int customerId = 0;
+
         public EditCustomer(Customer customer)
         {
             InitializeComponent();
@@ -39,6 +42,9 @@ namespace Schedule_Manager.Forms
             txtZip.Text = addr.postalCode.ToString();
             txtCountry.Text = country.country;
             txtPhone.Text = addr.phone;
+
+            // Setting the customer ID
+            customerId = customer.customerId;
         }
 
         #region Helper Functions
@@ -211,13 +217,14 @@ namespace Schedule_Manager.Forms
 
             // Setting up the Customer
             Customer cust = new Customer();
+            cust.customerId = customerId;
             cust.customerName = txtName.Text;
             cust.addressId = addressId;
             cust.active = true;
-            cust.createDate = timestamp;
-            cust.createdBy = DbManager.GetUsername();
             cust.lastUpdate = timestamp;
             cust.lastUpdateBy = DbManager.GetUsername();
+
+            MessageBox.Show(cust.customerId.ToString());
 
             DbManager.UpdateCustomer(cust);         // Add the customer
             MessageBox.Show("Customer updated.");   // Alert the user
