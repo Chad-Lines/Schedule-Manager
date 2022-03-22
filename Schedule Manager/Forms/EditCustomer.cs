@@ -219,11 +219,11 @@ namespace Schedule_Manager.Forms
             cust.lastUpdate = timestamp;
             cust.lastUpdateBy = DbManager.GetUsername();
 
-            DbManager.AddCustomer(cust);                    // Add the customer
-            MessageBox.Show("Customer added.");             // Alert the user
-            this.Close();                                   // Close the window
-            Main m = new Main();
-            m.UpdateCustomerView();
+            DbManager.UpdateCustomer(cust);         // Add the customer
+            MessageBox.Show("Customer updated.");   // Alert the user
+            this.Close();                           // Close the window
+            Main m = new Main();                    // Instantiate the main form 
+            m.UpdateCustomerView();                 // Update the customer view
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

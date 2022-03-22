@@ -170,7 +170,23 @@ namespace Schedule_Manager
         
         public static void UpdateCustomer(Customer c)
         {
+            DateTime create = ConvertToUtcTime(c.createDate);                           // Converting the local dates to UTC
+            DateTime update = ConvertToUtcTime(c.lastUpdate);
 
+            string query =                                                              // The update query. We're kinda brute-forcing it
+                $"update customer " +                                                   // but that's okay
+                $"set customerName = '{c.customerName}', " +
+                    $"addressId = {c.addressId}, " +
+                    $"active = {c.active}, " +
+                    $"lastUpdate = @update, " +
+                    $"lastUpdateBy = '{c.lastUpdateBy}' " +
+                $"where customerId = {c.customerId};";
+
+            using (var command = new MySqlCommand(query, DbConnect()))                  // Using the command that we create...
+            {
+                command.Parameters.Add("@update", MySqlDbType.Datetime).Value = update; // Inserting parameters
+                command.ExecuteNonQuery();                                              // Execute the command
+            }
         }
         #endregion
 
