@@ -224,8 +224,6 @@ namespace Schedule_Manager.Forms
             cust.lastUpdate = timestamp;
             cust.lastUpdateBy = DbManager.GetUsername();
 
-            MessageBox.Show(cust.customerId.ToString());
-
             DbManager.UpdateCustomer(cust);         // Add the customer
             MessageBox.Show("Customer updated.");   // Alert the user
             this.Close();                           // Close the window

@@ -182,8 +182,6 @@ namespace Schedule_Manager
                     $"lastUpdateBy = '{c.lastUpdateBy}' " +
                 $"where customerId = {c.customerId};";
 
-            MessageBox.Show(c.customerId.ToString());
-
             using (var command = new MySqlCommand(query, DbConnect()))                  // Using the command that we create...
             {
                 command.Parameters.Add("@update", MySqlDbType.Datetime).Value = update; // Inserting parameters
