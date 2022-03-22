@@ -208,7 +208,10 @@ namespace Schedule_Manager.Forms
 
         private void btnDeleteCustomer_Click(object sender, EventArgs e)
         {
-
+            Customer c = (Customer)dgvCustomer.CurrentRow.DataBoundItem;    // Getting the selected customer
+            DbManager.DeleteCustomer(c);                                    // Delete the customer
+            MessageBox.Show("Customer Deleted");                            // Display that the customer has been deleted
+            UpdateCustomerView();                                           // Refresh the customer view
         }
         #endregion
 

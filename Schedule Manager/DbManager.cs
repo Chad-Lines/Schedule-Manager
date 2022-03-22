@@ -190,6 +190,18 @@ namespace Schedule_Manager
                 command.ExecuteNonQuery();                                              // Execute the command
             }
         }
+
+        public static void DeleteCustomer(Customer c)
+        {
+            string query =                                                  // Setting up the query to delete the given appointment
+                $"delete from customer " +
+                $"where customerId = {c.customerId};";
+
+            using (var command = new MySqlCommand(query, DbConnect()))  // A shortcut to the two 'using' commands I've been using elsewhere
+            {
+                command.ExecuteNonQuery();                              // Executing the query
+            }
+        }
         #endregion
 
         #region Appointment Functions
