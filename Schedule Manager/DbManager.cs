@@ -515,6 +515,40 @@ namespace Schedule_Manager
 
         #endregion
 
+        #region Report Functions
+
+        public static BindingList<string> ApptTypePerMonth()
+        {
+            string query =                                                              // Setting the query
+                $"insert into country (country, createDate, " +
+                $"createdBy, lastUpdate, lastUpdateBy) " +
+                $"values ('{c.country}', @create, " +
+                $"'{c.createdBy}', @update, '{c.lastUpdateBy}');";
+
+            using (var command = new MySqlCommand(query, DbConnect()))                  // Using the command that we create...
+            {
+                command.Parameters.Add("@create", MySqlDbType.Datetime).Value = create; // Inserting parameters
+                command.Parameters.Add("@update", MySqlDbType.Datetime).Value = update;
+
+                command.ExecuteNonQuery();                                              // Execute the command
+            }
+            return cId;
+        }
+
+        //public static BindingList<string> ApptTypeByUser()
+        //{
+        //    BindingList<string> b;
+        //    return b;
+        //}
+
+        //public static BindingList<string> ScheduleByUser()
+        //{
+        //    BindingList<string> b;
+        //    return b;
+        //}
+
+        #endregion
+
         #region Helper Functions
         private static int GetNextId(string table)
         {

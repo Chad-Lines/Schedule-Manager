@@ -19,6 +19,8 @@ namespace Schedule_Manager.Forms
         BindingList<Customer> allCustomers;
         public static Customer currentCustomer;
 
+        BindingList<string> Report;
+
         #region Initialization
 
         public Main()
@@ -32,6 +34,7 @@ namespace Schedule_Manager.Forms
         {
             ConfigureCalendarView();
             UpdateCustomerView();
+            UpdateReportView();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -217,7 +220,16 @@ namespace Schedule_Manager.Forms
 
         #region ReportsTab
 
+        public void UpdateReportView()
+        {
+            dgvReport.DataSource = Report;
+        }
+
         #endregion
 
+        private void btnApptType_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

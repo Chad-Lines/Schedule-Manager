@@ -427,6 +427,7 @@
             this.btnApptType.TabIndex = 26;
             this.btnApptType.Text = "Appt. Types by Month";
             this.btnApptType.UseVisualStyleBackColor = true;
+            this.btnApptType.Click += new System.EventHandler(this.btnApptType_Click);
             // 
             // textBox1
             // 
