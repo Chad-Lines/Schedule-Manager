@@ -60,22 +60,20 @@
             this.btnAddCustomer = new System.Windows.Forms.Button();
             this.btnDeleteCustomer = new System.Windows.Forms.Button();
             this.tabReports = new System.Windows.Forms.TabPage();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.dgvReport = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnApptUser = new System.Windows.Forms.Button();
+            this.btnSchedUser = new System.Windows.Forms.Button();
+            this.btnApptType = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabCalendar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalendar)).BeginInit();
             this.tabCustomers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).BeginInit();
             this.tabReports.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).BeginInit();
             this.SuspendLayout();
             // 
             // btnExit
@@ -372,53 +370,26 @@
             // tabReports
             // 
             this.tabReports.BackColor = System.Drawing.Color.Transparent;
-            this.tabReports.Controls.Add(this.dataGridView2);
-            this.tabReports.Controls.Add(this.groupBox2);
+            this.tabReports.Controls.Add(this.label5);
+            this.tabReports.Controls.Add(this.textBox1);
+            this.tabReports.Controls.Add(this.dgvReport);
             this.tabReports.Controls.Add(this.label2);
-            this.tabReports.Controls.Add(this.button7);
-            this.tabReports.Controls.Add(this.button6);
-            this.tabReports.Controls.Add(this.button5);
+            this.tabReports.Controls.Add(this.btnApptUser);
+            this.tabReports.Controls.Add(this.btnSchedUser);
+            this.tabReports.Controls.Add(this.btnApptType);
             this.tabReports.Location = new System.Drawing.Point(4, 22);
             this.tabReports.Name = "tabReports";
             this.tabReports.Size = new System.Drawing.Size(1035, 513);
             this.tabReports.TabIndex = 2;
             this.tabReports.Text = "Reports";
             // 
-            // dataGridView2
+            // dgvReport
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(12, 74);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(1011, 423);
-            this.dataGridView2.TabIndex = 31;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(12, 28);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(307, 40);
-            this.groupBox2.TabIndex = 30;
-            this.groupBox2.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 14);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(25, 13);
-            this.label3.TabIndex = 22;
-            this.label3.Text = "Key";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(182, 14);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 13);
-            this.label4.TabIndex = 23;
-            this.label4.Text = "Value";
+            this.dgvReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvReport.Location = new System.Drawing.Point(12, 70);
+            this.dgvReport.Name = "dgvReport";
+            this.dgvReport.Size = new System.Drawing.Size(1011, 427);
+            this.dgvReport.TabIndex = 31;
             // 
             // label2
             // 
@@ -430,32 +401,48 @@
             this.label2.TabIndex = 29;
             this.label2.Text = "Report Title";
             // 
-            // button7
+            // btnApptUser
             // 
-            this.button7.Location = new System.Drawing.Point(948, 45);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 28;
-            this.button7.Text = "Report 3";
-            this.button7.UseVisualStyleBackColor = true;
+            this.btnApptUser.Location = new System.Drawing.Point(162, 41);
+            this.btnApptUser.Name = "btnApptUser";
+            this.btnApptUser.Size = new System.Drawing.Size(144, 23);
+            this.btnApptUser.TabIndex = 28;
+            this.btnApptUser.Text = "Appt. Types by Consultant";
+            this.btnApptUser.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // btnSchedUser
             // 
-            this.button6.Location = new System.Drawing.Point(867, 45);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 27;
-            this.button6.Text = "Report 2";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnSchedUser.Location = new System.Drawing.Point(879, 41);
+            this.btnSchedUser.Name = "btnSchedUser";
+            this.btnSchedUser.Size = new System.Drawing.Size(144, 23);
+            this.btnSchedUser.TabIndex = 27;
+            this.btnSchedUser.Text = "Schedule by Consultant";
+            this.btnSchedUser.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btnApptType
             // 
-            this.button5.Location = new System.Drawing.Point(786, 45);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 26;
-            this.button5.Text = "Report 1";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnApptType.Location = new System.Drawing.Point(12, 41);
+            this.btnApptType.Name = "btnApptType";
+            this.btnApptType.Size = new System.Drawing.Size(144, 23);
+            this.btnApptType.TabIndex = 26;
+            this.btnApptType.Text = "Appt. Types by Month";
+            this.btnApptType.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(644, 44);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(229, 20);
+            this.textBox1.TabIndex = 32;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(641, 28);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(116, 13);
+            this.label5.TabIndex = 33;
+            this.label5.Text = "Enter Consultant Name";
             // 
             // Main
             // 
@@ -474,9 +461,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).EndInit();
             this.tabReports.ResumeLayout(false);
             this.tabReports.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -495,14 +480,11 @@
         private System.Windows.Forms.Button btnEditCustomer;
         private System.Windows.Forms.Button btnAddCustomer;
         private System.Windows.Forms.Button btnDeleteCustomer;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridView dgvReport;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnApptUser;
+        private System.Windows.Forms.Button btnSchedUser;
+        private System.Windows.Forms.Button btnApptType;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
@@ -522,5 +504,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
