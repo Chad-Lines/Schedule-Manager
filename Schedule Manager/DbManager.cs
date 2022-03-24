@@ -19,7 +19,9 @@ namespace Schedule_Manager
         
         public static BindingList<Appointment> appointments = new BindingList<Appointment>();                   // This is the binding list wherein we'll store appointements
         public static BindingList<Customer> customers = new BindingList<Customer>();                            // This is the binding list wherein we'll store customers
-        public static BindingList<AppointmentTypeByMonth> reports = new BindingList<AppointmentTypeByMonth>();  // This is the binding list wherein we'll store the report data
+        public static BindingList<AppointmentTypeByMonth> report1 = new BindingList<AppointmentTypeByMonth>();  // This is the binding list wherein we'll store the report data
+        public static BindingList<AppointmentTypeByUser> report2 = new BindingList<AppointmentTypeByUser>();  // This is the binding list wherein we'll store the report data
+        //public static BindingList<AppointmentTypeByMonth> report3 = new BindingList<AppointmentTypeByMonth>();  // This is the binding list wherein we'll store the report data
 
         public static int userId;                                                                               // Stores the user ID
         public static string userName;                                                                          // Stores the user name
@@ -520,7 +522,7 @@ namespace Schedule_Manager
 
         public static BindingList<AppointmentTypeByMonth> GetApptTypePerMonth()
         {
-            reports.Clear();                                                    // Cleear out the reports BindingList
+            report1.Clear();                                                    // Cleear out the reports BindingList
 
             DataTable reportDt = new DataTable();                               // We're going to use a DataTable to hold the query results
             MySqlCommand query =                                                // Creating the query
@@ -547,21 +549,52 @@ namespace Schedule_Manager
                             a.Type = row[1].ToString();
                             a.Count = Int32.Parse(row[2].ToString());
 
-                            reports.Add(a);
+                            report1.Add(a);
                         }
                     }
                 }
             }
-            return reports;
+            return report1;
         }
 
-        //public static BindingList<string> ApptTypeByUser()
-        //{
-        //    BindingList<string> b;
-        //    return b;
-        //}
+        public static BindingList<AppointmentTypeByUser> ApptTypeByUser()
+        {
+            report2.Clear();                                                    // Cleear out the reports BindingList
 
-        //public static BindingList<string> ScheduleByUser()
+            DataTable reportDt = new DataTable();                               // We're going to use a DataTable to hold the query results
+            MySqlCommand query =                                                // Creating the query
+                new MySqlCommand(
+                    $"select userName, type " +
+                    $"from user, appointment " +
+                    $"where user.userId = appointment.userId " +
+                    $"group by userName",
+                    DbConnect()
+                );
+
+            using (DbConnect())                                     // Using the connection
+            {
+                using (query)                                       // Using the query we created
+                {
+                    MySqlDataReader reader = query.ExecuteReader(); // Initialize the data reader
+                    reportDt.Load(reader);                          // Execute the reader and load the data into the DataTable
+
+                    if (reportDt.Rows.Count > 0)                    // If there are rows, then...
+                    {
+                        foreach (DataRow row in reportDt.Rows)      // for each row...
+                        {
+                            AppointmentTypeByUser a = new AppointmentTypeByUser();
+                            a.Username = row[0].ToString();
+                            a.Type = row[1].ToString();
+
+                            report2.Add(a);
+                        }
+                    }
+                }
+            }
+            return report2;
+        }
+
+        //public static BindingList<ScheduleByUser> ScheduleByUser()
         //{
         //    BindingList<string> b;
         //    return b;
