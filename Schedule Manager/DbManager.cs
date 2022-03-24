@@ -17,11 +17,12 @@ namespace Schedule_Manager
         // This is the database connection string 
         public static readonly string constr = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
         
-        public static BindingList<Appointment> appointments = new BindingList<Appointment>();   // This is the binding list wherein we'll store appointements
-        public static BindingList<Customer> customers = new BindingList<Customer>();            // This is the binding list wherein we'll store customers
+        public static BindingList<Appointment> appointments = new BindingList<Appointment>();                   // This is the binding list wherein we'll store appointements
+        public static BindingList<Customer> customers = new BindingList<Customer>();                            // This is the binding list wherein we'll store customers
+        public static BindingList<AppointmentTypeByMonth> reports = new BindingList<AppointmentTypeByMonth>();  // This is the binding list wherein we'll store the report data
 
-        public static int userId;                                                               // Stores the user ID
-        public static string userName;                                                          // Stores the user name
+        public static int userId;                                                                               // Stores the user ID
+        public static string userName;                                                                          // Stores the user name
 
         #region Db Admin Functions
         public static MySqlConnection DbConnect()
@@ -517,22 +518,41 @@ namespace Schedule_Manager
 
         #region Report Functions
 
-        public static BindingList<string> ApptTypePerMonth()
+        public static BindingList<AppointmentTypeByMonth> GetApptTypePerMonth()
         {
-            string query =                                                              // Setting the query
-                $"insert into country (country, createDate, " +
-                $"createdBy, lastUpdate, lastUpdateBy) " +
-                $"values ('{c.country}', @create, " +
-                $"'{c.createdBy}', @update, '{c.lastUpdateBy}');";
+            reports.Clear();                                                    // Cleear out the reports BindingList
 
-            using (var command = new MySqlCommand(query, DbConnect()))                  // Using the command that we create...
+            DataTable reportDt = new DataTable();                               // We're going to use a DataTable to hold the query results
+            MySqlCommand query =                                                // Creating the query
+                new MySqlCommand(                                               
+                    $"select monthname(start), type, count(type) " +
+                    $"from appointment " +
+                    $"group by month(start), type", 
+                    DbConnect()
+                );      
+
+            using (DbConnect())                                     // Using the connection
             {
-                command.Parameters.Add("@create", MySqlDbType.Datetime).Value = create; // Inserting parameters
-                command.Parameters.Add("@update", MySqlDbType.Datetime).Value = update;
+                using (query)                                       // Using the query we created
+                {
+                    MySqlDataReader reader = query.ExecuteReader(); // Initialize the data reader
+                    reportDt.Load(reader);                          // Execute the reader and load the data into the DataTable
 
-                command.ExecuteNonQuery();                                              // Execute the command
+                    if (reportDt.Rows.Count > 0)                    // If there are rows, then...
+                    {
+                        foreach (DataRow row in reportDt.Rows)      // for each row...
+                        {
+                            AppointmentTypeByMonth a = new AppointmentTypeByMonth();
+                            a.Month = row[0].ToString();
+                            a.Type = row[1].ToString();
+                            a.Count = Int32.Parse(row[2].ToString());
+
+                            reports.Add(a);
+                        }
+                    }
+                }
             }
-            return cId;
+            return reports;
         }
 
         //public static BindingList<string> ApptTypeByUser()

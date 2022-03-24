@@ -229,7 +229,7 @@ namespace Schedule_Manager.Forms
 
         private void btnApptType_Click(object sender, EventArgs e)
         {
-
+            dgvReport.DataSource = DbManager.GetApptTypePerMonth();
         }
     }
 }
