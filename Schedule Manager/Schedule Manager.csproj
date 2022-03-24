@@ -92,6 +92,7 @@
     <Compile Include="Address.cs" />
     <Compile Include="Appointment.cs" />
     <Compile Include="AppointmentTypeByMonth.cs" />
+    <Compile Include="AppointmentTypeByUser.cs" />
     <Compile Include="City.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Customer.cs" />
