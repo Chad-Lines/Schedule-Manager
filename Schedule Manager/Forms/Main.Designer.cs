@@ -61,7 +61,7 @@
             this.btnDeleteCustomer = new System.Windows.Forms.Button();
             this.tabReports = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtUsername = new System.Windows.Forms.TextBox();
             this.dgvReport = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.btnApptUser = new System.Windows.Forms.Button();
@@ -371,7 +371,7 @@
             // 
             this.tabReports.BackColor = System.Drawing.Color.Transparent;
             this.tabReports.Controls.Add(this.label5);
-            this.tabReports.Controls.Add(this.textBox1);
+            this.tabReports.Controls.Add(this.txtUsername);
             this.tabReports.Controls.Add(this.dgvReport);
             this.tabReports.Controls.Add(this.label2);
             this.tabReports.Controls.Add(this.btnApptUser);
@@ -392,12 +392,12 @@
             this.label5.TabIndex = 33;
             this.label5.Text = "Enter Consultant Name";
             // 
-            // textBox1
+            // txtUsername
             // 
-            this.textBox1.Location = new System.Drawing.Point(644, 44);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(229, 20);
-            this.textBox1.TabIndex = 32;
+            this.txtUsername.Location = new System.Drawing.Point(644, 44);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(229, 20);
+            this.txtUsername.TabIndex = 32;
             // 
             // dgvReport
             // 
@@ -435,6 +435,7 @@
             this.btnSchedUser.TabIndex = 27;
             this.btnSchedUser.Text = "Schedule by Consultant";
             this.btnSchedUser.UseVisualStyleBackColor = true;
+            this.btnSchedUser.Click += new System.EventHandler(this.btnSchedUser_Click);
             // 
             // btnApptType
             // 
@@ -507,6 +508,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtUsername;
     }
 }

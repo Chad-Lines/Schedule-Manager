@@ -236,5 +236,18 @@ namespace Schedule_Manager.Forms
         {
             dgvReport.DataSource = DbManager.ApptTypeByUser();
         }
+
+        private void btnSchedUser_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtUsername.Text))
+            {
+                MessageBox.Show("Please enter the name of a Consultant.");
+            }
+            else
+            {
+                string u = txtUsername.Text;
+                dgvReport.DataSource = DbManager.GetApptByUser(u);
+            }
+        }
     }
 }

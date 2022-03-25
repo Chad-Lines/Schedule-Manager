@@ -20,8 +20,8 @@ namespace Schedule_Manager
         public static BindingList<Appointment> appointments = new BindingList<Appointment>();                   // This is the binding list wherein we'll store appointements
         public static BindingList<Customer> customers = new BindingList<Customer>();                            // This is the binding list wherein we'll store customers
         public static BindingList<AppointmentTypeByMonth> report1 = new BindingList<AppointmentTypeByMonth>();  // This is the binding list wherein we'll store the report data
-        public static BindingList<AppointmentTypeByUser> report2 = new BindingList<AppointmentTypeByUser>();  // This is the binding list wherein we'll store the report data
-        //public static BindingList<AppointmentTypeByMonth> report3 = new BindingList<AppointmentTypeByMonth>();  // This is the binding list wherein we'll store the report data
+        public static BindingList<AppointmentTypeByUser> report2 = new BindingList<AppointmentTypeByUser>();    // This is the binding list wherein we'll store the report data
+        public static BindingList<ScheduleByUser> report3 = new BindingList<ScheduleByUser>();                  // This is the binding list wherein we'll store the report data
 
         public static int userId;                                                                               // Stores the user ID
         public static string userName;                                                                          // Stores the user name
@@ -594,11 +594,52 @@ namespace Schedule_Manager
             return report2;
         }
 
-        //public static BindingList<ScheduleByUser> ScheduleByUser()
-        //{
-        //    BindingList<string> b;
-        //    return b;
-        //}
+        public static BindingList<ScheduleByUser> GetApptByUser(string username)
+        {
+            report3.Clear();                                                    // Cleear out the reports BindingList
+            string un = username.ToLower();                                     // Normalizing the Username
+
+            DataTable reportDt = new DataTable();                               // We're going to use a DataTable to hold the query results
+            MySqlCommand query =                                                // Creating the query
+                new MySqlCommand(
+                    $"select start, end, customerName, type " +
+                        $"from appointment, customer, user " +
+                    $"where appointment.customerId = customer.customerId " +
+                        $"and appointment.userId = user.userId " +
+                        $"and userName = '{un}';",
+                    DbConnect()
+                );
+                using (DbConnect())                                                 // Using the connection
+                {
+                    using (query)                                                   // Using the query we created
+                    {
+                        MySqlDataReader reader = query.ExecuteReader();             // Initialize the data reader
+                        reportDt.Load(reader);                                      // Execute the reader and load the data into the DataTable
+
+                        if (reportDt.Rows.Count > 0)                                // If there are rows, then...
+                        {
+                            foreach (DataRow row in reportDt.Rows)                  // for each row...
+                            {
+                                DateTime start = DateTime.Parse(row[0].ToString()); // Converting the start and end times to local times for display
+                                DateTime end = DateTime.Parse(row[1].ToString());
+
+                                ScheduleByUser s = new ScheduleByUser();
+                                s.start = start;
+                                s.end = end;
+                                s.customerName = row[2].ToString();
+                                s.type = row[3].ToString();
+
+                                report3.Add(s);
+                            }
+                        }
+                        else
+                        {
+                        MessageBox.Show("Appointments not found.");
+                        }
+                    }
+                }            
+            return report3;
+        }
 
         #endregion
 
