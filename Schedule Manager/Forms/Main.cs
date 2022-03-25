@@ -231,5 +231,10 @@ namespace Schedule_Manager.Forms
         {
             dgvReport.DataSource = DbManager.GetApptTypePerMonth();
         }
+
+        private void btnApptUser_Click(object sender, EventArgs e)
+        {
+            dgvReport.DataSource = DbManager.ApptTypeByUser();
+        }
     }
 }
