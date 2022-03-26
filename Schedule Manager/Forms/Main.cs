@@ -74,7 +74,8 @@ namespace Schedule_Manager.Forms
 
         private void btnDeleteAppointment_Click(object sender, EventArgs e)
         {
-            if (dgvCalendar.CurrentRow.DataBoundItem.GetType() == typeof(Appointment))              // If the selected item is valid, then...
+            if (dgvCalendar.SelectedRows.Count > 0 &&
+                dgvCalendar.CurrentRow.DataBoundItem.GetType() == typeof(Appointment))              // If the selected item is valid, then...
             {
                 var option = MessageBox.Show("Are you sure you want to delete this appointment?",   // Ask the user to confirm the delete operation
                                 "Confirm Delete", MessageBoxButtons.YesNo);
@@ -170,13 +171,20 @@ namespace Schedule_Manager.Forms
             allAppts = DbManager.GetAppointmentsByUserId();                         // Updates the appointments
 
             // Configuring the DataGridView Source and Parameters
-            dgvCalendar.Sort(dgvCalendar.Columns[0], ListSortDirection.Ascending);  // Sorting the calendar by appointment start date
             dgvCalendar.DataSource = allAppts;                                      // Re-establishes the dgv source
             dgvCalendar.AutoGenerateColumns = false;
             dgvCalendar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;    // Full row sleect (rather than single cells)
             dgvCalendar.ReadOnly = true;                                            // Setting the data to "read only"
             dgvCalendar.MultiSelect = false;                                        // Disabling multi-select
             dgvCalendar.AllowUserToAddRows = false;                                 // Disallow adding new rows
+            try
+            {
+                dgvCalendar.Sort(dgvCalendar.Columns[0], ListSortDirection.Ascending);  // Sorting the calendar by appointment start date
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
         #endregion
@@ -188,7 +196,7 @@ namespace Schedule_Manager.Forms
             allCustomers = DbManager.GetAllCustomers();
 
             // Configuring the DataGridView Source and Parameters
-            dgvCustomer.DataSource = allCustomers;                                      // Re-establishes the dgv source
+            dgvCustomer.DataSource = allCustomers;                                  // Re-establishes the dgv source
             dgvCustomer.AutoGenerateColumns = false;
             dgvCustomer.SelectionMode = DataGridViewSelectionMode.FullRowSelect;    // Full row sleect (rather than single cells)
             dgvCustomer.ReadOnly = true;                                            // Setting the data to "read only"
