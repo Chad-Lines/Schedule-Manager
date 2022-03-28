@@ -18,8 +18,10 @@ namespace Schedule_Manager.Forms
 
         BindingList<Customer> allCustomers;
         public static Customer currentCustomer;
-
+        
         BindingList<string> Report;
+
+        public bool CheckForMeeting = true;
 
         #region Initialization
 
@@ -32,6 +34,12 @@ namespace Schedule_Manager.Forms
 
         private void InitializeForm()
         {
+            if (CheckForMeeting)
+            {
+                DbManager.CheckForAppointment();
+                CheckForMeeting = false;
+            }
+
             ConfigureCalendarView();
             UpdateCustomerView();
             UpdateReportView();
@@ -74,13 +82,14 @@ namespace Schedule_Manager.Forms
 
         private void btnDeleteAppointment_Click(object sender, EventArgs e)
         {
+
             if (dgvCalendar.SelectedRows.Count > 0 &&
                 dgvCalendar.CurrentRow.DataBoundItem.GetType() == typeof(Appointment))              // If the selected item is valid, then...
             {
                 var option = MessageBox.Show("Are you sure you want to delete this appointment?",   // Ask the user to confirm the delete operation
                                 "Confirm Delete", MessageBoxButtons.YesNo);
 
-                if (option == DialogResult.Yes)                                                      // Assuming they say Yes, then...
+                if (option == DialogResult.Yes)                                                     // Assuming they say Yes, then...
                 {
                     try                                                                             // Try to...
                     {
@@ -93,9 +102,9 @@ namespace Schedule_Manager.Forms
                         Console.WriteLine(ex.Message);                                              // Log the error to the console
                     }
                 }
-                else { return; }                                                                   // If the user answers "No", then don't delete it
+                else { return; }                                                                    // If the user answers "No", then don't delete it
             }
-            else { MessageBox.Show("Select an Appointment to Delete"); }                          // If the item is not valid, let the user know
+            else { MessageBox.Show("Select an Appointment to Delete"); }                            // If the item is not valid, let the user know
             ConfigureCalendarView();                                                                // Reload the calendar view
         }
 

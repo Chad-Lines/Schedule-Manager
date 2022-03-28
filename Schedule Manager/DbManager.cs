@@ -17,7 +17,8 @@ namespace Schedule_Manager
         // This is the database connection string 
         public static readonly string constr = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
         
-        public static BindingList<Appointment> appointments = new BindingList<Appointment>();                   // This is the binding list wherein we'll store appointements
+        public static BindingList<Appointment> appointments = new BindingList<Appointment>();                   // This is the binding list wherein we'll store appointments
+        public static BindingList<Appointment> upcomingAppts = new BindingList<Appointment>();                  // This is the binding list wherein we'll store upcoming appointments
         public static BindingList<Customer> customers = new BindingList<Customer>();                            // This is the binding list wherein we'll store customers
         public static BindingList<AppointmentTypeByMonth> report1 = new BindingList<AppointmentTypeByMonth>();  // This is the binding list wherein we'll store the report data
         public static BindingList<AppointmentTypeByUser> report2 = new BindingList<AppointmentTypeByUser>();    // This is the binding list wherein we'll store the report data
@@ -696,6 +697,56 @@ namespace Schedule_Manager
             DateTime dateTime = dt.ToUniversalTime();
             return dateTime;
         }
+
+        public static void CheckForAppointment()
+        {
+            /* +----------------------------------------------------------------------------------------------------+
+            * |                                                                                                     |
+            * | REQUIREMENT H: Write code to alert if there is an appointment within 15 minutes of the user’s login |
+            * |                                                                                                     |
+            * +-----------------------------------------------------------------------------------------------------+
+            */
+            upcomingAppts.Clear();                                                          // Clearing the existing appointments 
+
+            DataTable appointmentsDt = new DataTable();                                     // We're going to use a DataTable to hold the query results
+            MySqlCommand query  = new MySqlCommand(                                         // Creating the query
+                $"select * from appointment " +
+                $"where start >= now() - interval 15 minute",
+                DbConnect()                                                                 // Since DbConnect already returns a connection, we'll use it
+                );
+
+            using (DbConnect())                                                             // Using the connection we established...
+            {
+                using (query)                                                               // And the query that we defined...
+                {
+                    MySqlDataReader reader = query.ExecuteReader();                         // Initialize the data reader
+                    appointmentsDt.Load(reader);                                            // Execute the reader and load the data into the DataTable
+
+                    if (appointmentsDt.Rows.Count > 0)                                      // If there are rows, then...
+                    {
+                        foreach (DataRow row in appointmentsDt.Rows)                        // for each row...
+                        {
+                            Appointment newAppt = new Appointment();                        // Create a new appointment
+                            newAppt.appointmentId = (int)row[0];                            // Set the parameters as appropriate
+                            newAppt.customerId = (int)row[1];
+                            newAppt.customerName = GetCustomerNameById(newAppt.customerId);
+                            newAppt.userId = (int)row[1];
+                            newAppt.type = row[7].ToString();
+                            newAppt.start = String.Format("{0:MM/dd/yyy hh:mmm tt}", 
+                                ConvertToLocalTime((DateTime)row[9]));
+                            newAppt.end = String.Format("{0:MM/dd/yyy hh:mmm tt}", 
+                                ConvertToLocalTime((DateTime)row[10]));
+
+                            upcomingAppts.Add(newAppt);                                     // Finally we add the appointments to the binding list
+
+                            MessageBox.Show($"You have an appointment with " +
+                                $"{newAppt.customerName} ({newAppt.start.ToString()})");    // Alerting the user to the upcoming meeting
+                        }
+                    }
+                }
+            }
+        }
+
         #endregion
     }
 }
