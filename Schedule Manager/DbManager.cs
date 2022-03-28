@@ -66,7 +66,7 @@ namespace Schedule_Manager
             {
                 using (usernameDataReader)
                 {
-                    //usernameDataReader.Read();
+                    usernameDataReader.Read();
                     SetUsername(usernameDataReader[0].ToString());
                 }
             }

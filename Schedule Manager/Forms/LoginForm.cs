@@ -111,7 +111,6 @@ namespace Schedule_Manager.Forms
              * |                control.                                                                       |
              * |                                                                                               |
              * |                [X] Entering an Incorrect Username or Password (4/4 Validation requiremets)    |
-             * |                                                                                               |
              * |                [X] Try/Catch (1/2 Methods)                                                    |
              * +-----------------------------------------------------------------------------------------------+
              * 2/3 is in the AddAppointment.cs file.
@@ -125,37 +124,38 @@ namespace Schedule_Manager.Forms
                                                                                                         // reader method. Hence the "cmd.ExecuteReader()".
                 dr.Read();                                                                              // Here we actually use the MySqlDataReader to capture.
                 DbManager.SetUserID((int)dr[0]);                                                        // Setting the user ID
-                                                                                                        // The dr[0] returns the first cell of the row                                                                                         
+                                                                                                        // The dr[0] returns the first cell of the row
+                Log.writeLog(username, true);
+                Main main = new Main();
+                /* +-----------------------------------------------------------------------------------------------+
+                 * |                                                                                               |
+                 * | REQUIREMENT G: (1/2) Write two or more lambda expressions to make your program more efficient |
+                 * |                                                                                               |
+                 * +-----------------------------------------------------------------------------------------------+
+                 * This lambda expression simplifies handling the LoginForm. Although we hide the login form (see below)
+                 * it is still in memory. When we exit the Main form, we want to also exit the Login form. This 
+                 * lambda expression accomplishes that. If the main form is closed, then this (the login form) will close 
+                 * also. 
+                 * 
+                 * Lambda #2 is in Main.cs
+                */
+                main.FormClosed += (s, args) => this.Close();
+
+                main.Show();                                    // Show the main Form
+                this.Hide();                                    // Hide this form so it's not lurking in the background
+
             }
 
             catch (Exception ex)                                                                        
             {                                                                                           // If the authentication fails, then...
+                Log.writeLog(username, false);                                                          // log the failure
                 txtUserName.Clear();                                                                    // Clear the username field
                 txtPassword.Clear();                                                                    // Clear the password field
                 labelError = LoginError;                                                                // Set the error text appropriately
                 lblLoginErr.Text = labelError;                                                          // Assign that text to the error label
                 lblLoginErr.Show();                                                                     // Display the error label
                 Console.WriteLine(ex.Message);                                                          // Capture the exact error
-            }
-
-            Main main = new Main();                                                                     // Here we create the new main view
-
-            /* +-----------------------------------------------------------------------------------------------+
-             * |                                                                                               |
-             * | REQUIREMENT G: (1/2) Write two or more lambda expressions to make your program more efficient |
-             * |                                                                                               |
-             * +-----------------------------------------------------------------------------------------------+
-             * This lambda expression simplifies handling the LoginForm. Although we hide the login form (see below)
-             * it is still in memory. When we exit the Main form, we want to also exit the Login form. This 
-             * lambda expression accomplishes that. If the main form is closed, then this (the login form) will close 
-             * also. 
-             * 
-             * Lambda #2 is in Main.cs
-            */
-            main.FormClosed += (s, args) => this.Close();
-
-            main.Show();                                    // Show the main Form
-            this.Hide();                                    // Hide this form so it's not lurking in the background
+            }                    
         }
 
         private void btnTest_Click(object sender, EventArgs e)
