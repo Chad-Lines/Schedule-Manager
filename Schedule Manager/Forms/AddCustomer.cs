@@ -215,8 +215,8 @@ namespace Schedule_Manager.Forms
             DbManager.AddCustomer(cust);                    // Add the customer
             MessageBox.Show("Customer added.");             // Alert the user
             this.Close();                                   // Close the window
-            Main m = new Main();
-            m.UpdateCustomerView();
+            Main m = new Main();                            // Show the main window
+            m.UpdateCustomerView();                         // Update the customer view
         }
         #endregion       
     }
