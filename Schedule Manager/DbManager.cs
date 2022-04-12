@@ -579,7 +579,7 @@ namespace Schedule_Manager
                     $"select userName, type " +
                     $"from user, appointment " +
                     $"where user.userId = appointment.userId " +
-                    $"group by userName",
+                    $"group by type",
                     DbConnect()
                 );
 
