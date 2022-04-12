@@ -99,6 +99,7 @@ namespace Schedule_Manager.Forms
             // This is the first function I'm writing to access the database, hence the quantity of comments
 
             MySqlConnection conn = DbManager.DbConnect();
+            DbManager.FK();
             MySqlCommand cmd = new MySqlCommand(                                                        // Creating a new MySQL command
                 $"select userId from user where username = '{username}' and password = '{password}';",  // The text of the command (a query to get the userId)
                 conn                                                                                    // Passing in the connection
