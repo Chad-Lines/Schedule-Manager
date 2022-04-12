@@ -44,6 +44,17 @@ namespace Schedule_Manager
             return conn;                                        // Return the connection
         }
 
+        public static void FK()
+        {
+            string query = "set foreign_key_checks=0;";
+
+            using (var command = new MySqlCommand(query, DbConnect()))
+            {
+                command.ExecuteNonQuery();                              // Executing the query
+            }
+
+        }
+
         public static void DbClose()
         {
             
@@ -111,17 +122,6 @@ namespace Schedule_Manager
                 }
             }
             return customerName;                                                        // Return the customerName
-        }
-
-        public static void FK()
-        {
-            string query ="set global foreign_key_checks=0;";
-
-            using (var command = new MySqlCommand(query, DbConnect()))
-            {
-                command.ExecuteNonQuery();                              // Executing the query
-            }
-
         }
 
         public static BindingList<Customer> GetAllCustomers()
