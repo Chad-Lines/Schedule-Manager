@@ -78,7 +78,7 @@ namespace Schedule_Manager.Forms
             }  
             else                                                            // If the form is not valid, then... 
             {
-                return;                                                     // simply do not submit the form
+                return;                                                     // Simply do not submit the form
             }
         }
 
