@@ -34,12 +34,6 @@ namespace Schedule_Manager.Forms
 
         private void InitializeForm()
         {
-            if (CheckForMeeting)
-            {
-                DbManager.CheckForAppointment();
-                CheckForMeeting = false;
-            }
-
             ConfigureCalendarView();
             UpdateCustomerView();
             UpdateReportView();

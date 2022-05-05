@@ -126,7 +126,8 @@ namespace Schedule_Manager.Forms
                 dr.Read();                                                                              // Here we actually use the MySqlDataReader to capture.
                 DbManager.SetUserID((int)dr[0]);                                                        // Setting the user ID
                                                                                                         // The dr[0] returns the first cell of the row
-                Log.writeLog(username, true);
+                Log.writeLog(username, true);                                                           // Writing the user info to the logfile
+                DbManager.CheckForAppointment();                                                        // Checking to see if there's an upcoming appointment
                 Main main = new Main();
                 /* +-----------------------------------------------------------------------------------------------+
                  * |                                                                                               |
