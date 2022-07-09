@@ -69,7 +69,7 @@ namespace Schedule_Manager.Forms
             }
             else
             {
-                MessageBox.Show("Please select an appointment to edit");
+                MessageBox.Show("Please select a calendar item to edit");
             }
 
         }
@@ -98,7 +98,7 @@ namespace Schedule_Manager.Forms
                 }
                 else { return; }                                                                    // If the user answers "No", then don't delete it
             }
-            else { MessageBox.Show("Select an Appointment to Delete"); }                            // If the item is not valid, let the user know
+            else { MessageBox.Show("Select a calendar item to Delete"); }                            // If the item is not valid, let the user know
             ConfigureCalendarView();                                                                // Reload the calendar view
         }
 
@@ -264,6 +264,20 @@ namespace Schedule_Manager.Forms
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (dgvCalendar.CurrentRow.DataBoundItem.GetType() == typeof(Appointment))
+            {
+                Appointment currentAppointment = (Appointment)dgvCalendar.CurrentRow.DataBoundItem; // Getting the appointment to edit 
+                AppointmentDetail apptDetail = new AppointmentDetail(currentAppointment);                 // Instantiating Edit form
+                apptDetail.Show();                                                                    // Showing the Edit form
+            }
+            else
+            {
+                MessageBox.Show("Please select a calendar item to view");
+            }
         }
     }
 }

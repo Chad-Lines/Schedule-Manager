@@ -31,6 +31,7 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabCalendar = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnMonth = new System.Windows.Forms.Button();
             this.btnWeek = new System.Windows.Forms.Button();
             this.btnAll = new System.Windows.Forms.Button();
@@ -38,6 +39,7 @@
             this.dgvCalendar = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TaskName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -100,6 +102,7 @@
             // tabCalendar
             // 
             this.tabCalendar.BackColor = System.Drawing.Color.Transparent;
+            this.tabCalendar.Controls.Add(this.button1);
             this.tabCalendar.Controls.Add(this.btnMonth);
             this.tabCalendar.Controls.Add(this.btnWeek);
             this.tabCalendar.Controls.Add(this.btnAll);
@@ -114,6 +117,16 @@
             this.tabCalendar.Size = new System.Drawing.Size(1035, 513);
             this.tabCalendar.TabIndex = 0;
             this.tabCalendar.Text = "Calendar";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(786, 61);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 35;
+            this.button1.Text = "View";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnMonth
             // 
@@ -162,6 +175,7 @@
             this.dgvCalendar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
+            this.TaskName,
             this.Column7,
             this.Column3,
             this.Column4,
@@ -175,16 +189,23 @@
             // Column1
             // 
             this.Column1.DataPropertyName = "start";
-            this.Column1.HeaderText = "Appointment Start";
+            this.Column1.HeaderText = "Start Time";
             this.Column1.Name = "Column1";
-            this.Column1.Width = 200;
+            this.Column1.Width = 175;
             // 
             // Column2
             // 
             this.Column2.DataPropertyName = "end";
-            this.Column2.HeaderText = "Appointment End";
+            this.Column2.HeaderText = "End Time";
             this.Column2.Name = "Column2";
-            this.Column2.Width = 200;
+            this.Column2.Width = 175;
+            // 
+            // TaskName
+            // 
+            this.TaskName.DataPropertyName = "Name";
+            this.TaskName.HeaderText = "Task Name";
+            this.TaskName.Name = "TaskName";
+            this.TaskName.Width = 200;
             // 
             // Column7
             // 
@@ -243,7 +264,7 @@
             // 
             // btnAddAppointments
             // 
-            this.btnAddAppointments.Location = new System.Drawing.Point(786, 61);
+            this.btnAddAppointments.Location = new System.Drawing.Point(705, 61);
             this.btnAddAppointments.Name = "btnAddAppointments";
             this.btnAddAppointments.Size = new System.Drawing.Size(75, 23);
             this.btnAddAppointments.TabIndex = 26;
@@ -489,13 +510,6 @@
         private System.Windows.Forms.Button btnApptUser;
         private System.Windows.Forms.Button btnSchedUser;
         private System.Windows.Forms.Button btnApptType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnMonth;
         private System.Windows.Forms.Button btnWeek;
@@ -510,5 +524,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TaskName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
     }
 }
