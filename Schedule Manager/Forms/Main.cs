@@ -260,5 +260,10 @@ namespace Schedule_Manager.Forms
                 dgvReport.DataSource = DbManager.GetApptByUser(u);
             }
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
