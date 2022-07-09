@@ -93,6 +93,7 @@
     <Compile Include="Appointment.cs" />
     <Compile Include="AppointmentTypeByMonth.cs" />
     <Compile Include="AppointmentTypeByUser.cs" />
+    <Compile Include="CalendarItem.cs" />
     <Compile Include="City.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="Customer.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScheduleByUser.cs" />
+    <Compile Include="Task.cs" />
     <EmbeddedResource Include="Forms\AddAppointment.resx">
       <DependentUpon>AddAppointment.cs</DependentUpon>
     </EmbeddedResource>

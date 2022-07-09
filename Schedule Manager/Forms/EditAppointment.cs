@@ -21,7 +21,7 @@ namespace Schedule_Manager.Forms
         {
             InitializeComponent();
 
-            apptId = currentAppointment.appointmentId;
+            apptId = currentAppointment.Id;
 
             // Setting up the BindingLists
             if (allCustomers != null) { allCustomers.Clear(); }         

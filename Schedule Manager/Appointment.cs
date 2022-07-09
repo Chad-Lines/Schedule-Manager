@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace Schedule_Manager
 {
-    public class Appointment
+    public class Appointment : CalendarItem
     {
         // PROPERTIES --------------------------------
-        public int  appointmentId { get; set; }
+        
+        // NOTE TO SELF: the Id property is called "appointmentId" in the Database
         public int customerId { get; set; }
         public string customerName { get; set; }
-        public int userId { get; set; }
         public string type { get; set; }
-        public string start { get; set; }
-        public string end { get; set; }
 
         // METHODS --------------------------------
         public override string ToString()

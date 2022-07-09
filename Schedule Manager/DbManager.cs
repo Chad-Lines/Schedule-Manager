@@ -303,7 +303,7 @@ namespace Schedule_Manager
                         foreach (DataRow row in appointmentsDt.Rows)                        // for each row...
                         {                            
                             Appointment newAppt = new Appointment();                        // Create a new appointment
-                            newAppt.appointmentId = (int)row[0];                            // Set the parameters as appropriate
+                            newAppt.Id = (int)row[0];                                       // Set the parameters as appropriate
                             newAppt.customerId = (int)row[1];
                             newAppt.customerName = GetCustomerNameById(newAppt.customerId); 
                             newAppt.userId = (int)row[1];
@@ -329,7 +329,7 @@ namespace Schedule_Manager
         {
             string query =                                                  // Setting up the query to delete the given appointment
                 $"delete from appointment " +
-                $"where appointmentId = {a.appointmentId};";
+                $"where appointmentId = {a.Id};";
 
             try                                                             // Try to delete the appointment from the database
             {
@@ -711,12 +711,8 @@ namespace Schedule_Manager
 
         public static void CheckForAppointment()
         {
-            /* +----------------------------------------------------------------------------------------------------+
-            * |                                                                                                     |
-            * | REQUIREMENT H: Write code to alert if there is an appointment within 15 minutes of the user’s login |
-            * |                                                                                                     |
-            * +-----------------------------------------------------------------------------------------------------+
-            */
+            // Alert if there is an appointment within 15 minutes of the user’s login
+
             upcomingAppts.Clear();                                                          // Clearing the existing appointments 
 
             DataTable appointmentsDt = new DataTable();                                     // We're going to use a DataTable to hold the query results
@@ -738,7 +734,7 @@ namespace Schedule_Manager
                         foreach (DataRow row in appointmentsDt.Rows)                        // for each row...
                         {
                             Appointment newAppt = new Appointment();                        // Create a new appointment
-                            newAppt.appointmentId = (int)row[0];                            // Set the parameters as appropriate
+                            newAppt.Id = (int)row[0];                                       // Set the parameters as appropriate
                             newAppt.customerId = (int)row[1];
                             newAppt.customerName = GetCustomerNameById(newAppt.customerId);
                             newAppt.userId = (int)row[1];
