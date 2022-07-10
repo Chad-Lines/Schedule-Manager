@@ -17,8 +17,9 @@ namespace Schedule_Manager
         // This is the database connection string 
         public static readonly string constr = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
         
-        public static BindingList<Appointment> appointments = new BindingList<Appointment>();                   // This is the binding list wherein we'll store appointments
+        public static BindingList<Appointment> appointments = new BindingList<Appointment>();                   // This is the binding list wherein we'll store appointments        
         public static BindingList<Appointment> upcomingAppts = new BindingList<Appointment>();                  // This is the binding list wherein we'll store upcoming appointments
+        public static BindingList<Task> tasks = new BindingList<Task>();                                        // This is the binding list wherein we'll store tasks
         public static BindingList<Customer> customers = new BindingList<Customer>();                            // This is the binding list wherein we'll store customers
         public static BindingList<AppointmentTypeByMonth> report1 = new BindingList<AppointmentTypeByMonth>();  // This is the binding list wherein we'll store the report data
         public static BindingList<AppointmentTypeByUser> report2 = new BindingList<AppointmentTypeByUser>();    // This is the binding list wherein we'll store the report data
@@ -220,12 +221,8 @@ namespace Schedule_Manager
         #region Appointment Functions
         public static void AddAppointment(Appointment appt)
         {
-            /* +-------------------------------------------------------------------------------------------------------------+
-            * |                                                                                                             |
-            * | REQUIREMENT E: (3/n) Provide the ability to automatically adjust appointment times based on user time zones |
-            * |                                                                                                             |
-            * +-------------------------------------------------------------------------------------------------------------+
-            */
+            //Provide the ability to automatically adjust appointment times based on user time zones 
+
             DateTime startDt = ConvertToUtcTime(DateTime.Parse(appt.start));    // Here we're (1) converting the start and end strings into
             DateTime endDt = ConvertToUtcTime(DateTime.Parse(appt.end));        // DateTime objects, and then (2) converting them into UTC
                                                                                 // time before we insert them into the database.
@@ -374,6 +371,129 @@ namespace Schedule_Manager
 
             return types;
         }
+        #endregion
+
+        #region Task Functions
+
+        public static void AddTask(Task task)
+        {
+            //Provide the ability to automatically adjust task times based on user time zones 
+
+            DateTime startDt = ConvertToUtcTime(DateTime.Parse(task.start));                // Here we're (1) converting the start and end strings into
+            DateTime endDt = ConvertToUtcTime(DateTime.Parse(task.end));                    // DateTime objects, and then (2) converting them into UTC
+                                                                                            // time before we insert them into the database.
+            string query =                                                                  // Keep in mind that userName and userId are already populated
+                $"insert into task" +                                                       // This is our insert statement
+                $"(taskid, userid, name, description, status, priority, " +
+                $"start, end)" +
+                $"values ({userId}, '{task.name}', '{task.description}', " +
+                $"'{task.status}', '{task.priority}', @sdate, @edate);";
+
+                using (var command = new MySqlCommand(query, DbConnect()))                  // Using the command that we create...
+                {
+                    command.Parameters.Add("@sdate", MySqlDbType.Datetime).Value = startDt; // Add in the start date and end date parameters
+                    command.Parameters.Add("@edate", MySqlDbType.Datetime).Value = endDt;
+                    command.ExecuteNonQuery();                                              // Execute the command
+                }
+
+                MessageBox.Show("Task Saved");                                              // Alert the user that the appointment has been saved
+        }
+
+        public static void UpdateTask(int taskId, Task task)
+        {
+            DateTime startDt = ConvertToUtcTime(DateTime.Parse(task.start));    // Here we're (1) converting the start and end strings into
+            DateTime endDt = ConvertToUtcTime(DateTime.Parse(task.end));        // DateTime objects, and then (2) converting them into UTC
+                                                                                // time before we insert them into the database.
+            string query =                                                      // This is our update query
+               $"update task " +
+               $"set " +
+                $"name = {task.name}," +
+                $"description = {task.description}," +
+                $"status = {task.status}," +
+                $"start = @sdate," +
+                $"end = @edate " +
+               $"where appointmentId = {taskId};";
+
+            using (var command = new MySqlCommand(query, DbConnect()))                  // Using the command that we create...
+            {
+                command.Parameters.Add("@sdate", MySqlDbType.Datetime).Value = startDt; // Add in the start date and end date parameters
+                command.Parameters.Add("@edate", MySqlDbType.Datetime).Value = endDt;
+                command.ExecuteNonQuery();                                              // Execute the command
+            }
+
+            MessageBox.Show("Task Saved");                                              // Alert the user that the appointment has been saved
+
+        }
+
+        public static BindingList<Task> GetTaskByUserId(int id = -1)
+        {
+            int outputId;                                           // This is the Id that we're going to use to get tasks
+            tasks.Clear();                                          // Clearing the existing tasks
+
+            // See if tasks are being requested for a different user
+            if (id <= -1) { outputId = userId; }                    // If no id is provided, then we assume that it's fort he current user id
+            else {  outputId = id; }                                // Otherwise we assign the output id to the id that was specified
+
+            DataTable tasksDt = new DataTable();                    // We're going to use a DataTable to hold the query results
+            MySqlCommand query = new MySqlCommand(                  // Creating the query
+                $"select * from task where userId = {outputId};",
+                DbConnect()
+            );
+
+            using (DbConnect())                                     // Using the connection we established...
+            {
+                using (query)                                       // And the query that we defined...
+                {
+                    MySqlDataReader reader = query.ExecuteReader(); // Initialize the data reader
+                    tasksDt.Load(reader);                           // Execute the reader and load the data into the DataTable
+
+                    if (tasksDt.Rows.Count > 0)                     // If there are rows (i.e. if the query returns results), then...
+                    {
+                        foreach (DataRow row in tasksDt.Rows)
+                        {
+                            Task newTask = new Task();              // Create a new task
+                            newTask.Id = (int)row[0];               // Set the parameters as appropriate
+                            newTask.userId = (int)row[1];
+                            newTask.name = (string)row[2];
+                            newTask.description = (string)row[3];
+                            newTask.status = (string)row[4];
+                            newTask.priority = (string)row[5];
+
+                            // We convert the dates into a string. DateTime formatting is a pain, so I'll spell it out ...
+                            // MM = Month, dd = day, yyy = Year. For example: "12/31/2018"
+                            // hh = hour in 12-hour format (HH for 24-hour format), mmm = minute, tt indicates either AM or PM
+                            // For example: "05:00 PM" 
+                            // ConvertToLocalTime() returns a local DateTime object derived from specified rows
+                            newTask.start = String.Format("{0:MM/dd/yyy hh:mmm tt}", ConvertToLocalTime((DateTime)row[9]));
+                            newTask.end = String.Format("{0:MM/dd/yyy hh:mmm tt}", ConvertToLocalTime((DateTime)row[10]));
+
+                            tasks.Add(newTask);                     // Finally, we add the task to the binding list                       
+                        }
+                    }
+                }
+            }
+            return tasks;
+        }
+
+        public static void DeleteTask(Task task)
+        {
+            string query =                                                  // Setting up the query to delete the given appointment
+                $"delete from task " +
+                $"where taskId = {task.Id};";
+
+            try                                                             // Try to delete the appointment from the database
+            {
+                using (var command = new MySqlCommand(query, DbConnect()))  // A shortcut to the two 'using' commands I've been using elsewhere
+                {
+                    command.ExecuteNonQuery();                              // Executing the query
+                }
+            }
+            catch (Exception ex)                                            // If the deletion doesn't work...
+            {
+                Console.WriteLine(ex.Message);                              // Send the error to the console
+            }
+        }
+
         #endregion
 
         #region Country, City, Address Functions

@@ -39,6 +39,7 @@ namespace Schedule_Manager.Forms
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            // Close the page
             this.Close();
         }
     }
