@@ -18,8 +18,6 @@ namespace Schedule_Manager.Forms
 
         BindingList<Task> allTasks = DbManager.GetTaskByUserId();                               // Holds all Tasks
         public static Task currentTask;                                                         // Holds the currently selected task
-
-        BindingList<CalendarItem> allCalendarItems = DbManager.GetAllCalendarItemsByUserId();   // Holds all calendar items (appointments and tasks)
             
         BindingList<Customer> allCustomers;                                                     // Holds all customers
         public static Customer currentCustomer;                                                 // The current customers
@@ -41,6 +39,7 @@ namespace Schedule_Manager.Forms
         {
             ConfigureCalendarView();
             UpdateCustomerView();
+            UpdateTaskView();
             UpdateReportView();
         }
 
@@ -164,24 +163,14 @@ namespace Schedule_Manager.Forms
         public void updateCalendarView()
         {
             allAppts = DbManager.GetAppointmentsByUserId();                             // Updates the appointments
-            allTasks = DbManager.GetTaskByUserId();                                     // Updates the tasks
-
-            // Combing all appointments and all tasks into a single binding list
-            foreach (Appointment a in allAppts) { allCalendarItems.Add(a); }            // Add the appointments to allCalendarItems
-            foreach (Task t in allTasks) { allCalendarItems.Add(t); }                   // Add the tasks to AllCalendarItems
 
             // Configuring the DataGridView Source and Parameters
-            //dgvCalendar.DataSource = allAppts;                                        // Re-establishes the dgv source
-            dgvCalendar.DataSource = allCalendarItems;                                  // Re-establishes the dgv source
+            dgvCalendar.DataSource = allAppts;                                          // Re-establishes the dgv source
             dgvCalendar.AutoGenerateColumns = false;
             dgvCalendar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;        // Full row select (rather than single cells)
             dgvCalendar.ReadOnly = true;                                                // Setting the data to "read only"
             dgvCalendar.MultiSelect = false;                                            // Disabling multi-select
             dgvCalendar.AllowUserToAddRows = false;                                     // Disallow adding new rows
-
-            // TESTING ==================================================================
-
-            // ==========================================================================
 
             try
             {
@@ -191,6 +180,19 @@ namespace Schedule_Manager.Forms
             {
                 Console.WriteLine(ex.ToString());
             }
+        }
+
+        public void UpdateTaskView()
+        {
+            allTasks = DbManager.GetTaskByUserId();                             // Refreshing all tasks
+
+            // Configuring the DataGridView Source and Parameters
+            dgvTasks.DataSource = allTasks;                                     // Re-establishes the dgv source
+            dgvTasks.AutoGenerateColumns = false;
+            dgvTasks.SelectionMode = DataGridViewSelectionMode.FullRowSelect;   // Full row select (rather than single cells)
+            dgvTasks.ReadOnly = true;                                           // Setting the data to "read only"
+            dgvTasks.MultiSelect = false;                                       // Disabling multi-select
+            dgvTasks.AllowUserToAddRows = false;                                // Disallow adding new rows
         }
 
         #endregion
@@ -241,6 +243,8 @@ namespace Schedule_Manager.Forms
 
         #endregion
 
+        #region APPOINTMENT BUTTONS
+
         private void btnApptType_Click(object sender, EventArgs e)
         {
             dgvReport.DataSource = DbManager.GetApptTypePerMonth();
@@ -271,16 +275,52 @@ namespace Schedule_Manager.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+            // Show the Apppointment Detail
             if (dgvCalendar.CurrentRow.DataBoundItem.GetType() == typeof(Appointment))
             {
-                Appointment currentAppointment = (Appointment)dgvCalendar.CurrentRow.DataBoundItem; // Getting the appointment to edit 
-                AppointmentDetail apptDetail = new AppointmentDetail(currentAppointment);                 // Instantiating Edit form
-                apptDetail.Show();                                                                    // Showing the Edit form
+                Appointment currentAppointment = (Appointment)dgvCalendar.CurrentRow.DataBoundItem;     // Getting the appointment to edit 
+                AppointmentDetail apptDetail = new AppointmentDetail(currentAppointment);               // Instantiating Edit form
+                apptDetail.Show();                                                                      // Showing the Edit form
             }
             else
             {
                 MessageBox.Show("Please select a calendar item to view");
             }
         }
+        #endregion
+
+        #region TASK BUTTONS
+
+        private void btnAddTask_Click(object sender, EventArgs e)
+        {
+
+        }    
+
+        private void btnTaskDetail_Click(object sender, EventArgs e)
+        {
+            if (dgvTasks.CurrentRow.DataBoundItem.GetType() == typeof(Task))// Make sure there's a row selected
+            {
+                Task currentTask = (Task)dgvTasks.CurrentRow.DataBoundItem; // Getting the appointment to edit 
+                TaskDetail taskDetail = new TaskDetail(currentTask);        // Instantiating Edit form
+                taskDetail.Show();                                          // Showing the Edit form
+            }
+            else
+            {
+                MessageBox.Show("Please select a task to view");            // If there is not row selected, alert the user
+            }   
+        }
+
+        private void btnEditTask_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDeleteTask_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
     }
 }
