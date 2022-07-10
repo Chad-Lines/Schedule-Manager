@@ -13,13 +13,18 @@ namespace Schedule_Manager.Forms
 {
     public partial class Main : Form
     {
-        BindingList<Appointment> allAppts = DbManager.GetAppointmentsByUserId();
-        public static Appointment currentAppointment;
+        BindingList<Appointment> allAppts = DbManager.GetAppointmentsByUserId();                // Holds all appointments
+        public static Appointment currentAppointment;                                           // Holds the currently select appointments
 
-        BindingList<Customer> allCustomers;
-        public static Customer currentCustomer;
+        BindingList<Task> allTasks = DbManager.GetTaskByUserId();                               // Holds all Tasks
+        public static Task currentTask;                                                         // Holds the currently selected task
+
+        BindingList<CalendarItem> allCalendarItems = DbManager.GetAllCalendarItemsByUserId();   // Holds all calendar items (appointments and tasks)
+            
+        BindingList<Customer> allCustomers;                                                     // Holds all customers
+        public static Customer currentCustomer;                                                 // The current customers
         
-        BindingList<string> Report;
+        BindingList<string> Report;                                                             // Holds reports
 
         public bool CheckForMeeting = true;
 
@@ -134,19 +139,6 @@ namespace Schedule_Manager.Forms
             DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;                                            // We get the current DateTimeFormatInfo
             System.Globalization.Calendar cal = dfi.Calendar;                                                   // Getting a calendar item (curse me for creating a "Calendar" class!)
 
-            /* +-----------------------------------------------------------------------------------------------+
-             * |                                                                                               |
-             * | REQUIREMENT G: (2/2) Write two or more lambda expressions to make your program more efficient |
-             * |                                                                                               |
-             * +-----------------------------------------------------------------------------------------------+
-             * This lambda expression allows us to filter our appointment list in-line. I considered creating a
-             * separate function to handle this for both the week and month views, but using this lambda is much
-             * more convenient. It simplifies the code, in my oppinion, and reduces the lines of code written 
-             * while remaining readable. 
-             * 
-             * Lambda #1 is in LoginForm.cs. There's another lambda in rdoMonth_CheckedChanged() but it does 
-             * the same thing as this one, except it filters for month (and is thus simpler).
-            */
             dgvCalendar.DataSource = null;
             dgvCalendar.DataSource = allAppts.Where(                                                            // This is where we filter by...
                 a => cal.GetWeekOfYear(DateTime.Parse(a.start), dfi.CalendarWeekRule, dfi.FirstDayOfWeek) ==    // Get the week of the year (int) of the appointment, and...
@@ -171,15 +163,22 @@ namespace Schedule_Manager.Forms
 
         public void updateCalendarView()
         {
-            allAppts = DbManager.GetAppointmentsByUserId();                         // Updates the appointments
+            allAppts = DbManager.GetAppointmentsByUserId();                             // Updates the appointments
+            allTasks = DbManager.GetTaskByUserId();                                     // Updates the tasks
+
+            // Combing all appointments and all tasks into a single binding list
+            foreach (Appointment a in allAppts) { allCalendarItems.Add(a); }            // Add the appointments to allCalendarItems
+            foreach (Task t in allTasks) { allCalendarItems.Add(t); }                   // Add the tasks to AllCalendarItems
 
             // Configuring the DataGridView Source and Parameters
-            dgvCalendar.DataSource = allAppts;                                      // Re-establishes the dgv source
+            //dgvCalendar.DataSource = allAppts;                                        // Re-establishes the dgv source
+            dgvCalendar.DataSource = allCalendarItems;                                  // Re-establishes the dgv source
             dgvCalendar.AutoGenerateColumns = false;
-            dgvCalendar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;    // Full row sleect (rather than single cells)
-            dgvCalendar.ReadOnly = true;                                            // Setting the data to "read only"
-            dgvCalendar.MultiSelect = false;                                        // Disabling multi-select
-            dgvCalendar.AllowUserToAddRows = false;                                 // Disallow adding new rows
+            dgvCalendar.SelectionMode = DataGridViewSelectionMode.FullRowSelect;        // Full row select (rather than single cells)
+            dgvCalendar.ReadOnly = true;                                                // Setting the data to "read only"
+            dgvCalendar.MultiSelect = false;                                            // Disabling multi-select
+            dgvCalendar.AllowUserToAddRows = false;                                     // Disallow adding new rows
+
             try
             {
                 dgvCalendar.Sort(dgvCalendar.Columns[0], ListSortDirection.Ascending);  // Sorting the calendar by appointment start date

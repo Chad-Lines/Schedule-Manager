@@ -32,13 +32,6 @@ namespace Schedule_Manager.Forms
 
         private void InitializeForm()
         {
-            /* +-------------------------------------------------------------------------------------+
-             * |                                                                                     |
-             * | REQUIREMENT A: Determine the User's Location and translate login and error messages |
-             * |                                                                                     |
-             * +-------------------------------------------------------------------------------------+
-             */
-
             if (CultureInfo.CurrentCulture.Name == spanishCode) // Checking to see if the local culture settings are set to es-ES (Spanish)...
             {                                                   // If so we set all of the text accordingly
                 // These are the primary labels and button texts
@@ -105,21 +98,8 @@ namespace Schedule_Manager.Forms
                 conn                                                                                    // Passing in the connection
             );
 
-            /* +-----------------------------------------------------------------------------------------------+
-             * |                                                                                               |
-             * | REQUIREMENT F: (1/3) You may use the same mechanism of exception control more than once,      |
-             * |                but you must incorporate at least two different mechanisms of exception        |
-             * |                control.                                                                       |
-             * |                                                                                               |
-             * |                [X] Entering an Incorrect Username or Password (4/4 Validation requiremets)    |
-             * |                [X] Try/Catch (1/2 Methods)                                                    |
-             * +-----------------------------------------------------------------------------------------------+
-             * 2/3 is in the AddAppointment.cs file.
-             * 3/3 is in the AddCustomer.cs file.
-             */
-
-            try                                                                                         // We're going to attempt to get data from the Datbase with the...
-            {                                                                                           // user information provided.
+            //try                                                                                         // We're going to attempt to get data from the Datbase with the...
+            //{                                                                                           // user information provided.
                 MySqlDataReader dr = cmd.ExecuteReader();                                               // The MySqlDataReader enables reading a stream of rows from MySQL...
                                                                                                         // But in order to use it, you must execute the MySqlCommand...
                                                                                                         // reader method. Hence the "cmd.ExecuteReader()".
@@ -129,35 +109,27 @@ namespace Schedule_Manager.Forms
                 Log.writeLog(username, true);                                                           // Writing the user info to the logfile
                 DbManager.CheckForAppointment();                                                        // Checking to see if there's an upcoming appointment
                 Main main = new Main();
-                /* +-----------------------------------------------------------------------------------------------+
-                 * |                                                                                               |
-                 * | REQUIREMENT G: (1/2) Write two or more lambda expressions to make your program more efficient |
-                 * |                                                                                               |
-                 * +-----------------------------------------------------------------------------------------------+
-                 * This lambda expression simplifies handling the LoginForm. Although we hide the login form (see below)
+                /* This lambda expression simplifies handling the LoginForm. Although we hide the login form (see below)
                  * it is still in memory. When we exit the Main form, we want to also exit the Login form. This 
                  * lambda expression accomplishes that. If the main form is closed, then this (the login form) will close 
-                 * also. 
-                 * 
-                 * Lambda #2 is in Main.cs
-                */
+                 * also.*/
                 main.FormClosed += (s, args) => this.Close();
 
                 main.Show();                                    // Show the main Form
                 this.Hide();                                    // Hide this form so it's not lurking in the background
 
-            }
+            //}
 
-            catch (Exception ex)                                                                        
-            {                                                                                           // If the authentication fails, then...
-                Log.writeLog(username, false);                                                          // log the failure
-                txtUserName.Clear();                                                                    // Clear the username field
-                txtPassword.Clear();                                                                    // Clear the password field
-                labelError = LoginError;                                                                // Set the error text appropriately
-                lblLoginErr.Text = labelError;                                                          // Assign that text to the error label
-                lblLoginErr.Show();                                                                     // Display the error label
-                Console.WriteLine(ex.Message);                                                          // Capture the exact error
-            }                    
+            //catch (Exception ex)                                                                        
+            //{                                                                                           // If the authentication fails, then...
+            //    Log.writeLog(username, false);                                                          // log the failure
+            //    txtUserName.Clear();                                                                    // Clear the username field
+            //    txtPassword.Clear();                                                                    // Clear the password field
+            //    labelError = LoginError;                                                                // Set the error text appropriately
+            //    lblLoginErr.Text = labelError;                                                          // Assign that text to the error label
+            //    lblLoginErr.Show();                                                                     // Display the error label
+            //    Console.WriteLine(ex.Message);                                                          // Capture the exact error
+            //}                    
         }
 
         private void btnTest_Click(object sender, EventArgs e)
