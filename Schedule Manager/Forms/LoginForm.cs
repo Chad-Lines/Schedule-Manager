@@ -98,8 +98,8 @@ namespace Schedule_Manager.Forms
                 conn                                                                                    // Passing in the connection
             );
 
-            //try                                                                                         // We're going to attempt to get data from the Datbase with the...
-            //{                                                                                           // user information provided.
+            try                                                                                         // We're going to attempt to get data from the Datbase with the...
+            {                                                                                           // user information provided.
                 MySqlDataReader dr = cmd.ExecuteReader();                                               // The MySqlDataReader enables reading a stream of rows from MySQL...
                                                                                                         // But in order to use it, you must execute the MySqlCommand...
                                                                                                         // reader method. Hence the "cmd.ExecuteReader()".
@@ -117,19 +117,17 @@ namespace Schedule_Manager.Forms
 
                 main.Show();                                    // Show the main Form
                 this.Hide();                                    // Hide this form so it's not lurking in the background
-
-            //}
-
-            //catch (Exception ex)                                                                        
-            //{                                                                                           // If the authentication fails, then...
-            //    Log.writeLog(username, false);                                                          // log the failure
-            //    txtUserName.Clear();                                                                    // Clear the username field
-            //    txtPassword.Clear();                                                                    // Clear the password field
-            //    labelError = LoginError;                                                                // Set the error text appropriately
-            //    lblLoginErr.Text = labelError;                                                          // Assign that text to the error label
-            //    lblLoginErr.Show();                                                                     // Display the error label
-            //    Console.WriteLine(ex.Message);                                                          // Capture the exact error
-            //}                    
+            }
+            catch (Exception ex)
+            {                                                                                           // If the authentication fails, then...
+                Log.writeLog(username, false);                                                          // log the failure
+                txtUserName.Clear();                                                                    // Clear the username field
+                txtPassword.Clear();                                                                    // Clear the password field
+                labelError = LoginError;                                                                // Set the error text appropriately
+                lblLoginErr.Text = labelError;                                                          // Assign that text to the error label
+                lblLoginErr.Show();                                                                     // Display the error label
+                Console.WriteLine(ex.Message);                                                          // Capture the exact error
+            }
         }
 
         private void btnTest_Click(object sender, EventArgs e)

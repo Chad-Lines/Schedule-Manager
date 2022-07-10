@@ -179,6 +179,10 @@ namespace Schedule_Manager.Forms
             dgvCalendar.MultiSelect = false;                                            // Disabling multi-select
             dgvCalendar.AllowUserToAddRows = false;                                     // Disallow adding new rows
 
+            // TESTING ==================================================================
+
+            // ==========================================================================
+
             try
             {
                 dgvCalendar.Sort(dgvCalendar.Columns[0], ListSortDirection.Ascending);  // Sorting the calendar by appointment start date

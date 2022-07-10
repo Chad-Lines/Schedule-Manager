@@ -61,14 +61,23 @@
             this.btnApptUser = new System.Windows.Forms.Button();
             this.btnSchedUser = new System.Windows.Forms.Button();
             this.btnApptType = new System.Windows.Forms.Button();
+            this.dgvTasks = new System.Windows.Forms.DataGridView();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnDeleteTask = new System.Windows.Forms.Button();
+            this.btnTaskDetail = new System.Windows.Forms.Button();
+            this.btnAddTask = new System.Windows.Forms.Button();
+            this.btnEditTask = new System.Windows.Forms.Button();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TaskName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabCalendar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCalendar)).BeginInit();
@@ -76,11 +85,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomer)).BeginInit();
             this.tabReports.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTasks)).BeginInit();
             this.SuspendLayout();
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(964, 574);
+            this.btnExit.Location = new System.Drawing.Point(964, 557);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 23;
@@ -102,15 +112,22 @@
             // tabCalendar
             // 
             this.tabCalendar.BackColor = System.Drawing.Color.Transparent;
+            this.tabCalendar.Controls.Add(this.btnDeleteTask);
+            this.tabCalendar.Controls.Add(this.btnTaskDetail);
+            this.tabCalendar.Controls.Add(this.btnAddTask);
+            this.tabCalendar.Controls.Add(this.btnEditTask);
+            this.tabCalendar.Controls.Add(this.label4);
+            this.tabCalendar.Controls.Add(this.label3);
+            this.tabCalendar.Controls.Add(this.btnDeleteAppointment);
             this.tabCalendar.Controls.Add(this.button1);
+            this.tabCalendar.Controls.Add(this.dgvTasks);
+            this.tabCalendar.Controls.Add(this.btnAddAppointments);
             this.tabCalendar.Controls.Add(this.btnMonth);
+            this.tabCalendar.Controls.Add(this.btnEditAppointment);
             this.tabCalendar.Controls.Add(this.btnWeek);
             this.tabCalendar.Controls.Add(this.btnAll);
             this.tabCalendar.Controls.Add(this.label1);
             this.tabCalendar.Controls.Add(this.dgvCalendar);
-            this.tabCalendar.Controls.Add(this.btnDeleteAppointment);
-            this.tabCalendar.Controls.Add(this.btnEditAppointment);
-            this.tabCalendar.Controls.Add(this.btnAddAppointments);
             this.tabCalendar.Location = new System.Drawing.Point(4, 22);
             this.tabCalendar.Name = "tabCalendar";
             this.tabCalendar.Padding = new System.Windows.Forms.Padding(3);
@@ -120,7 +137,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(786, 61);
+            this.button1.Location = new System.Drawing.Point(278, 479);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 35;
@@ -130,7 +147,7 @@
             // 
             // btnMonth
             // 
-            this.btnMonth.Location = new System.Drawing.Point(177, 61);
+            this.btnMonth.Location = new System.Drawing.Point(236, 64);
             this.btnMonth.Name = "btnMonth";
             this.btnMonth.Size = new System.Drawing.Size(75, 23);
             this.btnMonth.TabIndex = 32;
@@ -140,7 +157,7 @@
             // 
             // btnWeek
             // 
-            this.btnWeek.Location = new System.Drawing.Point(96, 61);
+            this.btnWeek.Location = new System.Drawing.Point(155, 64);
             this.btnWeek.Name = "btnWeek";
             this.btnWeek.Size = new System.Drawing.Size(75, 23);
             this.btnWeek.TabIndex = 34;
@@ -150,7 +167,7 @@
             // 
             // btnAll
             // 
-            this.btnAll.Location = new System.Drawing.Point(15, 61);
+            this.btnAll.Location = new System.Drawing.Point(74, 64);
             this.btnAll.Name = "btnAll";
             this.btnAll.Size = new System.Drawing.Size(75, 23);
             this.btnAll.TabIndex = 33;
@@ -162,7 +179,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(11, 21);
+            this.label1.Location = new System.Drawing.Point(18, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(131, 24);
             this.label1.TabIndex = 31;
@@ -175,20 +192,18 @@
             this.dgvCalendar.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
-            this.TaskName,
             this.Column7,
-            this.Column3,
             this.Column4,
             this.Column5,
             this.Column6});
-            this.dgvCalendar.Location = new System.Drawing.Point(15, 90);
+            this.dgvCalendar.Location = new System.Drawing.Point(15, 93);
             this.dgvCalendar.Name = "dgvCalendar";
-            this.dgvCalendar.Size = new System.Drawing.Size(1008, 417);
+            this.dgvCalendar.Size = new System.Drawing.Size(500, 380);
             this.dgvCalendar.TabIndex = 24;
             // 
             // btnDeleteAppointment
             // 
-            this.btnDeleteAppointment.Location = new System.Drawing.Point(948, 61);
+            this.btnDeleteAppointment.Location = new System.Drawing.Point(440, 479);
             this.btnDeleteAppointment.Name = "btnDeleteAppointment";
             this.btnDeleteAppointment.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteAppointment.TabIndex = 25;
@@ -198,7 +213,7 @@
             // 
             // btnEditAppointment
             // 
-            this.btnEditAppointment.Location = new System.Drawing.Point(867, 61);
+            this.btnEditAppointment.Location = new System.Drawing.Point(359, 479);
             this.btnEditAppointment.Name = "btnEditAppointment";
             this.btnEditAppointment.Size = new System.Drawing.Size(75, 23);
             this.btnEditAppointment.TabIndex = 27;
@@ -208,7 +223,7 @@
             // 
             // btnAddAppointments
             // 
-            this.btnAddAppointments.Location = new System.Drawing.Point(705, 61);
+            this.btnAddAppointments.Location = new System.Drawing.Point(197, 479);
             this.btnAddAppointments.Name = "btnAddAppointments";
             this.btnAddAppointments.Size = new System.Drawing.Size(75, 23);
             this.btnAddAppointments.TabIndex = 26;
@@ -413,40 +428,93 @@
             this.btnApptType.UseVisualStyleBackColor = true;
             this.btnApptType.Click += new System.EventHandler(this.btnApptType_Click);
             // 
+            // dgvTasks
+            // 
+            this.dgvTasks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTasks.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column16,
+            this.Column17,
+            this.Column18,
+            this.Column19});
+            this.dgvTasks.Location = new System.Drawing.Point(521, 93);
+            this.dgvTasks.Name = "dgvTasks";
+            this.dgvTasks.Size = new System.Drawing.Size(502, 380);
+            this.dgvTasks.TabIndex = 36;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(15, 67);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 16);
+            this.label3.TabIndex = 37;
+            this.label3.Text = "Sort By:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(517, 28);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(104, 24);
+            this.label4.TabIndex = 38;
+            this.label4.Text = "Your Tasks";
+            // 
+            // btnDeleteTask
+            // 
+            this.btnDeleteTask.Location = new System.Drawing.Point(948, 479);
+            this.btnDeleteTask.Name = "btnDeleteTask";
+            this.btnDeleteTask.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteTask.TabIndex = 39;
+            this.btnDeleteTask.Text = "Delete";
+            this.btnDeleteTask.UseVisualStyleBackColor = true;
+            // 
+            // btnTaskDetail
+            // 
+            this.btnTaskDetail.Location = new System.Drawing.Point(786, 479);
+            this.btnTaskDetail.Name = "btnTaskDetail";
+            this.btnTaskDetail.Size = new System.Drawing.Size(75, 23);
+            this.btnTaskDetail.TabIndex = 42;
+            this.btnTaskDetail.Text = "View";
+            this.btnTaskDetail.UseVisualStyleBackColor = true;
+            // 
+            // btnAddTask
+            // 
+            this.btnAddTask.Location = new System.Drawing.Point(705, 479);
+            this.btnAddTask.Name = "btnAddTask";
+            this.btnAddTask.Size = new System.Drawing.Size(75, 23);
+            this.btnAddTask.TabIndex = 40;
+            this.btnAddTask.Text = "Add";
+            this.btnAddTask.UseVisualStyleBackColor = true;
+            // 
+            // btnEditTask
+            // 
+            this.btnEditTask.Location = new System.Drawing.Point(867, 479);
+            this.btnEditTask.Name = "btnEditTask";
+            this.btnEditTask.Size = new System.Drawing.Size(75, 23);
+            this.btnEditTask.TabIndex = 41;
+            this.btnEditTask.Text = "Edit...";
+            this.btnEditTask.UseVisualStyleBackColor = true;
+            // 
             // Column1
             // 
             this.Column1.DataPropertyName = "start";
             this.Column1.HeaderText = "Start Time";
             this.Column1.Name = "Column1";
-            this.Column1.Width = 175;
             // 
             // Column2
             // 
             this.Column2.DataPropertyName = "end";
             this.Column2.HeaderText = "End Time";
             this.Column2.Name = "Column2";
-            this.Column2.Width = 175;
-            // 
-            // TaskName
-            // 
-            this.TaskName.DataPropertyName = "Task.Name";
-            this.TaskName.HeaderText = "Task Name";
-            this.TaskName.Name = "TaskName";
-            this.TaskName.Width = 200;
             // 
             // Column7
             // 
             this.Column7.DataPropertyName = "customerName";
             this.Column7.HeaderText = "Customer";
             this.Column7.Name = "Column7";
-            this.Column7.Width = 200;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "type";
-            this.Column3.HeaderText = "Appointment Type";
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 200;
+            this.Column7.Width = 255;
             // 
             // Column4
             // 
@@ -469,11 +537,35 @@
             this.Column6.Name = "Column6";
             this.Column6.Visible = false;
             // 
+            // Column16
+            // 
+            this.Column16.DataPropertyName = "end";
+            this.Column16.HeaderText = "Due";
+            this.Column16.Name = "Column16";
+            // 
+            // Column17
+            // 
+            this.Column17.DataPropertyName = "task";
+            this.Column17.HeaderText = "Task";
+            this.Column17.Name = "Column17";
+            // 
+            // Column18
+            // 
+            this.Column18.DataPropertyName = "status";
+            this.Column18.HeaderText = "Status";
+            this.Column18.Name = "Column18";
+            // 
+            // Column19
+            // 
+            this.Column19.DataPropertyName = "priority";
+            this.Column19.HeaderText = "Priority";
+            this.Column19.Name = "Column19";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 603);
+            this.ClientSize = new System.Drawing.Size(1067, 595);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnExit);
             this.Name = "Main";
@@ -487,6 +579,7 @@
             this.tabReports.ResumeLayout(false);
             this.tabReports.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTasks)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -525,11 +618,20 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnDeleteTask;
+        private System.Windows.Forms.Button btnTaskDetail;
+        private System.Windows.Forms.Button btnAddTask;
+        private System.Windows.Forms.Button btnEditTask;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridView dgvTasks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column19;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TaskName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
