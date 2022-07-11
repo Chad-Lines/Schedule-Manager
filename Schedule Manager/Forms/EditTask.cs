@@ -60,7 +60,7 @@ namespace Schedule_Manager.Forms
 
                 DbManager.UpdateTask(_currentTask.Id, newTask); // Update the task in the database
                 Main m = new Main();                            // Instantiating Main so we can access the updateCalendarView()
-                m.updateCalendarView();                         // Updating the calendar view
+                m.UpdateTaskView();                             // Updating the task view
                 this.Close();                                   // Closing out this form
             }
             else

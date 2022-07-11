@@ -328,7 +328,28 @@ namespace Schedule_Manager.Forms
 
         private void btnDeleteTask_Click(object sender, EventArgs e)
         {
+            if (dgvTasks.SelectedRows.Count > 0 &&
+                dgvTasks.CurrentRow.DataBoundItem.GetType() == typeof(Task))                // If the selected item is valid, then...
+            {
+                var option = MessageBox.Show("Are you sure you want to delete this task?",  // Ask the user to confirm the delete operation
+                                "Confirm Delete", MessageBoxButtons.YesNo);
 
+                if (option == DialogResult.Yes)                                             // Assuming they say Yes, then...
+                {
+                    try                                                                     // Try to...
+                    {
+                        Task toDeleteTask = (Task)dgvTasks.CurrentRow.DataBoundItem;        // Capture the appointment to delete
+                        DbManager.DeleteTask(toDeleteTask);                                 // Delete the appointment
+                    }
+                    catch (Exception ex)                                                    // If it doesn't work, then...
+                    {
+                        Console.WriteLine(ex.Message);                                      // Log the error to the console
+                    }
+                }
+                else { return; }                                                            // If the user answers "No", then don't delete it
+            }
+            else { MessageBox.Show("Select a task to Delete"); }                            // If the item is not valid, let the user know
+            UpdateTaskView();                                                        // Reload the calendar view
         }
 
         #endregion
