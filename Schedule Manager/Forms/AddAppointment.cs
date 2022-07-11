@@ -84,20 +84,6 @@ namespace Schedule_Manager.Forms
 
         private bool VerifyForm()
         {
-            /* +--------------------------------------------------------------------------------------------------+
-             * |                                                                                                  |
-             * | REQUIREMENT F: (2/3) You may use the same mechanism of exception control more than once,         |
-             * |                but you must incorporate at least two different mechanisms of exception           |
-             * |                control.                                                                          |
-             * |                                                                                                  |
-             * |                [X] Scheduling an appointment outside business hours (1/4 Validation requiremets) |
-             * |                [X] Scheduling overlapping appointments (2/4 Validation requiremets)              |
-             * |                                                                                                  |
-             * |                [x] If/ElseIf/Else                                                                |
-             * +--------------------------------------------------------------------------------------------------+
-             * 1/2 is in the LoginForm.cs file. 
-             * 3/3 is in the AddCustomer.cs file.
-             */
 
             // Check if "Type" has a value
             if (string.IsNullOrWhiteSpace(cbType.Text))

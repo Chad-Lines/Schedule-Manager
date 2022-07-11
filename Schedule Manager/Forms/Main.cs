@@ -294,7 +294,8 @@ namespace Schedule_Manager.Forms
 
         private void btnAddTask_Click(object sender, EventArgs e)
         {
-
+            AddTask addTask = new AddTask();    // Instantiate the AddTask form
+            addTask.Show();                     // Show the AddTask form
         }    
 
         private void btnTaskDetail_Click(object sender, EventArgs e)

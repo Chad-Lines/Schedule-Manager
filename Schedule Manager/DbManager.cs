@@ -470,7 +470,7 @@ namespace Schedule_Manager
                                                                                             // time before we insert them into the database.
             string query =                                                                  // Keep in mind that userName and userId are already populated
                 $"insert into task" +                                                       // This is our insert statement
-                $"(taskid, userid, name, description, status, priority, " +
+                $"(userid, name, description, status, priority, " +
                 $"start, end)" +
                 $"values ({userId}, '{task.name}', '{task.description}', " +
                 $"'{task.status}', '{task.priority}', @sdate, @edate);";
