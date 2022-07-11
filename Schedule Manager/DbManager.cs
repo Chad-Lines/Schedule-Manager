@@ -20,7 +20,6 @@ namespace Schedule_Manager
         public static BindingList<Appointment> appointments = new BindingList<Appointment>();                   // This is the binding list wherein we'll store appointments        
         public static BindingList<Appointment> upcomingAppts = new BindingList<Appointment>();                  // This is the binding list wherein we'll store upcoming appointments
         public static BindingList<Task> tasks = new BindingList<Task>();                                        // This is the binding list wherein we'll store tasks
-        public static BindingList<CalendarItem> calendarItems = new BindingList<CalendarItem>();                // This is the binding list wherein we'll store all calendar items
         public static BindingList<Customer> customers = new BindingList<Customer>();                            // This is the binding list wherein we'll store customers
         public static BindingList<AppointmentTypeByMonth> report1 = new BindingList<AppointmentTypeByMonth>();  // This is the binding list wherein we'll store the report data
         public static BindingList<AppointmentTypeByUser> report2 = new BindingList<AppointmentTypeByUser>();    // This is the binding list wherein we'll store the report data
@@ -62,91 +61,6 @@ namespace Schedule_Manager
             
         }
         #endregion
-
-        public static BindingList<CalendarItem> GetAllCalendarItemsByUserId(int id = -1)
-        {
-            int outputId;                                                                   // This is the Id that we're going to use to get tasks
-            tasks.Clear();                                                                  // Clearing the existing tasks
-
-            // See if tasks are being requested for a different user
-            if (id <= -1) { outputId = userId; }                                            // If no id is provided, then we assume that it's fort he current user id
-            else { outputId = id; }                                                         // Otherwise we assign the output id to the id that was specified
-
-            DataTable aDt = new DataTable();                                              // We're going to use a DataTable to hold the query results
-            DataTable tDt = new DataTable();
-
-            MySqlCommand getAppointmentsByUserIdCmd = new MySqlCommand(                     // Creating the appintments query
-                $"select * from appointment where userId = {outputId};",
-                DbConnect()                                                                 
-            );
-
-           MySqlCommand getTasksByUserIdCmd = new MySqlCommand(                                         // Creating the tasks query
-                $"select * from task where userId = {outputId};",
-                DbConnect()
-            );
-
-            using (DbConnect())                                                             // Using the connection we established...
-            {
-                using (getAppointmentsByUserIdCmd)                                          // And the query that we defined...
-                {
-                    MySqlDataReader reader = getAppointmentsByUserIdCmd.ExecuteReader();    // Initialize the data reader
-                    aDt.Load(reader);                                                     // Execute the reader and load the data into the DataTable
-
-                    if (aDt.Rows.Count > 0)                                               // If there are rows, then...
-                    {
-                        foreach (DataRow row in aDt.Rows)                                 // for each row...
-                        {
-                            Appointment newAppt = new Appointment();                        // Create a new appointment
-                            newAppt.Id = (int)row[0];                                       // Set the parameters as appropriate
-                            newAppt.customerId = (int)row[1];
-                            newAppt.customerName = GetCustomerNameById(newAppt.customerId);
-                            newAppt.userId = (int)row[1];
-                            newAppt.type = row[7].ToString();
-
-                            // We convert the dates into a string. DateTime formatting is a pain, so I'll spell it out ...
-                            // MM = Month, dd = day, yyy = Year. For example: "12/31/2018"
-                            // hh = hour in 12-hour format (HH for 24-hour format), mmm = minute, tt indicates either AM or PM
-                            // For example: "05:00 PM" 
-                            // ConvertToLocalTime() returns a local DateTime object derived from specified rows
-                            newAppt.start = String.Format("{0:MM/dd/yyy hh:mmm tt}", ConvertToLocalTime((DateTime)row[9]));
-                            newAppt.end = String.Format("{0:MM/dd/yyy hh:mmm tt}", ConvertToLocalTime((DateTime)row[10]));
-
-                            calendarItems.Add(newAppt);                      // Finally we add the appointments to the binding list
-                        }
-                    }
-                }
-                using (getTasksByUserIdCmd)                                                 // Using  the query that we defined...
-                {
-                    MySqlDataReader reader = getTasksByUserIdCmd.ExecuteReader();    // Initialize the data reader
-                    tDt.Load(reader);                                                     // Execute the reader and load the data into the DataTable
-
-                    if (tDt.Rows.Count > 0)                                               // If there are rows, then...
-                    {
-                        foreach (DataRow row in tDt.Rows)                                 // for each row...
-                        {
-                            Task newTask = new Task();              // Create a new task
-                            newTask.Id = (int)row[0];               // Set the parameters as appropriate
-                            newTask.userId = (int)row[1];
-                            newTask.name = (string)row[2];
-                            newTask.description = (string)row[3];
-                            newTask.status = (string)row[4];
-                            newTask.priority = (string)row[5];
-
-                            // We convert the dates into a string. DateTime formatting is a pain, so I'll spell it out ...
-                            // MM = Month, dd = day, yyy = Year. For example: "12/31/2018"
-                            // hh = hour in 12-hour format (HH for 24-hour format), mmm = minute, tt indicates either AM or PM
-                            // For example: "05:00 PM" 
-                            // ConvertToLocalTime() returns a local DateTime object derived from specified rows
-                            newTask.start = String.Format("{0:MM/dd/yyy hh:mmm tt}", ConvertToLocalTime((DateTime)row[6]));
-                            newTask.end = String.Format("{0:MM/dd/yyy hh:mmm tt}", ConvertToLocalTime((DateTime)row[7]));
-
-                            calendarItems.Add(newTask);                      // Finally we add the appointments to the binding list
-                        }
-                    }
-                }
-            }
-            return calendarItems;
-        }
 
         #region User Functions
         public static void SetUserID(int id)

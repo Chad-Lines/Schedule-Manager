@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Schedule_Manager
 {
-    public class CalendarItem
+    public class Obligation
     {
         // PROPERTIES --------------------------------
         // NOTE TO SELF: the Id property is called something different for both inhereting classes

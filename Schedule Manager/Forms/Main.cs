@@ -288,6 +288,29 @@ namespace Schedule_Manager.Forms
                 MessageBox.Show("Please select a calendar item to view");
             }
         }
+
+        private void btnSearchAppointments_Click(object sender, EventArgs e)
+        {
+            dgvCalendar.ClearSelection();                                   // This makes sure there is nothing highlighted as default
+            dgvCalendar.MultiSelect = true;                                 // Allowing Multi-select
+
+            bool found = false;                                             // Setting the default value for the found variable
+
+            if (tbAppointmentSearch.Text != "")                             // If the txtProductSearch box isn't empty...
+            {
+                for (int i = 0; i < allAppts.Count; i++)                    // Iterate through the product list...
+                {
+                    if (allAppts[i].customerName.ToUpper()                  // Convert the search string AND the list item to Upper...
+                        .Contains(tbAppointmentSearch.Text.ToUpper()))      // And see if the search string is IN the list. If so...
+                    {
+                        dgvCalendar.Rows[i].Selected = true;                // Flag the matching row as Selected, and
+                        found = true;                                       // Set found to true
+                    }
+                }
+            }
+            if (found == false) { MessageBox.Show("No Matches Found."); }   // If there are no matches, inform the user
+        }
+
         #endregion
 
         #region TASK BUTTONS
@@ -350,8 +373,29 @@ namespace Schedule_Manager.Forms
             }
             else { MessageBox.Show("Select a task to Delete"); }                            // If the item is not valid, let the user know
             UpdateTaskView();                                                        // Reload the calendar view
-        }
+        }      
 
+        private void btnSearchTasks_Click(object sender, EventArgs e)
+        {
+            dgvTasks.ClearSelection();                                      // This makes sure there is nothing highlighted as default
+            dgvTasks.MultiSelect = true;                                    // Allowing Multi-select
+
+            bool found = false;                                             // Setting the default value for the found variable
+
+            if (tbTaskSearch.Text != "")                                    // If the txtProductSearch box isn't empty...
+            {
+                for (int i = 0; i < allTasks.Count; i++)                    // Iterate through the product list...
+                {
+                    if (allTasks[i].name.ToUpper()                          // Convert the search string AND the list item to Upper...
+                        .Contains(tbTaskSearch.Text.ToUpper()))             // And see if the search string is IN the list. If so...
+                    {
+                        dgvTasks.Rows[i].Selected = true;                   // Flag the matching row as Selected, and
+                        found = true;                                       // Set found to true
+                    }
+                }
+            }
+            if (found == false) { MessageBox.Show("No Matches Found."); }   // If there are no matches, inform the user
+        }
         #endregion
     }
 }

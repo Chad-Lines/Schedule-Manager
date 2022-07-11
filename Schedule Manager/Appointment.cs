@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Schedule_Manager
 {
-    public class Appointment : CalendarItem
+    public class Appointment : Obligation
     {
         // PROPERTIES --------------------------------
         

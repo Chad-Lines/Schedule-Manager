@@ -40,6 +40,15 @@
             this.btnDeleteAppointment = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.dgvTasks = new System.Windows.Forms.DataGridView();
+            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.start = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.taskId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CIId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAddAppointments = new System.Windows.Forms.Button();
             this.btnMonth = new System.Windows.Forms.Button();
             this.btnEditAppointment = new System.Windows.Forms.Button();
@@ -47,6 +56,14 @@
             this.btnAll = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvCalendar = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabCustomers = new System.Windows.Forms.TabPage();
             this.dgvCustomer = new System.Windows.Forms.DataGridView();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,23 +85,10 @@
             this.btnApptUser = new System.Windows.Forms.Button();
             this.btnSchedUser = new System.Windows.Forms.Button();
             this.btnApptType = new System.Windows.Forms.Button();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.start = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.taskId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CIId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.userId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSearchAppointments = new System.Windows.Forms.Button();
+            this.tbAppointmentSearch = new System.Windows.Forms.TextBox();
+            this.tbTaskSearch = new System.Windows.Forms.TextBox();
+            this.btnSearchTasks = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabCalendar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTasks)).BeginInit();
@@ -119,6 +123,10 @@
             // tabCalendar
             // 
             this.tabCalendar.BackColor = System.Drawing.Color.Transparent;
+            this.tabCalendar.Controls.Add(this.tbTaskSearch);
+            this.tabCalendar.Controls.Add(this.btnSearchTasks);
+            this.tabCalendar.Controls.Add(this.tbAppointmentSearch);
+            this.tabCalendar.Controls.Add(this.btnSearchAppointments);
             this.tabCalendar.Controls.Add(this.btnDeleteTask);
             this.tabCalendar.Controls.Add(this.btnTaskDetail);
             this.tabCalendar.Controls.Add(this.btnAddTask);
@@ -240,6 +248,67 @@
             this.dgvTasks.Size = new System.Drawing.Size(502, 380);
             this.dgvTasks.TabIndex = 36;
             // 
+            // Column16
+            // 
+            this.Column16.DataPropertyName = "end";
+            this.Column16.HeaderText = "Due";
+            this.Column16.Name = "Column16";
+            this.Column16.Width = 124;
+            // 
+            // start
+            // 
+            this.start.DataPropertyName = "start";
+            this.start.HeaderText = "start";
+            this.start.Name = "start";
+            this.start.Visible = false;
+            // 
+            // taskId
+            // 
+            this.taskId.DataPropertyName = "taskId";
+            this.taskId.HeaderText = "taskId";
+            this.taskId.Name = "taskId";
+            this.taskId.Visible = false;
+            // 
+            // CIId
+            // 
+            this.CIId.DataPropertyName = "Id";
+            this.CIId.HeaderText = "CIId";
+            this.CIId.Name = "CIId";
+            this.CIId.Visible = false;
+            // 
+            // userId
+            // 
+            this.userId.DataPropertyName = "userId";
+            this.userId.HeaderText = "userId";
+            this.userId.Name = "userId";
+            this.userId.Visible = false;
+            // 
+            // Column17
+            // 
+            this.Column17.DataPropertyName = "name";
+            this.Column17.HeaderText = "Task";
+            this.Column17.Name = "Column17";
+            this.Column17.Width = 130;
+            // 
+            // description
+            // 
+            this.description.DataPropertyName = "description";
+            this.description.HeaderText = "description";
+            this.description.Name = "description";
+            this.description.Visible = false;
+            // 
+            // Column18
+            // 
+            this.Column18.DataPropertyName = "status";
+            this.Column18.HeaderText = "Status";
+            this.Column18.Name = "Column18";
+            // 
+            // Column19
+            // 
+            this.Column19.DataPropertyName = "priority";
+            this.Column19.HeaderText = "Priority";
+            this.Column19.Name = "Column19";
+            // 
             // btnAddAppointments
             // 
             this.btnAddAppointments.Location = new System.Drawing.Point(197, 479);
@@ -317,6 +386,62 @@
             this.dgvCalendar.Name = "dgvCalendar";
             this.dgvCalendar.Size = new System.Drawing.Size(500, 380);
             this.dgvCalendar.TabIndex = 24;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "start";
+            this.Column1.HeaderText = "Start Time";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 150;
+            // 
+            // type
+            // 
+            this.type.DataPropertyName = "type";
+            this.type.HeaderText = "type";
+            this.type.Name = "type";
+            this.type.Visible = false;
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.Visible = false;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "end";
+            this.Column2.HeaderText = "End Time";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 150;
+            // 
+            // Column7
+            // 
+            this.Column7.DataPropertyName = "customerName";
+            this.Column7.HeaderText = "Customer";
+            this.Column7.Name = "Column7";
+            this.Column7.Width = 150;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "appointmentId";
+            this.Column4.HeaderText = "Appointment ID";
+            this.Column4.Name = "Column4";
+            this.Column4.Visible = false;
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "customerId";
+            this.Column5.HeaderText = "Customer ID";
+            this.Column5.Name = "Column5";
+            this.Column5.Visible = false;
+            // 
+            // Column6
+            // 
+            this.Column6.DataPropertyName = "userId";
+            this.Column6.HeaderText = "User ID";
+            this.Column6.Name = "Column6";
+            this.Column6.Visible = false;
             // 
             // tabCustomers
             // 
@@ -515,122 +640,39 @@
             this.btnApptType.UseVisualStyleBackColor = true;
             this.btnApptType.Click += new System.EventHandler(this.btnApptType_Click);
             // 
-            // Column1
+            // btnSearchAppointments
             // 
-            this.Column1.DataPropertyName = "start";
-            this.Column1.HeaderText = "Start Time";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 150;
+            this.btnSearchAppointments.Location = new System.Drawing.Point(340, 64);
+            this.btnSearchAppointments.Name = "btnSearchAppointments";
+            this.btnSearchAppointments.Size = new System.Drawing.Size(51, 23);
+            this.btnSearchAppointments.TabIndex = 24;
+            this.btnSearchAppointments.Text = "Search";
+            this.btnSearchAppointments.UseVisualStyleBackColor = true;
+            this.btnSearchAppointments.Click += new System.EventHandler(this.btnSearchAppointments_Click);
             // 
-            // type
+            // tbAppointmentSearch
             // 
-            this.type.DataPropertyName = "type";
-            this.type.HeaderText = "type";
-            this.type.Name = "type";
-            this.type.Visible = false;
+            this.tbAppointmentSearch.Location = new System.Drawing.Point(397, 66);
+            this.tbAppointmentSearch.Name = "tbAppointmentSearch";
+            this.tbAppointmentSearch.Size = new System.Drawing.Size(119, 20);
+            this.tbAppointmentSearch.TabIndex = 43;
             // 
-            // Id
+            // tbTaskSearch
             // 
-            this.Id.DataPropertyName = "Id";
-            this.Id.HeaderText = "Id";
-            this.Id.Name = "Id";
-            this.Id.Visible = false;
+            this.tbTaskSearch.Location = new System.Drawing.Point(904, 66);
+            this.tbTaskSearch.Name = "tbTaskSearch";
+            this.tbTaskSearch.Size = new System.Drawing.Size(119, 20);
+            this.tbTaskSearch.TabIndex = 45;
             // 
-            // Column2
+            // btnSearchTasks
             // 
-            this.Column2.DataPropertyName = "end";
-            this.Column2.HeaderText = "End Time";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 150;
-            // 
-            // Column7
-            // 
-            this.Column7.DataPropertyName = "customerName";
-            this.Column7.HeaderText = "Customer";
-            this.Column7.Name = "Column7";
-            this.Column7.Width = 150;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "appointmentId";
-            this.Column4.HeaderText = "Appointment ID";
-            this.Column4.Name = "Column4";
-            this.Column4.Visible = false;
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "customerId";
-            this.Column5.HeaderText = "Customer ID";
-            this.Column5.Name = "Column5";
-            this.Column5.Visible = false;
-            // 
-            // Column6
-            // 
-            this.Column6.DataPropertyName = "userId";
-            this.Column6.HeaderText = "User ID";
-            this.Column6.Name = "Column6";
-            this.Column6.Visible = false;
-            // 
-            // Column16
-            // 
-            this.Column16.DataPropertyName = "end";
-            this.Column16.HeaderText = "Due";
-            this.Column16.Name = "Column16";
-            this.Column16.Width = 124;
-            // 
-            // start
-            // 
-            this.start.DataPropertyName = "start";
-            this.start.HeaderText = "start";
-            this.start.Name = "start";
-            this.start.Visible = false;
-            // 
-            // taskId
-            // 
-            this.taskId.DataPropertyName = "taskId";
-            this.taskId.HeaderText = "taskId";
-            this.taskId.Name = "taskId";
-            this.taskId.Visible = false;
-            // 
-            // CIId
-            // 
-            this.CIId.DataPropertyName = "Id";
-            this.CIId.HeaderText = "CIId";
-            this.CIId.Name = "CIId";
-            this.CIId.Visible = false;
-            // 
-            // userId
-            // 
-            this.userId.DataPropertyName = "userId";
-            this.userId.HeaderText = "userId";
-            this.userId.Name = "userId";
-            this.userId.Visible = false;
-            // 
-            // Column17
-            // 
-            this.Column17.DataPropertyName = "name";
-            this.Column17.HeaderText = "Task";
-            this.Column17.Name = "Column17";
-            this.Column17.Width = 130;
-            // 
-            // description
-            // 
-            this.description.DataPropertyName = "description";
-            this.description.HeaderText = "description";
-            this.description.Name = "description";
-            this.description.Visible = false;
-            // 
-            // Column18
-            // 
-            this.Column18.DataPropertyName = "status";
-            this.Column18.HeaderText = "Status";
-            this.Column18.Name = "Column18";
-            // 
-            // Column19
-            // 
-            this.Column19.DataPropertyName = "priority";
-            this.Column19.HeaderText = "Priority";
-            this.Column19.Name = "Column19";
+            this.btnSearchTasks.Location = new System.Drawing.Point(847, 64);
+            this.btnSearchTasks.Name = "btnSearchTasks";
+            this.btnSearchTasks.Size = new System.Drawing.Size(51, 23);
+            this.btnSearchTasks.TabIndex = 44;
+            this.btnSearchTasks.Text = "Search";
+            this.btnSearchTasks.UseVisualStyleBackColor = true;
+            this.btnSearchTasks.Click += new System.EventHandler(this.btnSearchTasks_Click);
             // 
             // Main
             // 
@@ -713,5 +755,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column19;
+        private System.Windows.Forms.TextBox tbTaskSearch;
+        private System.Windows.Forms.Button btnSearchTasks;
+        private System.Windows.Forms.TextBox tbAppointmentSearch;
+        private System.Windows.Forms.Button btnSearchAppointments;
     }
 }
