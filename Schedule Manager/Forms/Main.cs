@@ -314,7 +314,16 @@ namespace Schedule_Manager.Forms
 
         private void btnEditTask_Click(object sender, EventArgs e)
         {
-
+            if (dgvTasks.CurrentRow.DataBoundItem.GetType() == typeof(Task))
+            {
+                Task currentTask = (Task)dgvTasks.CurrentRow.DataBoundItem;  // Getting the appointment to edit 
+                EditTask editTask = new EditTask(currentTask);                  // Instantiating Edit form
+                editTask.Show();                                                // Showing the Edit form
+            }
+            else
+            {
+                MessageBox.Show("Please select a calendar item to edit");
+            }
         }
 
         private void btnDeleteTask_Click(object sender, EventArgs e)

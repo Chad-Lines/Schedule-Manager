@@ -493,17 +493,16 @@ namespace Schedule_Manager
             string query =                                                      // This is our update query
                $"update task " +
                $"set " +
-                $"name = {task.name}," +
-                $"description = {task.description}," +
-                $"status = {task.status}," +
-                $"start = @sdate," +
+                $"name = '{task.name}', " +
+                $"description = '{task.description}', " +
+                $"priority = '{task.priority}', " +
+                $"status = '{task.status}', " +
                 $"end = @edate " +
-               $"where appointmentId = {taskId};";
+               $"where taskId = {taskId};";
 
             using (var command = new MySqlCommand(query, DbConnect()))                  // Using the command that we create...
             {
-                command.Parameters.Add("@sdate", MySqlDbType.Datetime).Value = startDt; // Add in the start date and end date parameters
-                command.Parameters.Add("@edate", MySqlDbType.Datetime).Value = endDt;
+                command.Parameters.Add("@edate", MySqlDbType.Datetime).Value = endDt;   // Add in the end date parameters
                 command.ExecuteNonQuery();                                              // Execute the command
             }
 
