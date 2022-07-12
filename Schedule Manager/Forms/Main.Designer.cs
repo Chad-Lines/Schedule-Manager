@@ -31,6 +31,8 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabCalendar = new System.Windows.Forms.TabPage();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.tbTaskSearch = new System.Windows.Forms.TextBox();
             this.btnSearchTasks = new System.Windows.Forms.Button();
             this.tbAppointmentSearch = new System.Windows.Forms.TextBox();
@@ -69,6 +71,7 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabCustomers = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
             this.dgvCustomer = new System.Windows.Forms.DataGridView();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -89,9 +92,6 @@
             this.btnApptUser = new System.Windows.Forms.Button();
             this.btnSchedUser = new System.Windows.Forms.Button();
             this.btnApptType = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabCalendar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTasks)).BeginInit();
@@ -160,6 +160,26 @@
             this.tabCalendar.TabIndex = 0;
             this.tabCalendar.Text = "Calendar";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.label7.Location = new System.Drawing.Point(910, 50);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(113, 13);
+            this.label7.TabIndex = 47;
+            this.label7.Text = "Search by Task Name";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.label6.Location = new System.Drawing.Point(383, 50);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(133, 13);
+            this.label6.TabIndex = 46;
+            this.label6.Text = "Search by Customer Name";
+            // 
             // tbTaskSearch
             // 
             this.tbTaskSearch.Location = new System.Drawing.Point(904, 66);
@@ -202,7 +222,7 @@
             // 
             // btnDeleteTask
             // 
-            this.btnDeleteTask.BackColor = System.Drawing.Color.IndianRed;
+            this.btnDeleteTask.BackColor = System.Drawing.Color.DarkGray;
             this.btnDeleteTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteTask.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.btnDeleteTask.Location = new System.Drawing.Point(948, 479);
@@ -226,7 +246,7 @@
             // 
             // btnAddTask
             // 
-            this.btnAddTask.BackColor = System.Drawing.Color.SeaGreen;
+            this.btnAddTask.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnAddTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddTask.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.btnAddTask.Location = new System.Drawing.Point(705, 479);
@@ -271,7 +291,7 @@
             // 
             // btnDeleteAppointment
             // 
-            this.btnDeleteAppointment.BackColor = System.Drawing.Color.IndianRed;
+            this.btnDeleteAppointment.BackColor = System.Drawing.Color.DarkGray;
             this.btnDeleteAppointment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteAppointment.ForeColor = System.Drawing.SystemColors.Window;
             this.btnDeleteAppointment.Location = new System.Drawing.Point(440, 479);
@@ -376,7 +396,7 @@
             // 
             // btnAddAppointments
             // 
-            this.btnAddAppointments.BackColor = System.Drawing.Color.SeaGreen;
+            this.btnAddAppointments.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnAddAppointments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddAppointments.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.btnAddAppointments.Location = new System.Drawing.Point(197, 479);
@@ -533,6 +553,17 @@
             this.tabCustomers.TabIndex = 1;
             this.tabCustomers.Text = "Customers";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.label8.Location = new System.Drawing.Point(42, 24);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(109, 24);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "Customers";
+            // 
             // dgvCustomer
             // 
             this.dgvCustomer.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
@@ -621,7 +652,7 @@
             // 
             // btnAddCustomer
             // 
-            this.btnAddCustomer.BackColor = System.Drawing.Color.SeaGreen;
+            this.btnAddCustomer.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnAddCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAddCustomer.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.btnAddCustomer.Location = new System.Drawing.Point(786, 63);
@@ -634,7 +665,7 @@
             // 
             // btnDeleteCustomer
             // 
-            this.btnDeleteCustomer.BackColor = System.Drawing.Color.IndianRed;
+            this.btnDeleteCustomer.BackColor = System.Drawing.Color.DarkGray;
             this.btnDeleteCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDeleteCustomer.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.btnDeleteCustomer.Location = new System.Drawing.Point(948, 63);
@@ -737,37 +768,6 @@
             this.btnApptType.Text = "Appt. Types by Month";
             this.btnApptType.UseVisualStyleBackColor = false;
             this.btnApptType.Click += new System.EventHandler(this.btnApptType_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label6.Location = new System.Drawing.Point(383, 50);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(133, 13);
-            this.label6.TabIndex = 46;
-            this.label6.Text = "Search by Customer Name";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label7.Location = new System.Drawing.Point(910, 50);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(113, 13);
-            this.label7.TabIndex = 47;
-            this.label7.Text = "Search by Task Name";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.label8.Location = new System.Drawing.Point(42, 24);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(109, 24);
-            this.label8.TabIndex = 26;
-            this.label8.Text = "Customers";
             // 
             // Main
             // 
