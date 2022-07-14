@@ -12,7 +12,7 @@ using System.Data;
 
 namespace Schedule_Manager
 {
-    static class DbManager
+    class DbManager
     {
         // This is the database connection string 
         public static readonly string constr = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
