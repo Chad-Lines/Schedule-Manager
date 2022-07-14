@@ -9,10 +9,12 @@ using System.Configuration;
 using MySql.Data.MySqlClient;
 using System.ComponentModel;
 using System.Data;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("ScheduleManagerTests")]
 namespace Schedule_Manager
-{
-    class DbManager
+{    
+    internal class DbManager
     {
         // This is the database connection string 
         public static readonly string constr = ConfigurationManager.ConnectionStrings["localdb"].ConnectionString;
@@ -25,8 +27,8 @@ namespace Schedule_Manager
         public static BindingList<AppointmentTypeByUser> report2 = new BindingList<AppointmentTypeByUser>();    // This is the binding list wherein we'll store the report data
         public static BindingList<ScheduleByUser> report3 = new BindingList<ScheduleByUser>();                  // This is the binding list wherein we'll store the report data
 
-        public static int userId;                                                                               // Stores the user ID
-        public static string userName;                                                                          // Stores the user name
+        public static int userId = 1;                                                                               // Stores the user ID
+        public static string userName = "test";                                                                          // Stores the user name
 
         #region Db Admin Functions
         public static MySqlConnection DbConnect()
@@ -243,9 +245,7 @@ namespace Schedule_Manager
                 command.Parameters.Add("@sdate", MySqlDbType.Datetime).Value = startDt; // Add in the start date and end date parameters
                 command.Parameters.Add("@edate", MySqlDbType.Datetime).Value = endDt;
                 command.ExecuteNonQuery();                                              // Execute the command
-            }
-
-            MessageBox.Show("Appointment Saved");                                       // Alert the user that the appointment has been saved
+            }            
         }
 
         public static void UpdateAppointment(int apptId, Appointment appt)

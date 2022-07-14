@@ -129,14 +129,5 @@ namespace Schedule_Manager.Forms
                 Console.WriteLine(ex.Message);                                                          // Capture the exact error
             }
         }
-
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-            DbManager.userName = "test";
-            DbManager.userId = 1;
-
-            DateTime timestamp = DbManager.ConvertToUtcTime(DateTime.Now);
-            string t = timestamp.ToString();
-        }
     }
 }
