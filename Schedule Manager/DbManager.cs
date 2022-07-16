@@ -242,8 +242,8 @@ namespace Schedule_Manager
 
             using (var command = new MySqlCommand(query, DbConnect()))                  // Using the command that we create...
             {
-                command.Parameters.Add("@sdate", MySqlDbType.Datetime).Value = startDt; // Add in the start date and end date parameters
-                command.Parameters.Add("@edate", MySqlDbType.Datetime).Value = endDt;
+                command.Parameters.Add("@sdate", MySqlDbType.DateTime).Value = startDt; // Add in the start date and end date parameters
+                command.Parameters.Add("@edate", MySqlDbType.DateTime).Value = endDt;
                 command.ExecuteNonQuery();                                              // Execute the command
             }            
         }
